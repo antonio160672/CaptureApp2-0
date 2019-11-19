@@ -5,10 +5,26 @@ import java.io.Serializable;
 public class Obj_usuario implements Serializable {
     /*String nombre,apellido_pater,apellido_mater,correo,
             contrasena,calle,colonia,cp,idTipoUsuario,idCompania,idEstatus,idEstado;*/
-    String nombre,apellido_pater,apellido_mater,correo,
-            contrasena,calle,colonia,cp,idEstado;
+    String id_usua,nombre,apellido_pater,apellido_mater,correo,
+            contrasena,calle,colonia,cp,fecha_nac,idEstado;
 
     public Obj_usuario() {
+    }
+
+    public String getFecha_nac() {
+        return fecha_nac;
+    }
+
+    public void setFecha_nac(String fecha_nac) {
+        this.fecha_nac = fecha_nac;
+    }
+
+    public String getId_usua() {
+        return id_usua;
+    }
+
+    public void setId_usua(String id_usua) {
+        this.id_usua = id_usua;
     }
 
     public String getNombre() {

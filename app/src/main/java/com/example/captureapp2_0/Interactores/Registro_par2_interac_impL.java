@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.captureapp2_0.Interfaces.Registro_par2_interF.interRegistro_par2_Interactor;
 import com.example.captureapp2_0.Interfaces.Registro_par2_interF.oninter_Registro_par2_Finishlicener;
+import com.example.captureapp2_0.objetos.Obj_Estados;
 import com.example.captureapp2_0.objetos.Obj_usuario;
 
 public class Registro_par2_interac_impL implements interRegistro_par2_Interactor {
@@ -32,7 +33,8 @@ public class Registro_par2_interac_impL implements interRegistro_par2_Interactor
                     listener.calle_seterror("campo vacio");
                     listener.colonia_setrror("campo vacio");
                     listener.CP_seterror("campo vacio");
-                }else{
+                }
+                else{
                     if (fecha.equals("Fecha")||fecha.equals("campo vacio") ){
                         listener.fecha_seterror("campo vacio");
                         bandera=0;
@@ -66,9 +68,29 @@ public class Registro_par2_interac_impL implements interRegistro_par2_Interactor
     }
 
     private void validar_cadenas(String fecha, String estado, String municipio, String calle, String colonia, String cp) {
+        bandera=1;
+        if (!(cp.length()>=5&&cp.length()<=8)){
+            listener.CP_seterror("El CP no es valido");
+            bandera=0;
+        }
+        if (bandera==1){
+            Obj_Estados obj_estados=new Obj_Estados();
+            obj_usuario.setCalle(calle);
+            obj_usuario.setColonia(colonia);
+            obj_usuario.setCp(cp);
+            obj_usuario.setFecha_nac(fecha);
+            obj_usuario.setIdEstado(obj_estados.contenedor_stados.get(estado));
+            //prueba(fecha, estado, municipio, calle, colonia, cp);
+            resgistro_volley_sqlite();
+        }
+    }
+
+    private void resgistro_volley_sqlite() {
+
     }
 
     private void prueba(String fecha, String estado, String municipio, String calle, String colonia, String cp) {
+        Log.e("usuario","contra::"+obj_usuario.getContrasena()+" correo:"+obj_usuario.getCorreo()+"\n");
         Log.e("datos","fecha:"+fecha+" estado:"+estado);
     }
 }

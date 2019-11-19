@@ -16,6 +16,7 @@ import com.example.captureapp2_0.Interfaces.Registro_par2_interF.Interf_Registro
 import com.example.captureapp2_0.Interfaces.Registro_par2_interF.inter_Registro_par2_presentador;
 import com.example.captureapp2_0.Presentadores.Registro_par2_presen_impL;
 import com.example.captureapp2_0.R;
+import com.example.captureapp2_0.objetos.Obj_Context;
 import com.example.captureapp2_0.objetos.Obj_usuario;
 import java.util.Calendar;
 
@@ -25,6 +26,7 @@ public class Registro_par2Vista extends AppCompatActivity implements Interf_Regi
     private EditText municipi,calle,colonia,CP;
     private Obj_usuario obj_usuario;
     private inter_Registro_par2_presentador presentador;
+    public Obj_Context obj_context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +73,7 @@ public class Registro_par2Vista extends AppCompatActivity implements Interf_Regi
         presentador.validar_Registro_interacto(obj_usuario,text_fech.getText().toString(),Estado_spi.getSelectedItem().toString(),
                 municipi.getText().toString(),calle.getText().toString(),colonia.getText().toString(),
                 CP.getText().toString());
+        obj_context=new Obj_Context(this);
     }
 
     @Override

@@ -1,10 +1,12 @@
 package com.example.captureapp2_0.Interactores;
 
+import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 
 import com.example.captureapp2_0.Interfaces.Registro_par2_interF.interRegistro_par2_Interactor;
 import com.example.captureapp2_0.Interfaces.Registro_par2_interF.oninter_Registro_par2_Finishlicener;
+import com.example.captureapp2_0.consultas_volley.Registro_user;
 import com.example.captureapp2_0.objetos.Obj_Estados;
 import com.example.captureapp2_0.objetos.Obj_usuario;
 
@@ -80,12 +82,14 @@ public class Registro_par2_interac_impL implements interRegistro_par2_Interactor
             obj_usuario.setCp(cp);
             obj_usuario.setFecha_nac(fecha);
             obj_usuario.setIdEstado(obj_estados.contenedor_stados.get(estado));
-            //prueba(fecha, estado, municipio, calle, colonia, cp);
+            prueba(fecha, estado, municipio, calle, colonia, cp);
             resgistro_volley_sqlite();
         }
     }
 
     private void resgistro_volley_sqlite() {
+        Registro_user registro_user=new Registro_user(obj_usuario);
+        registro_user.Registro_usuario();
 
     }
 

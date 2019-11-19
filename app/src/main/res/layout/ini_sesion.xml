@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo1"
+    android:orientation="vertical"
+    android:visibility="visible"
+    tools:context=".Vistas.Ini_sesion">
+
+    <LinearLayout
+        android:padding="1dp"
+        android:layout_margin="16dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="208dp"
+            android:layout_height="137dp"
+            android:alpha=".90"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/Titulo"
+            android:layout_width="208dp"
+            android:layout_height="43dp"
+            android:gravity="center"
+            android:hint="Nombre de usuario"
+            android:inputType="textPersonName"
+            android:text="CaptureAPP"
+            android:textColor="#E7EDF8"
+            android:textColorHint="#FFFFFF"
+            android:textSize="30dp"
+            android:layout_gravity="center_horizontal"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_margin="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/NombreUsu"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/correo1"
+                android:hint="Correo"
+                android:inputType="textPersonName"
+                android:nextFocusDown="@+id/Contraseña"
+                app:met_baseColor="#FFFFFF"
+                app:met_errorColor="#F44336"
+                app:met_floatingLabel="highlight"
+                app:met_floatingLabelText="Correo"
+                app:met_primaryColor="#92d0d0"
+                app:met_textColorHint="#FFFFFF"
+                app:met_underlineColor="#92d0d0"
+                android:layout_gravity="center"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/Contraseña"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="73dp"
+                android:drawableLeft="@drawable/contra"
+                android:ems="10"
+                android:hint="Contraseña"
+                app:met_floatingLabel="highlight"
+                app:met_floatingLabelText="Contraseña"
+                android:inputType="textPassword"
+                app:met_baseColor="#FFFFFF"
+                app:met_errorColor="#F44336"
+                app:met_primaryColor="#92d0d0"
+                app:met_textColorHint="#FFFFFF"
+                app:met_underlineColor="#92d0d0"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:onClick="Ini_sesion"
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/botones"
+            android:text="Iniciar sesión"
+            android:textColor="#ffffff"
+            tools:ignore="RtlCompat" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_marginTop="16dp"
+            android:onClick="Registro_usu"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/botones"
+            android:text="Registro"
+            android:textColor="#ffffff" />
+
+    </LinearLayout>
+
+</RelativeLayout>

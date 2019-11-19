@@ -1,0 +1,170 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:background="@drawable/fondo1"
+    android:orientation="vertical"
+    android:visibility="visible"
+    tools:context=".Vistas.Registro_par2Vista">
+    <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="178dp"
+        android:layout_height="111dp"
+        android:layout_gravity="center_horizontal"
+        android:alpha=".90"
+        android:src="@drawable/usuario2" />
+
+        <TextView
+            android:id="@+id/Titulo"
+            android:layout_width="208dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="Registro"
+            android:textColor="#E7EDF8"
+            android:textColorHint="#FFFFFF"
+            android:textSize="30dp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <Button
+                        android:id="@+id/btnLogin"
+                        android:layout_width="135dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/botones"
+                        android:onClick="fecha_nacimiento"
+                        android:text="Fecha de nacimiento"
+                        android:textColor="#ffffff"
+                        android:textSize="14dp"
+                        tools:ignore="RtlCompat" />
+
+                    <TextView
+                        android:id="@+id/text_fech"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:text="Fecha"
+                        android:textColor="#E7EDF8"
+                        android:textColorHint="#FFFFFF"
+                        android:textSize="20dp"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <Spinner
+                        android:id="@+id/spinner_estados"
+                        android:layout_marginLeft="-2dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/spinner_style"
+                        android:entries="@array/animals" />
+
+                </LinearLayout>
+
+
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/Munici"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Municipio"
+                    android:inputType="textPersonName"
+                    app:met_baseColor="#FFFFFF"
+                    app:met_errorColor="#F44336"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelText="Municipio"
+                    app:met_primaryColor="#92d0d0"
+                    app:met_textColorHint="#FFFFFF"
+                    app:met_underlineColor="#92d0d0" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/calle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Calle"
+                    android:inputType="textPersonName"
+                    app:met_baseColor="#FFFFFF"
+                    app:met_errorColor="#F44336"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelText="Calle"
+                    app:met_primaryColor="#92d0d0"
+                    app:met_textColorHint="#FFFFFF"
+                    app:met_underlineColor="#92d0d0" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/colonia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Colonia"
+                    android:inputType="textPersonName"
+                    app:met_baseColor="#FFFFFF"
+                    app:met_errorColor="#F44336"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelText="Colonia"
+                    app:met_primaryColor="#92d0d0"
+                    app:met_textColorHint="#FFFFFF"
+                    app:met_underlineColor="#92d0d0"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/CP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Codigo postal"
+                    app:met_baseColor="#FFFFFF"
+                    app:met_errorColor="#F44336"
+                    app:met_floatingLabel="highlight"
+                    android:inputType="number"
+                    app:met_floatingLabelText="Codigo postal"
+                    app:met_primaryColor="#92d0d0"
+                    app:met_textColorHint="#FFFFFF"
+                    app:met_underlineColor="#92d0d0" />
+                <Button
+                    android:id="@+id/btn_regist"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/botones"
+                    android:text="Registrar"
+                    android:textColor="#ffffff"
+                    tools:ignore="RtlCompat"
+                    android:onClick="Registrar"/>
+            </LinearLayout>
+        </ScrollView>
+
+
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

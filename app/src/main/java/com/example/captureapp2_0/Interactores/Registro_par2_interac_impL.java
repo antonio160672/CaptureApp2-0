@@ -89,7 +89,9 @@ public class Registro_par2_interac_impL implements interRegistro_par2_Interactor
 
     private void resgistro_volley_sqlite() {
         Registro_user registro_user=new Registro_user(obj_usuario);
-        registro_user.Registro_usuario();
+        if (registro_user.Registro_usuario()){
+
+        }
 
     }
 

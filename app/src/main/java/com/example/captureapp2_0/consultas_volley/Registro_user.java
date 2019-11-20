@@ -1,9 +1,7 @@
 package com.example.captureapp2_0.consultas_volley;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -14,8 +12,6 @@ import com.android.volley.toolbox.Volley;
 import com.example.captureapp2_0.DB_lite.Sqlite_usuario;
 import com.example.captureapp2_0.objetos.Obj_Context;
 import com.example.captureapp2_0.objetos.Obj_usuario;
-import com.google.gson.Gson;
-import com.google.gson.JsonParser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,7 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Registro_user {
-    private String fecha, hora;
     private RequestQueue request;
     private Context context;
     private Obj_usuario obj_usuario;
@@ -35,9 +30,9 @@ public class Registro_user {
         this.obj_usuario = obj_usuario;
     }
 
-    public void Registro_usuario(){
+    public boolean Registro_usuario(){
         request= Volley.newRequestQueue(context);
-        String mesnaje;
+        final boolean[] bandera = new boolean[1];
         String URL = "http://pruebas-upemor.ddns.net/android/insertar.php";
         StringRequest getRequest = new StringRequest(Request.Method.POST, URL,
                 new Response.Listener<String>() {
@@ -48,9 +43,12 @@ public class Registro_user {
                         Log.e("datos responce","formato: "+response);
                         try {
                             parseData(response);
-                            Registro_sql();
+                            if(Registro_sql()){
+                                bandera[0] =true;
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            bandera[0]=false;
                         }
                     }
                 },
@@ -59,6 +57,7 @@ public class Registro_user {
                     public void onErrorResponse(VolleyError error) {
                         if (null != error.networkResponse) {
                             Log.e("error" + ": ", "Error Response code: " + error.networkResponse.statusCode);
+                            bandera[0]=false;
                         }
                     }
                 }){
@@ -79,25 +78,9 @@ public class Registro_user {
 
         };
         request.add(getRequest);
-
+        return bandera[0];
     }
 
-    private void Registro_sql() {
-        obj_usuario.sqLite= new Sqlite_usuario(context);
-        if (Addcontact()){
-            Log.e("ahora si","ya es tuyo papi");
-        }
-    }
-
-    private boolean Addcontact(){
-        String sql="insert into usuario values('"+obj_usuario.getId_usua()+"','"+obj_usuario.getNombre()+"','"+
-                        obj_usuario.getApellido_pater()+"','"+obj_usuario.getApellido_mater()+"','"+
-                        obj_usuario.getCorreo()+"','"+ obj_usuario.getCalle()+"','"+obj_usuario.getColonia()+
-                        "','"+obj_usuario.getContrasena()+"','"+
-                        obj_usuario.getCp()+"','"+obj_usuario.getIdEstado()+"','"+obj_usuario.getFecha_nac()+"');";
-        Log.e("cadena","contacto"+sql);
-        return obj_usuario.sqLite.ejecutaSQL(sql);
-    }
     private void parseData(String response) throws JSONException {
         JSONObject jsonObject = new JSONObject(response); ;
         if (jsonObject.optString("status").equals("true")){
@@ -122,5 +105,24 @@ public class Registro_user {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean Registro_sql() {
+        obj_usuario.sqLite= new Sqlite_usuario(context);
+        if (Addcontact()){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    private boolean Addcontact(){
+        String sql="insert into usuario values('"+obj_usuario.getId_usua()+"','"+obj_usuario.getNombre()+"','"+
+                obj_usuario.getApellido_pater()+"','"+obj_usuario.getApellido_mater()+"','"+
+                obj_usuario.getCorreo()+"','"+ obj_usuario.getCalle()+"','"+obj_usuario.getColonia()+
+                "','"+obj_usuario.getContrasena()+"','"+
+                obj_usuario.getCp()+"','"+obj_usuario.getIdEstado()+"','"+obj_usuario.getFecha_nac()+"');";
+        Log.e("cadena","contacto"+sql);
+        return obj_usuario.sqLite.ejecutaSQL(sql);
     }
 }

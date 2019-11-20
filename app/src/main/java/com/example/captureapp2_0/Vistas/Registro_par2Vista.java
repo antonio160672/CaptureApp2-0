@@ -55,7 +55,7 @@ public class Registro_par2Vista extends AppCompatActivity implements Interf_Regi
                 new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int mes, int dia) {
-                text_fech.setText(year+"/"+mes+"/"+dia);
+                text_fech.setText(year+"-"+mes+"-"+dia);
             }
         },datos_fecha_hor[2],datos_fecha_hor[1],datos_fecha_hor[0]);
         calenda.show();

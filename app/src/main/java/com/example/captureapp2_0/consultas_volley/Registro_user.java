@@ -1,6 +1,7 @@
 package com.example.captureapp2_0.consultas_volley;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -10,6 +11,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.captureapp2_0.DB_lite.Sqlite_usuario;
 import com.example.captureapp2_0.objetos.Obj_Context;
 import com.example.captureapp2_0.objetos.Obj_usuario;
 import com.google.gson.Gson;
@@ -46,6 +48,7 @@ public class Registro_user {
                         Log.e("datos responce","formato: "+response);
                         try {
                             parseData(response);
+                            Registro_sql();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -79,6 +82,22 @@ public class Registro_user {
 
     }
 
+    private void Registro_sql() {
+        obj_usuario.sqLite= new Sqlite_usuario(context);
+        if (Addcontact()){
+            Log.e("ahora si","ya es tuyo papi");
+        }
+    }
+
+    private boolean Addcontact(){
+        String sql="insert into usuario values('"+obj_usuario.getId_usua()+"','"+obj_usuario.getNombre()+"','"+
+                        obj_usuario.getApellido_pater()+"','"+obj_usuario.getApellido_mater()+"','"+
+                        obj_usuario.getCorreo()+"','"+ obj_usuario.getCalle()+"','"+obj_usuario.getColonia()+
+                        "','"+obj_usuario.getContrasena()+"','"+
+                        obj_usuario.getCp()+"','"+obj_usuario.getIdEstado()+"','"+obj_usuario.getFecha_nac()+"');";
+        Log.e("cadena","contacto"+sql);
+        return obj_usuario.sqLite.ejecutaSQL(sql);
+    }
     private void parseData(String response) throws JSONException {
         JSONObject jsonObject = new JSONObject(response); ;
         if (jsonObject.optString("status").equals("true")){

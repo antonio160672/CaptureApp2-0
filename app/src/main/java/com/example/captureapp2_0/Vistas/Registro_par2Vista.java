@@ -12,6 +12,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.captureapp2_0.Interfaces.Registro_par2_interF.Interf_Registro_par2_vista;
 import com.example.captureapp2_0.Interfaces.Registro_par2_interF.inter_Registro_par2_presentador;
 import com.example.captureapp2_0.Presentadores.Registro_par2_presen_impL;
@@ -44,6 +46,7 @@ public class Registro_par2Vista extends AppCompatActivity implements Interf_Regi
         presentador=new Registro_par2_presen_impL(this);
 
     }
+
     public void fecha_nacimiento(View view) {
         int[]datos_fecha_hor=new int [5];
         text_fech.setError(null);
@@ -107,5 +110,10 @@ public class Registro_par2Vista extends AppCompatActivity implements Interf_Regi
     @Override
     public void showerrorCP(String error) {
         CP.setError(error);
+    }
+
+    @Override
+    public void navegador() {
+        Toast.makeText(this,"usuario registrado",Toast.LENGTH_LONG).show();
     }
 }

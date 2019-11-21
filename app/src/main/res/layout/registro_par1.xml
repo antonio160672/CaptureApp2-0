@@ -36,124 +36,132 @@
             android:textColorHint="#FFFFFF"
             android:textSize="30dp" />
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/NombreUsu_regi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/usu"
-                android:hint="Nombre"
-                android:inputType="textPersonName"
-                android:nextFocusDown="@+id/Apellido_pa"
-                app:met_baseColor="#FFFFFF"
-                app:met_errorColor="#F44336"
-                app:met_floatingLabel="highlight"
-                app:met_floatingLabelText="Nombre"
-                app:met_primaryColor="#92d0d0"
-                app:met_textColorHint="#FFFFFF"
-                app:met_underlineColor="#92d0d0" />
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical">
+
                 <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/Apellido_pa"
-                    android:layout_marginRight="5dp"
-                    android:layout_width="135dp"
+                    android:id="@+id/NombreUsu_regi"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Apellido Pat"
-                    android:imeOptions="actionNext"
+                    android:drawableLeft="@drawable/usu"
+                    android:hint="Nombre"
                     android:inputType="textPersonName"
-                    android:nextFocusRight="@+id/Apellido_ma"
+                    android:nextFocusDown="@+id/Apellido_pa"
                     app:met_baseColor="#FFFFFF"
                     app:met_errorColor="#F44336"
                     app:met_floatingLabel="highlight"
-                    app:met_floatingLabelText="Apellido pater"
+                    app:met_floatingLabelText="Nombre"
+                    app:met_primaryColor="#92d0d0"
+                    app:met_textColorHint="#FFFFFF"
+                    app:met_underlineColor="#92d0d0" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/Apellido_pa"
+                        android:layout_width="135dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:hint="Apellido Pat"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPersonName"
+                        android:nextFocusRight="@+id/Apellido_ma"
+                        app:met_baseColor="#FFFFFF"
+                        app:met_errorColor="#F44336"
+                        app:met_floatingLabel="highlight"
+                        app:met_floatingLabelText="Apellido pater"
+                        app:met_primaryColor="#92d0d0"
+                        app:met_textColorHint="#FFFFFF"
+                        app:met_underlineColor="#92d0d0" />
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/Apellido_ma"
+                        android:layout_width="170dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Apellido Mater"
+                        android:inputType="textPersonName"
+                        android:layout="@+id/Apellido_pa"
+                        android:nextFocusDown="@+id/Correo_regis"
+                        app:met_baseColor="#FFFFFF"
+                        app:met_errorColor="#F44336"
+                        app:met_floatingLabel="highlight"
+                        app:met_floatingLabelText="Apellido mater"
+                        app:met_primaryColor="#92d0d0"
+                        app:met_textColorHint="#FFFFFF"
+                        app:met_underlineColor="#92d0d0" />
+
+                </LinearLayout>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/Correo_regis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/correo1"
+                    android:ems="10"
+                    android:hint="Correo"
+                    android:inputType="textEmailAddress"
+                    android:nextFocusDown="@+id/Contra_regis"
+                    app:met_baseColor="#FFFFFF"
+                    app:met_errorColor="#F44336"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelText="Correo"
                     app:met_primaryColor="#92d0d0"
                     app:met_textColorHint="#FFFFFF"
                     app:met_underlineColor="#92d0d0" />
 
                 <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/Apellido_ma"
-                    android:layout_width="170dp"
+                    android:id="@+id/Contra_regis"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Apellido Mater"
-                    android:inputType="textPersonName"
-                    android:nextFocusDown="@+id/Correo_regis"
+                    android:drawableLeft="@drawable/contra"
+                    android:ems="10"
+                    android:hint="Contraseña"
+                    android:inputType="textPassword"
                     app:met_baseColor="#FFFFFF"
                     app:met_errorColor="#F44336"
-                    app:met_floatingLabel="highlight"
-                    app:met_floatingLabelText="Apellido mater"
-                    android:layout="@+id/Apellido_pa"
                     app:met_primaryColor="#92d0d0"
                     app:met_textColorHint="#FFFFFF"
                     app:met_underlineColor="#92d0d0" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/Contra_conf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/contra"
+                    android:ems="10"
+                    android:hint="Confirmar contraseña"
+                    android:inputType="textPassword"
+                    app:met_baseColor="#FFFFFF"
+                    app:met_errorColor="#F44336"
+                    app:met_primaryColor="#92d0d0"
+                    app:met_textColorHint="#FFFFFF"
+                    app:met_underlineColor="#92d0d0" />
+                <Button
+                    android:id="@+id/btnLogin"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/botones"
+                    android:onClick="Validar_Reg"
+                    android:text="Siguiente"
+                    android:textColor="#ffffff"
+                    tools:ignore="RtlCompat" />
 
             </LinearLayout>
+        </ScrollView>
 
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/Correo_regis"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/correo1"
-                android:ems="10"
-                android:hint="Correo"
-                android:inputType="textEmailAddress"
-                android:nextFocusDown="@+id/Contra_regis"
-                app:met_baseColor="#FFFFFF"
-                app:met_errorColor="#F44336"
-                app:met_floatingLabel="highlight"
-                app:met_floatingLabelText="Correo"
-                app:met_primaryColor="#92d0d0"
-                app:met_textColorHint="#FFFFFF"
-                app:met_underlineColor="#92d0d0" />
 
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/Contra_regis"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/contra"
-                android:ems="10"
-                android:hint="Contraseña"
-                android:inputType="textPassword"
-                app:met_baseColor="#FFFFFF"
-                app:met_errorColor="#F44336"
-                app:met_primaryColor="#92d0d0"
-                app:met_textColorHint="#FFFFFF"
-                app:met_underlineColor="#92d0d0"/>
-
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/Contra_conf"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/contra"
-                android:ems="10"
-                android:hint="Confirmar contraseña"
-                android:inputType="textPassword"
-                app:met_baseColor="#FFFFFF"
-                app:met_errorColor="#F44336"
-                app:met_primaryColor="#92d0d0"
-                app:met_textColorHint="#FFFFFF"
-                app:met_underlineColor="#92d0d0" />
-
-        </LinearLayout>
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/botones"
-            android:onClick="Validar_Reg"
-            android:text="Siguiente"
-            android:textColor="#ffffff"
-            tools:ignore="RtlCompat" />
     </LinearLayout>
 
 </RelativeLayout>

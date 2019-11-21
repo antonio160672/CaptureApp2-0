@@ -1,4 +1,4 @@
-package com.example.captureapp2_0.Interfaces;
+package com.example.captureapp2_0.Interfaces.Ini_sesion_interF;
 
 public interface Ini_sesion_Interactor {
 

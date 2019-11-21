@@ -55,6 +55,6 @@ public class Registro_par2_presen_impL implements inter_Registro_par2_presentado
 
     @Override
     public void exito_valida() {
-
+        registro_par2Vista.navegador();
     }
 }

@@ -7,6 +7,6 @@ public interface Interf_Registro_par2_vista {
     void showerrorcalle(String error);
     void showerrorcolonia(String error);
     void showerrorCP(String error);
-
+    void navegador();
 
 }

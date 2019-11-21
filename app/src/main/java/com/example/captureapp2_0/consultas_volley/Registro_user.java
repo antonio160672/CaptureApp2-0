@@ -10,6 +10,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.captureapp2_0.DB_lite.Sqlite_usuario;
+import com.example.captureapp2_0.Interfaces.Registro_par2_interF.oninter_Registro_par2_Finishlicener;
 import com.example.captureapp2_0.objetos.Obj_Context;
 import com.example.captureapp2_0.objetos.Obj_usuario;
 
@@ -24,13 +25,15 @@ public class Registro_user {
     private RequestQueue request;
     private Context context;
     private Obj_usuario obj_usuario;
+    private oninter_Registro_par2_Finishlicener listener;
 
-    public Registro_user(Obj_usuario obj_usuario) {
+    public Registro_user(Obj_usuario obj_usuario, oninter_Registro_par2_Finishlicener listener) {
         this.context = Obj_Context.getContext();
         this.obj_usuario = obj_usuario;
+        this.listener=listener;
     }
 
-    public boolean Registro_usuario(){
+    public void Registro_usuario(){
         request= Volley.newRequestQueue(context);
         final boolean[] bandera = new boolean[1];
         String URL = "http://pruebas-upemor.ddns.net/android/insertar.php";
@@ -44,11 +47,10 @@ public class Registro_user {
                         try {
                             parseData(response);
                             if(Registro_sql()){
-                                bandera[0] =true;
+                                listener.exito_valida();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            bandera[0]=false;
                         }
                     }
                 },
@@ -78,7 +80,6 @@ public class Registro_user {
 
         };
         request.add(getRequest);
-        return bandera[0];
     }
 
     private void parseData(String response) throws JSONException {

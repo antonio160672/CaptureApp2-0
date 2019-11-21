@@ -1,10 +1,10 @@
 package com.example.captureapp2_0.Presentadores;
 
 import com.example.captureapp2_0.Interactores.Ini_sesion_impL;
-import com.example.captureapp2_0.Interfaces.Ini_sesion_Interactor;
-import com.example.captureapp2_0.Interfaces.Ini_sesion_presentador;
-import com.example.captureapp2_0.Interfaces.Ini_sesion_vista;
-import com.example.captureapp2_0.Interfaces.onIni_sesion_Finishlicener;
+import com.example.captureapp2_0.Interfaces.Ini_sesion_interF.Ini_sesion_Interactor;
+import com.example.captureapp2_0.Interfaces.Ini_sesion_interF.Ini_sesion_presentador;
+import com.example.captureapp2_0.Interfaces.Ini_sesion_interF.Ini_sesion_vista;
+import com.example.captureapp2_0.Interfaces.Ini_sesion_interF.onIni_sesion_Finishlicener;
 
 public class Ini_sesion_presen_impL implements Ini_sesion_presentador, onIni_sesion_Finishlicener {
 

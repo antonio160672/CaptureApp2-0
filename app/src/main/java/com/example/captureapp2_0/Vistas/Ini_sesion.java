@@ -5,16 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.captureapp2_0.Interfaces.Ini_sesion_presentador;
-import com.example.captureapp2_0.Interfaces.Ini_sesion_vista;
+import com.example.captureapp2_0.Interfaces.Ini_sesion_interF.Ini_sesion_presentador;
+import com.example.captureapp2_0.Interfaces.Ini_sesion_interF.Ini_sesion_vista;
 import com.example.captureapp2_0.Presentadores.Ini_sesion_presen_impL;
 import com.example.captureapp2_0.R;
+import com.example.captureapp2_0.menu_principal;
 
 public class Ini_sesion extends AppCompatActivity implements Ini_sesion_vista {
 
@@ -44,6 +44,7 @@ public class Ini_sesion extends AppCompatActivity implements Ini_sesion_vista {
         titulo.setTypeface(face);
 
     }
+
     @Override
     public void showerrorcorreo() {
         usuario.setError("correo invalido");
@@ -63,7 +64,7 @@ public class Ini_sesion extends AppCompatActivity implements Ini_sesion_vista {
 
     public void Registro_usu(View view) {
 
-        Intent r = new Intent(this, Registro_par1Vista.class);
+        Intent r = new Intent(this, menu_principal.class);
         startActivity(r);
         overridePendingTransition(R.anim.left_in,R.anim.left_out);
     }

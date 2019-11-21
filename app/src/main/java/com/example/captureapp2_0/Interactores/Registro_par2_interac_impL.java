@@ -88,11 +88,8 @@ public class Registro_par2_interac_impL implements interRegistro_par2_Interactor
     }
 
     private void resgistro_volley_sqlite() {
-        Registro_user registro_user=new Registro_user(obj_usuario);
-        if (registro_user.Registro_usuario()){
-
-        }
-
+        Registro_user registro_user=new Registro_user(obj_usuario,listener);
+        registro_user.Registro_usuario();
     }
 
     private void prueba(String fecha, String estado, String municipio, String calle, String colonia, String cp) {

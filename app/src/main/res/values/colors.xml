@@ -4,9 +4,11 @@
     <color name="primaryDark">#0A0A0A</color>
     <color name="centerColor">#428FBD</color>
     <color name="startColor">#9DC4EC</color>
+    <color name="blanco">#ECE6E6</color>
 
     <color name="color_cursor">#92d0d0</color>
     <color name="teal">#008080</color>
+    <color name="otro">#D506ABD8</color>
     <color name="endColor">#0D738C</color>
 
 </resources>

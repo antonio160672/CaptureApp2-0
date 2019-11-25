@@ -63,7 +63,7 @@ public class Ini_sesion extends AppCompatActivity implements Ini_sesion_vista {
     }
 
     public void Registro_usu(View view) {
-
+        //Intent r = new Intent(this, Registro_par1Vista.class);
         Intent r = new Intent(this, menu_principal.class);
         startActivity(r);
         overridePendingTransition(R.anim.left_in,R.anim.left_out);

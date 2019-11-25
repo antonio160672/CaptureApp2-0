@@ -80,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
                     android:text="User_nombre"
                     android:textColor="@color/primary"
@@ -152,6 +152,33 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/text_Municipio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Municipio: "
+                    android:textColor="@color/primary"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/Municipio_sql"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="5dp"
+                    android:text="User_Municipio"
+                    android:textColor="@color/primary"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="horizontal">
+
+                <TextView
                     android:id="@+id/text_Calle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -169,7 +196,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="35dp"
                     android:layout_marginTop="5dp"
-                    android:text="User_Estado"
+                    android:text="User_Calle"
                     android:textColor="@color/primary"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -201,6 +228,63 @@
                     android:textColor="@color/primary"
                     android:textSize="18sp" />
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_edad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Edad: "
+                    android:textColor="@color/primary"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/Edad_sql"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginTop="5dp"
+                    android:text="User_Edad"
+                    android:textColor="@color/primary"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_CP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="CP: "
+                    android:textColor="@color/primary"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/CP_sql"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="45dp"
+                    android:layout_marginTop="5dp"
+                    android:text="User_CP"
+                    android:textColor="@color/primary"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
 
 
         </LinearLayout>

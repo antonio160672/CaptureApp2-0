@@ -7,37 +7,37 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.captureapp2_0.ui.home.HomeFragment"
+        android:name="com.example.captureapp2_0.Vistas.ui_vistas.Menu_princi.inicioFragment_view"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_Inicio_menu" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.example.captureapp2_0.ui.gallery.GalleryFragment"
+        android:name="com.example.captureapp2_0.Vistas.ui_vistas.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.example.captureapp2_0.ui.slideshow.SlideshowFragment"
+        android:name="com.example.captureapp2_0.Vistas.ui_vistas.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
 
     <fragment
         android:id="@+id/nav_tools"
-        android:name="com.example.captureapp2_0.ui.tools.ToolsFragment"
+        android:name="com.example.captureapp2_0.Vistas.ui_vistas.tools.ToolsFragment"
         android:label="@string/menu_tools"
         tools:layout="@layout/fragment_tools" />
 
     <fragment
         android:id="@+id/nav_share"
-        android:name="com.example.captureapp2_0.ui.share.ShareFragment"
+        android:name="com.example.captureapp2_0.Vistas.ui_vistas.share.ShareFragment"
         android:label="@string/menu_share"
         tools:layout="@layout/fragment_share" />
 
     <fragment
         android:id="@+id/nav_send"
-        android:name="com.example.captureapp2_0.ui.send.SendFragment"
+        android:name="com.example.captureapp2_0.Vistas.ui_vistas.send.SendFragment"
         android:label="@string/menu_send"
         tools:layout="@layout/fragment_send" />
 </navigation>

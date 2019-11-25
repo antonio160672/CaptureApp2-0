@@ -81,6 +81,7 @@ public class Registro_par2_interac_impL implements interRegistro_par2_Interactor
             obj_usuario.setColonia(colonia);
             obj_usuario.setCp(cp);
             obj_usuario.setFecha_nac(fecha);
+            obj_usuario.setMunicipio(municipio);
             obj_usuario.setIdEstado(obj_estados.contenedor_stados.get(estado));
             prueba(fecha, estado, municipio, calle, colonia, cp);
             resgistro_volley_sqlite();

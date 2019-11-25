@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.captureapp2_0.objetos.Obj_usuario;
+
 import java.util.ArrayList;
 
 public class Sqlite_usuario {
@@ -17,7 +19,7 @@ public class Sqlite_usuario {
     String nombre_base = "bd";// nombre de la base de datos
     int version = 1;
     String[] tablas = {"CREATE TABLE IF NOT EXISTS usuario (id_user INTEGER PRIMARY KEY, nombre text, " +
-            "apelldioP text, apellidoM text, correo text,contrasena text, calle text, colonia text,fecha text," +
+            "apelldioP text, apellidoM text, correo text,contrasena text,municipio text, calle text, colonia text,fecha text," +
             "cp text,idEstado INTEGER)"};///Aqui van todas las tablas a crear,
     // para hacer modificaciones a la base de datos borrar la aplicacion e instalar nuevamente
     public Sqlite_usuario(Context context)
@@ -63,66 +65,32 @@ public class Sqlite_usuario {
         }
     }
 
-    public ArrayList llenarlista(String sql, int bandera)// consultas select * from para llenar las listas de las diferentes clases
+    public Obj_usuario Recuerar_datos_user(String sql,Obj_usuario obj_usuario)// consultas select * from para llenar las listas de las diferentes clases
     {
-        ArrayList lista=new ArrayList();
         try {
             this.Abrir();
-            Cursor c = bd.rawQuery(sql,null);
+            Cursor c = bd.rawQuery(sql,null);//se inicia un cursor el cual se mueve en
+                                                         //la consulta
             if(c.moveToFirst()){
-                String datos="";
-                if (bandera==1){
-                    do {
-                        lista.add(c.getString(3));
-                    }while (c.moveToNext());
-                }else if (bandera==2){
-                    do {
-
-                        datos=c.getString(0)+ " "+c.getString(4)+ " "+c.getString(5)+ " "+c.getString(6);
-                        lista.add(datos);
-                        Log.e("valor", "" + datos);
-                    }while (c.moveToNext());
-                }else if (bandera==3){
-
-                    do {
-                        datos=c.getString(1)+ " "+c.getString(2)+ " "+c.getString(3);
-                        lista.add(datos);
-                        lista.add(c.getString(5));
-                        lista.add(c.getString(4));
-                    }while (c.moveToNext());
-                }else if (bandera==4){
-                    do {
-                        lista.add(c.getString(4));/*
-                        lista.add(c.getString(5));
-                        lista.add(c.getString(4));*/
-                    }while (c.moveToNext());
-                }else if (bandera==5){
-                    do {
-                        datos=c.getString(0)+" "+c.getString(1)+" "+c.getString(2)+" "+c.getString(3);
-                        Log.e("cadena",""+datos);
-                        lista.add(datos);/*
-                        lista.add(c.getString(5));
-                        lista.add(c.getString(4));*/
-                    }while (c.moveToNext());
-                }if (bandera==6){
-
-                    do {
-                        datos=c.getString(1)+ " "+c.getString(2)+ " "+c.getString(3);
-                        lista.add(datos);
-                        lista.add(c.getString(6));
-                        lista.add(c.getString(4));
-                    }while (c.moveToNext());
-                }
-            }else{
-                lista.add("0");
+                Log.e("datos",""+c.getString(0));
+                obj_usuario.setId_usua(c.getString(0));
+                obj_usuario.setNombre(c.getString(1));
+                obj_usuario.setApellido_pater(c.getString(2));
+                obj_usuario.setApellido_mater(c.getString(3));
+                obj_usuario.setCorreo(c.getString(4));
+                obj_usuario.setMunicipio(c.getString(6));
+                obj_usuario.setCalle(c.getString(7));
+                obj_usuario.setColonia(c.getString(8));
+                obj_usuario.setFecha_nac(c.getString(9));
+                obj_usuario.setCp(c.getString(10));
+                obj_usuario.setIdEstado(c.getString(11));
             }
-            return lista;
         }catch (SQLiteException s)
         {
             this.Cerrar();
             return null;
         }
-
+        return obj_usuario;
     }
 
     public ArrayList llenarlista_alar(String sql, int bandera)// consultas select * from para llenar las listas de las diferentes clases

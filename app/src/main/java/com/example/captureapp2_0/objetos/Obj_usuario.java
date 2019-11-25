@@ -11,9 +11,17 @@ public class Obj_usuario implements Serializable {
     public Cursor cursor=null;
 
     String id_usua,nombre,apellido_pater,apellido_mater,correo,
-            contrasena,calle,colonia,cp,fecha_nac,idEstado;
+            contrasena,calle,colonia,cp,fecha_nac,idEstado,municipio;
 
     public Obj_usuario() {
+    }
+
+    public String getMunicipio() {
+        return municipio;
+    }
+
+    public void setMunicipio(String municipio) {
+        this.municipio = municipio;
     }
 
     public String getFecha_nac() {

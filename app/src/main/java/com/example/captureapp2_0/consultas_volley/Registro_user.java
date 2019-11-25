@@ -120,9 +120,9 @@ public class Registro_user {
     private boolean Addcontact(){
         String sql="insert into usuario values('"+obj_usuario.getId_usua()+"','"+obj_usuario.getNombre()+"','"+
                 obj_usuario.getApellido_pater()+"','"+obj_usuario.getApellido_mater()+"','"+
-                obj_usuario.getCorreo()+"','"+ obj_usuario.getCalle()+"','"+obj_usuario.getColonia()+
-                "','"+obj_usuario.getContrasena()+"','"+
-                obj_usuario.getCp()+"','"+obj_usuario.getIdEstado()+"','"+obj_usuario.getFecha_nac()+"');";
+                obj_usuario.getCorreo()+"','"+ obj_usuario.getContrasena()+"','"+obj_usuario.getMunicipio()
+                +"','"+obj_usuario.getCalle()+"','"+obj_usuario.getColonia()+"','"+
+                obj_usuario.getFecha_nac()+"','"+obj_usuario.getCp()+"','"+obj_usuario.getIdEstado()+"');";
         Log.e("cadena","contacto"+sql);
         return obj_usuario.sqLite.ejecutaSQL(sql);
     }

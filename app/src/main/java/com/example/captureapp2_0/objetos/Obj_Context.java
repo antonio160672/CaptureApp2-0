@@ -8,6 +8,7 @@ public class Obj_Context {
     public Obj_Context(Context context) {
         this.context = context;
     }
+
     public static Context getContext() {
         return context;
     }

@@ -17,6 +17,13 @@ public class Ini_sesion_presen_impL implements Ini_sesion_presentador, onIni_ses
     }
 
     @Override
+    public void validar_sharepre() {
+        if (intera_ini_Sesion != null) {
+            intera_ini_Sesion.validar_sharepreference(this);
+        }
+    }
+
+    @Override
     public void valida_usuario(String correo, String contra) {
         if (intera_ini_Sesion != null) {
             intera_ini_Sesion.validarUser(correo,contra,this);

@@ -1,6 +1,7 @@
 package com.example.captureapp2_0.consultas_volley;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -99,6 +100,7 @@ public class Registro_user {
                 for (int i = 0; i < dataArray.length(); i++) {
                     JSONObject dataobj = dataArray.getJSONObject(i);
                     obj_usuario.setId_usua(dataobj.getString("idUsuario"));
+                    salvar_preferencias();
                     Log.e("titlo",dataobj.getString("nombre"));
                     Log.e("titlo2",dataobj.getString("correo"));
                 }
@@ -106,6 +108,14 @@ public class Registro_user {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void salvar_preferencias() {
+        SharedPreferences preferences=context.getSharedPreferences
+                ("userid",context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=preferences.edit();
+        editor.putString("Id_User",obj_usuario.getId_usua());
+        editor.commit();
     }
 
     private boolean Registro_sql() {

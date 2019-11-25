@@ -1,6 +1,7 @@
 package com.example.captureapp2_0.Interactores;
 
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.example.captureapp2_0.DB_lite.Sqlite_usuario;
@@ -21,7 +22,10 @@ public class inicio_Fragmen_inter_impL implements inter_inicioFragmen_interactor
     @Override
     public void ejecutar_consulta(Obj_usuario obj_usuario, Obj_Estados obj_estados, oninter_inicioFragment_Finishlicener listener) {
         obj_usuario.sqLite= new Sqlite_usuario(Obj_Context.getContext());
-        String sql="SELECT * FROM usuario where id_user=63";
+        SharedPreferences preferences=Obj_Context.getContext().getSharedPreferences
+                ("userid",Obj_Context.getContext().MODE_PRIVATE);
+        String ID=preferences.getString("Id_User","nulo");
+        String sql="SELECT * FROM usuario where id_user="+ID;
         obj_usuario=obj_usuario.sqLite.Recuerar_datos_user(sql,obj_usuario);
         retornardatos(obj_usuario,obj_estados,listener);
     }

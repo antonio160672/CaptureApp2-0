@@ -1,14 +1,14 @@
-package com.example.captureapp2_0.Vistas.ui_vistas.gallery;
+package com.example.captureapp2_0.Vistas.ui_vistas.cap_segnals;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class captacion_fragmen_Model extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public captacion_fragmen_Model() {
         mText = new MutableLiveData<>();
         mText.setValue("This is gallery fragment");
     }

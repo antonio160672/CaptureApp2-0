@@ -9,13 +9,13 @@
         android:id="@+id/nav_home"
         android:name="com.example.captureapp2_0.Vistas.ui_vistas.Menu_princi.inicioFragment_view"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_Inicio_menu" />
+        tools:layout="@layout/fragment_inicio_menu" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.example.captureapp2_0.Vistas.ui_vistas.gallery.GalleryFragment"
+        android:name="com.example.captureapp2_0.Vistas.ui_vistas.cap_segnals.captacion_Fragment_view"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_captacion_segnl" />
 
     <fragment
         android:id="@+id/nav_slideshow"

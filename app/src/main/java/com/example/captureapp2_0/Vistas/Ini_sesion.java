@@ -35,8 +35,8 @@ public class Ini_sesion extends AppCompatActivity implements Ini_sesion_vista {
         getSupportActionBar().hide();//oculta la barra
 
         presentador =new Ini_sesion_presen_impL(this);
-        presentador.validar_sharepre();
         obj_context=new Obj_Context(this);
+        presentador.validar_sharepre();
         activar_fuente();//llama al metodo que activa la fuente
 
 
@@ -65,6 +65,7 @@ public class Ini_sesion extends AppCompatActivity implements Ini_sesion_vista {
         Intent r = new Intent(this, menu_principal.class);
         startActivity(r);
         overridePendingTransition(R.anim.left_in,R.anim.left_out);
+        finish();
     }
 
     public void Registro_usu(View view) {

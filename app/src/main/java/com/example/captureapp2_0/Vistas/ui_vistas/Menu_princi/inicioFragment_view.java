@@ -53,6 +53,7 @@ public class inicioFragment_view extends Fragment implements inter_inicioFragmen
         CP_sql=root.findViewById(R.id.CP_sql);
         Edad_sql=root.findViewById(R.id.Edad_sql);
         Municipio_sql=root.findViewById(R.id.Municipio_sql);
+
         Typeface face=Typeface.createFromAsset(getActivity().getAssets(),"fonts/Mohave-Bold.otf");
         titulo.setTypeface(face);
         usuario_titu.setTypeface(face);
@@ -66,6 +67,12 @@ public class inicioFragment_view extends Fragment implements inter_inicioFragmen
         Calle_sql.setTypeface(face);
         text_Colonia.setTypeface(face);
         Colonia_sql.setTypeface(face);
+        text_Municipio.setTypeface(face);
+        text_edad.setTypeface(face);
+        text_CP.setTypeface(face);
+        CP_sql.setTypeface(face);
+        Edad_sql.setTypeface(face);
+        Municipio_sql.setTypeface(face);
     }//se cargan en los diferentes campos la fuente que usara
 
     @Override

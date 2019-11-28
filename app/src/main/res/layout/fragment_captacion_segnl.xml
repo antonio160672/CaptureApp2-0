@@ -37,7 +37,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="454dp"
+        android:layout_height="440dp"
         android:orientation="vertical">
 
         <androidx.viewpager.widget.ViewPager
@@ -50,13 +50,26 @@
 
 
     </LinearLayout>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/ActionButton"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        app:srcCompat="@color/design_default_color_primary_dark" />
+        android:orientation="horizontal">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/ActionButton"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:srcCompat="@color/design_default_color_primary_dark" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/Desactivar_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="280dp"
+            android:clickable="true"
+            app:srcCompat="@android:color/holo_red_dark" />
+    </LinearLayout>
 
 
 </LinearLayout>

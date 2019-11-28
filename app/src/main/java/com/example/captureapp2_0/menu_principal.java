@@ -2,6 +2,7 @@ package com.example.captureapp2_0;
 
 import android.os.Bundle;
 
+import com.example.captureapp2_0.objetos.Obj_Context;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -24,6 +25,7 @@ import android.view.Menu;
 public class menu_principal extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+    Obj_Context obj_context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,8 @@ public class menu_principal extends AppCompatActivity {
         setContentView(R.layout.menu_principal_view);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        obj_context=new Obj_Context(this);
+        obj_context.setApplication(getApplication());
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each

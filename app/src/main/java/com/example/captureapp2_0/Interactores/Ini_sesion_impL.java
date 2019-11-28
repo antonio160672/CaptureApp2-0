@@ -51,6 +51,7 @@ public class Ini_sesion_impL implements Ini_sesion_Interactor {
         }
 
     }
+
     private boolean Registro_sql() {
         Obj_usuario obj_usuario=new Obj_usuario();
         obj_usuario.sqLite= new Sqlite_usuario(Obj_Context.getContext());

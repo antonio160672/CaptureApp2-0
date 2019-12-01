@@ -4,7 +4,7 @@ import com.example.captureapp2_0.Interactores.inicio_Fragmen_inter_impL;
 import com.example.captureapp2_0.Interfaces.Menu_princi_inter.inter_inicioFragmen_interactor;
 import com.example.captureapp2_0.Interfaces.Menu_princi_inter.inter_inicioFragment_presentador;
 import com.example.captureapp2_0.Interfaces.Menu_princi_inter.oninter_inicioFragment_Finishlicener;
-import com.example.captureapp2_0.Vistas.ui_vistas.Menu_princi.inicioFragment_view;
+import com.example.captureapp2_0.Vistas.Menu_princi.inicioFragment_view;
 import com.example.captureapp2_0.objetos.Obj_Estados;
 import com.example.captureapp2_0.objetos.Obj_usuario;
 

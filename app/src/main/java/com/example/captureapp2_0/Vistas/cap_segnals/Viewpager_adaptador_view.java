@@ -1,7 +1,5 @@
-package com.example.captureapp2_0.Vistas.ui_vistas.cap_segnals;
+package com.example.captureapp2_0.Vistas.cap_segnals;
 
-import android.app.Activity;
-import android.util.Log;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;

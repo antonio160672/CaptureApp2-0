@@ -17,7 +17,7 @@ import com.example.captureapp2_0.Interfaces.Capta_segnl_interfaces.Interactor_ca
 import com.example.captureapp2_0.Interfaces.Capta_segnl_interfaces.onlistener_captura_segnas_interf;
 import com.example.captureapp2_0.Interfaces.Capta_segnl_interfaces.presentador_captureFragment_interface;
 
-import com.example.captureapp2_0.Vistas.ui_vistas.cap_segnals.captacion_Fragment_view;
+import com.example.captureapp2_0.Vistas.cap_segnals.captacion_Fragment_view;
 import com.example.captureapp2_0.objetos.Obj_Context;
 import java.util.List;
 

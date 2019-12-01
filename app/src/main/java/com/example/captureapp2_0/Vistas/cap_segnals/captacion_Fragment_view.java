@@ -1,4 +1,4 @@
-package com.example.captureapp2_0.Vistas.ui_vistas.cap_segnals;
+package com.example.captureapp2_0.Vistas.cap_segnals;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -14,13 +14,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.captureapp2_0.Interfaces.Capta_segnl_interfaces.presentador_captureFragment_interface;
@@ -30,8 +28,6 @@ import com.example.captureapp2_0.R;
 import com.example.captureapp2_0.objetos.Obj_Context;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
-
-import java.util.List;
 
 public class captacion_Fragment_view extends Fragment  implements View.OnClickListener, view_captacion_fragmen_intfa {
     private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
@@ -77,7 +73,6 @@ public class captacion_Fragment_view extends Fragment  implements View.OnClickLi
                 desactib.setVisibility(view.GONE);
                 adaptador_view.clearFragemen();
                 viewPager.setAdapter(adaptador_view);
-                tabLayout.setupWithViewPager(viewPager);
                 break;
             default:
                 break;
@@ -148,8 +143,8 @@ public class captacion_Fragment_view extends Fragment  implements View.OnClickLi
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    private fragmen_listas_wifi_blue newinstance_bluetooth(){
-        fragmen_listas_wifi_blue fragmenwifi_blue=new fragmen_listas_wifi_blue();
+    private fragmen_listas_bluetooth newinstance_bluetooth(){
+        fragmen_listas_bluetooth fragmenwifi_blue=new fragmen_listas_bluetooth();
         return fragmenwifi_blue;
     }
     private fragment_lista_wifi newinstance_wifi(){

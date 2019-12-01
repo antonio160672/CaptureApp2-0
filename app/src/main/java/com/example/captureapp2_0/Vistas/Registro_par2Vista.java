@@ -19,6 +19,7 @@ import com.example.captureapp2_0.Interfaces.Registro_par2_interF.Interf_Registro
 import com.example.captureapp2_0.Interfaces.Registro_par2_interF.inter_Registro_par2_presentador;
 import com.example.captureapp2_0.Presentadores.Registro_par2_presen_impL;
 import com.example.captureapp2_0.R;
+import com.example.captureapp2_0.menu_principal;
 import com.example.captureapp2_0.objetos.Obj_Context;
 import com.example.captureapp2_0.objetos.Obj_usuario;
 import java.util.Calendar;
@@ -115,6 +116,9 @@ public class Registro_par2Vista extends AppCompatActivity implements Interf_Regi
 
     @Override
     public void navegador() {
-        Toast.makeText(this,"usuario registrado",Toast.LENGTH_LONG).show();
+        Intent r = new Intent(this, menu_principal.class);
+        startActivity(r);
+        overridePendingTransition(R.anim.left_in,R.anim.left_out);
+        finish();
     }
 }

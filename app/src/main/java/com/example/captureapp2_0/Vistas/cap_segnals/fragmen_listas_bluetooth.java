@@ -1,6 +1,5 @@
-package com.example.captureapp2_0.Vistas.ui_vistas.cap_segnals;
+package com.example.captureapp2_0.Vistas.cap_segnals;
 
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -18,7 +17,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.captureapp2_0.R;
-import com.example.captureapp2_0.objetos.Obj_Context;
 
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconConsumer;
@@ -31,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class fragmen_listas_wifi_blue extends Fragment implements BeaconConsumer {
+public class fragmen_listas_bluetooth extends Fragment implements BeaconConsumer {
     ListView listView;
     View view;
     ArrayAdapter<String> adaptador;
@@ -108,6 +106,13 @@ public class fragmen_listas_wifi_blue extends Fragment implements BeaconConsumer
     @Override
     public void onStop() {
         super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        beaconManager.setAndroidLScanningDisabled(true);
+        beaconManager.unbind(this);
     }
 
     @Override

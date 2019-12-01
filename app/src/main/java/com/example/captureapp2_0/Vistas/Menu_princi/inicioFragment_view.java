@@ -1,4 +1,4 @@
-package com.example.captureapp2_0.Vistas.ui_vistas.Menu_princi;
+package com.example.captureapp2_0.Vistas.Menu_princi;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.captureapp2_0.Interfaces.Menu_princi_inter.inter_inicioFragment_presentador;
 import com.example.captureapp2_0.Interfaces.Menu_princi_inter.inter_inicioFragment_view;

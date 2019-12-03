@@ -2,9 +2,8 @@ package com.example.captureapp2_0.Interactores;
 
 
 import android.content.SharedPreferences;
-import android.util.Log;
 
-import com.example.captureapp2_0.DB_lite.Sqlite_usuario;
+import com.example.captureapp2_0.DB_lite.Sqlite_DB_manejo;
 import com.example.captureapp2_0.Interfaces.Menu_princi_inter.inter_inicioFragmen_interactor;
 import com.example.captureapp2_0.Interfaces.Menu_princi_inter.oninter_inicioFragment_Finishlicener;
 import com.example.captureapp2_0.objetos.Obj_Context;
@@ -21,7 +20,7 @@ public class inicio_Fragmen_inter_impL implements inter_inicioFragmen_interactor
 
     @Override
     public void ejecutar_consulta(Obj_usuario obj_usuario, Obj_Estados obj_estados, oninter_inicioFragment_Finishlicener listener) {
-        obj_usuario.sqLite= new Sqlite_usuario(Obj_Context.getContext());
+        obj_usuario.sqLite= new Sqlite_DB_manejo(Obj_Context.getContext());
         SharedPreferences preferences=Obj_Context.getContext().getSharedPreferences
                 ("userid",Obj_Context.getContext().MODE_PRIVATE);
         String ID=preferences.getString("Id_User","nulo");
@@ -30,7 +29,7 @@ public class inicio_Fragmen_inter_impL implements inter_inicioFragmen_interactor
         retornardatos(obj_usuario,obj_estados,listener);
     }
 
-    @Override
+    @Override//retorna a la vista toda la informacion del usuario
     public void retornardatos(Obj_usuario obj_usuario, Obj_Estados obj_estados, oninter_inicioFragment_Finishlicener listener) {
 
         listener.cargar_Nombre_show(obj_usuario.getNombre()+" "+obj_usuario.getApellido_pater()

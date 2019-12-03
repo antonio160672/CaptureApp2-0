@@ -10,7 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.captureapp2_0.DB_lite.Sqlite_usuario;
+import com.example.captureapp2_0.DB_lite.Sqlite_DB_manejo;
 import com.example.captureapp2_0.Interfaces.Registro_par2_interF.oninter_Registro_par2_Finishlicener;
 import com.example.captureapp2_0.objetos.Obj_Context;
 import com.example.captureapp2_0.objetos.Obj_usuario;
@@ -35,20 +35,21 @@ public class Registro_user {
     }
 
     public void Registro_usuario(){
-        request= Volley.newRequestQueue(context);
+        request= Volley.newRequestQueue(context);//se instancia un nuevo reques con el contexto de la aplicación
         final boolean[] bandera = new boolean[1];
-        String URL = "http://pruebas-upemor.ddns.net/android/insertar.php";
-        StringRequest getRequest = new StringRequest(Request.Method.POST, URL,
+        String URL = "http://pruebas-upemor.ddns.net/android/insertar.php";//se crea una url
+        StringRequest getRequest = new StringRequest(Request.Method.POST, URL,//se indica el metodo
+                //de comunicación tipo post, la url y la información
                 new Response.Listener<String>() {
-                    @Override
+                    @Override//aqui se recibe una la respuesta
                     public void onResponse(String response) {
-                        request.getCache().clear();
+                        request.getCache().clear();//se limpia la respuesta
                         response= response.replace("Connected successfully","");
                         Log.e("datos responce","formato: "+response);
                         try {
-                            parseData(response);
-                            if(Registro_sql()){
-                                listener.exito_valida();
+                            parseData(response);//transforma un json para ser analizado
+                            if(Registro_sql()){//manda a llmar la funcion para el registro sqlite
+                                listener.exito_valida();//manda a llamar el metodo del presentador
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -65,7 +66,8 @@ public class Registro_user {
                     }
                 }){
             @Override
-            protected Map<String, String> getParams() {
+            protected Map<String, String> getParams() {//metodo para envío de datos
+                //mapea las instrucciones
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Nombre",obj_usuario.getNombre());
                 params.put("Apell_pater",obj_usuario.getApellido_pater());
@@ -80,7 +82,7 @@ public class Registro_user {
             }
 
         };
-        request.add(getRequest);
+        request.add(getRequest);//agrega a una pila para que sea enviada
     }
 
     private void parseData(String response) throws JSONException {
@@ -119,7 +121,7 @@ public class Registro_user {
     }
 
     private boolean Registro_sql() {
-        obj_usuario.sqLite= new Sqlite_usuario(context);
+        obj_usuario.sqLite= new Sqlite_DB_manejo(context);
         if (Addcontact()){
             return true;
         }else {

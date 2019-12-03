@@ -1,10 +1,11 @@
-package com.example.captureapp2_0.Vistas.cap_segnals;
+package com.example.captureapp2_0.Vistas.cap_segnals.vistas_listas;
 
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -30,8 +31,12 @@ import com.example.captureapp2_0.objetos.Obj_wifi;
 
 import org.json.JSONException;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class fragment_lista_wifi extends Fragment {
     ListView listView;
@@ -42,15 +47,18 @@ public class fragment_lista_wifi extends Fragment {
     WifiInfo wifiInfo;//este extrae informacion del wifimanger
     WifiScanReceiver wifiReciever;
     Obj_wifi obj_wifi;//clase que almacena los datos de la clase wifi aqui se guarda la informacion
-                      //linea 105
+    //linea 105
     Registro_wifi_volley registro_wifi_volley;
-    int o=87;
+    String ID;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_lista_wifi, container, false);
         listView = view.findViewById(R.id.Lista_señales);
+        SharedPreferences preferences=Obj_Context.getContext().getSharedPreferences
+                ("userid",Obj_Context.getContext().MODE_PRIVATE);
+        ID=preferences.getString("Id_User","nulo");
         try {
             cargarlista();
         } catch (JSONException e) {
@@ -65,13 +73,13 @@ public class fragment_lista_wifi extends Fragment {
         //saca los datos de los servicios del telefono por eso el service y manda el wifi service
         wifiInfo = wifiManager.getConnectionInfo();//este saca la informacion de los servivios y los manda
         //a una variable para informar
-        Log.e("mensaje info","men:"+wifiInfo.getRssi()+" "+wifiInfo.getSSID());
         wifiReciever = new WifiScanReceiver();//esto es la clase que se tiene abajo esto
         //inicia la captura
         wifiManager.startScan();
         adaptador = new ArrayAdapter<String>(Obj_Context.getContext(),
                 android.R.layout.simple_list_item_1, Lista_wifi);
         listView.setAdapter(adaptador);
+
         obj_wifi=new Obj_wifi();
         registro_wifi_volley=new Registro_wifi_volley();
 
@@ -95,37 +103,46 @@ public class fragment_lista_wifi extends Fragment {
         /*Context representa el estado actual de la aplicación y permite obtener información
         acerca de su entorno de ejecución. Es una clase abstracta
         y su implementación depende del sistema Android.*/
-        public void onReceive(Context c, Intent intent) {
+        public void onReceive(Context c, Intent intent){
             List<ScanResult> wifiScanList = wifiManager.getScanResults();
             //inicia la lista del manger por eso el . get resultados saca los
             //resultados de la busqueda del momento
-            Log.e("mensaje","si entro por 2 "+wifiScanList.size());
+
             Lista_wifi.clear();
             if (wifiScanList.size()>0){
+                //va sacando cada entidad de los datos
                 for (int i = 0; i < wifiScanList.size(); i++) {//recorre la lista y muestra los datos
                     String level= Integer.toString(wifiScanList.get(i).level);
                     String ssid = wifiScanList.get(i).SSID; //Get the SSID
                     String bssid =  wifiScanList.get(i).BSSID; //Get the BSSID
-                    String algo=wifiScanList.get(i).capabilities;//el tipo de cominicacion que tiene WPA
-                    /*Log.e("dato wifi:","Nombre:"+ssid+" macaddres: "+bssid+
-                            " level sin cal:"+level+" capabilitires:"+algo+"\n");*/
-                    Lista_wifi.add("Nombre del dispos: " + ssid
-                            + "\nmacaddres: " + bssid
+
+                    SimpleDateFormat dateFormat = new //crea la estructura de la fecha
+                            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                    DateFormat hourFormat = new //crea estrucutra de la hora
+                            SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+                    Date date = new Date();//se instancia la hora y fecha
+                    String fecha = dateFormat.format(date);//se les da formato
+                    String hora = hourFormat.format(date);//se les da formato
+                    Lista_wifi.add("Nombre: " + ssid
+                            + "\nMacaddres: " + bssid
                             + "\nRSSI: " + level);
-                    obj_wifi.setNombre_dispos(ssid);
-                    obj_wifi.setMacaddres(bssid);
-                    obj_wifi.setRSSI(level);
-                    obj_wifi.setId_dip((ssid+Integer.toString(o)));
+
+                    obj_wifi.setId_dip((bssid+":"+ID));//id Dispositivo
+                    obj_wifi.setNombre_dispos(ssid);//nombre dispositico
+                    obj_wifi.setMacaddres(bssid);//macaddres
+                    obj_wifi.setRSSI(level);//nivel de señal
+                    obj_wifi.setFecha_cap(fecha);
+                    obj_wifi.setHora(hora);
+                    obj_wifi.setId_user(ID);//iD Usuario
+                    obj_wifi.setId_tip_dispo("1");
+
                     registro_wifi_volley.setObj_wifi(obj_wifi);
                     try {
-                        registro_wifi_volley.envio_wifi();
+                        registro_wifi_volley.SQLite_exitencia();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-                    o++;
                 }
-
             }
             updateList();
             wifiManager.startScan(); //se manda a llamar a si misma

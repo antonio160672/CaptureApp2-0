@@ -36,7 +36,6 @@ public class Registro_par1Vista extends AppCompatActivity implements inter_Regis
 
         activar_fuente();
         presentador=new Registro_par1_presen_impL(this);
-
     }
 
     private void activar_fuente() {

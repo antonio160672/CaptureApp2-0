@@ -1,4 +1,4 @@
-package com.example.captureapp2_0.Vistas.cap_segnals;
+package com.example.captureapp2_0.Vistas.cap_segnals.vistas_listas;
 
 import android.content.Context;
 import android.content.Intent;

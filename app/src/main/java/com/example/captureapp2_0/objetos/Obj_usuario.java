@@ -1,13 +1,13 @@
 package com.example.captureapp2_0.objetos;
 
 import android.database.Cursor;
-import com.example.captureapp2_0.DB_lite.Sqlite_usuario;
+import com.example.captureapp2_0.DB_lite.Sqlite_DB_manejo;
 import java.io.Serializable;
 
 public class Obj_usuario implements Serializable {
     /*String nombre,apellido_pater,apellido_mater,correo,
             contrasena,calle,colonia,cp,idTipoUsuario,idCompania,idEstatus,idEstado;*/
-    public Sqlite_usuario sqLite=null;
+    public Sqlite_DB_manejo sqLite=null;
     public Cursor cursor=null;
 
     String id_usua,nombre,apellido_pater,apellido_mater,correo,

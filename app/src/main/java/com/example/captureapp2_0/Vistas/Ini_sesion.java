@@ -19,10 +19,10 @@ import com.example.captureapp2_0.objetos.Obj_Context;
 
 public class Ini_sesion extends AppCompatActivity implements Ini_sesion_vista {
 
-    private EditText usuario,contra;
-    private TextView titulo;
-    public Obj_Context obj_context;
-    private Ini_sesion_presentador presentador;
+    private EditText usuario,contra;//Variables de interfaz grafica, Campos editables
+    private TextView titulo;//titulos de la aplicación
+    public Obj_Context obj_context;//contexto sobre la aplicación
+    private Ini_sesion_presentador presentador;//interfaz del presentador para comunicación
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,32 +34,34 @@ public class Ini_sesion extends AppCompatActivity implements Ini_sesion_vista {
 
         getSupportActionBar().hide();//oculta la barra
 
-        presentador =new Ini_sesion_presen_impL(this);
-        obj_context=new Obj_Context(this);
-        presentador.validar_sharepre();
+        presentador =new Ini_sesion_presen_impL(this);//se instancia con la clas
+                                                                 //en este caso el presentadorimpl
+        obj_context=new Obj_Context(this);//se carga el contexto
+        presentador.validar_sharepre();//se valida la existencia de un usuario mediante preferencs
         activar_fuente();//llama al metodo que activa la fuente
 
 
     }
 
-    private void activar_fuente() {
+    private void activar_fuente()//función para carga de títulos
+    {
         titulo = findViewById(R.id.Titulo);   //definimos en ONCREATE donde esta por                                                                                                     //medio de un ID
         Typeface face=Typeface.createFromAsset(getAssets(),"fonts/Mohave-Bold.otf");
+        //línea 47 se busca dentro de archivos fonts para buscar la fuente para el titulo
         titulo.setTypeface(face);
-
     }
 
-    @Override
+    @Override//método sobre escrita del implements de Ini_sesion_vista
     public void showerrorcorreo() {
         usuario.setError("correo invalido");
     }
 
-    @Override
+    @Override//método sobre escrito de imple de Ini_sesion_vista
     public void showerrorcontra() {
         contra.setError("Contraseña invalida");
     }
 
-    @Override
+    @Override //método sobre escrito para navegación entre menús
     public void mover_menu_pri() {
         //este hace el cambio de vistas
         Intent r = new Intent(this, menu_principal.class);
@@ -68,14 +70,16 @@ public class Ini_sesion extends AppCompatActivity implements Ini_sesion_vista {
         finish();
     }
 
-    public void Registro_usu(View view) {
+    public void Registro_usu(View view) //metodo onclick para ir a registro de usuario
+    {
         //Intent r = new Intent(this, Registro_par1Vista.class);
         Intent r = new Intent(this, Registro_par1Vista.class);
         startActivity(r);
         overridePendingTransition(R.anim.left_in,R.anim.left_out);
     }
 
-    public void Ini_sesion(View view) {
+    public void Ini_sesion(View view) //onclick para validar el inicio de sesión
+    {
         presentador.valida_usuario(usuario.getText().toString(),contra.getText().toString());
     }
 }

@@ -11,7 +11,7 @@ import com.example.captureapp2_0.objetos.Obj_usuario;
 
 import java.util.ArrayList;
 
-public class Sqlite_usuario {
+public class Sqlite_DB_manejo {
 
     Context context;
     private Helper helper;
@@ -20,9 +20,11 @@ public class Sqlite_usuario {
     int version = 1;
     String[] tablas = {"CREATE TABLE IF NOT EXISTS usuario (id_user INTEGER PRIMARY KEY, nombre text, " +
             "apelldioP text, apellidoM text, correo text,contrasena text,municipio text, calle text, colonia text,fecha text," +
-            "cp text,idEstado INTEGER)"};///Aqui van todas las tablas a crear,
+            "cp text,idEstado INTEGER)",
+            "CREATE TABLE IF NOT EXISTS Entidad_wifi (id INTEGER PRIMARY KEY AUTOINCREMENT, Id_dip text, Nombre_dispositivo text, Macaddres text, " +
+                    "RSSI text, Fecha text,Hora text, Id_user INTEGER,Id_tipo_disposi INTEGER)"};///Aqui van todas las tablas a crear,
     // para hacer modificaciones a la base de datos borrar la aplicacion e instalar nuevamente
-    public Sqlite_usuario(Context context)
+    public Sqlite_DB_manejo(Context context)
     {
         this.context = context;
     }
@@ -53,7 +55,6 @@ public class Sqlite_usuario {
 
     public Cursor consultaSQL(String sql)// consultas select * from .....
     {
-
         try {
             this.Abrir();
             Cursor c = bd.rawQuery(sql,null);
@@ -65,7 +66,8 @@ public class Sqlite_usuario {
         }
     }
 
-    public Obj_usuario Recuerar_datos_user(String sql,Obj_usuario obj_usuario)// consultas select * from para llenar las listas de las diferentes clases
+    public Obj_usuario Recuerar_datos_user(String sql,Obj_usuario obj_usuario)// consultas select * from para
+    // llenar un objeto de tipo usuasrio
     {
         try {
             this.Abrir();

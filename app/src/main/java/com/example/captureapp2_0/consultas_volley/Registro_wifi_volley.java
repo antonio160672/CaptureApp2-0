@@ -1,6 +1,7 @@
 package com.example.captureapp2_0.consultas_volley;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
@@ -9,21 +10,16 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.captureapp2_0.DB_lite.Sqlite_DB_manejo;
 import com.example.captureapp2_0.objetos.Obj_Context;
 import com.example.captureapp2_0.objetos.Obj_json_wifi_bluetooth;
 import com.example.captureapp2_0.objetos.Obj_wifi;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class Registro_wifi_volley {
@@ -31,22 +27,63 @@ public class Registro_wifi_volley {
     private RequestQueue request;
     private Context context;
     private JSONObject jsonBody;
-
+    private String URL, sql;
+    private int Request_Method,tipo_json;
     public Registro_wifi_volley() {
         this.context = Obj_Context.getContext();
         if (context!=null)
             request= Volley.newRequestQueue(context);
     }
 
-    public void envio_wifi() throws JSONException {
-        final boolean[] bandera = new boolean[1];
-        transfor_json();
-        String URL = "http://pruebas-upemor.ddns.net:1026/v2/entities";/*
-        Log.e("valor del json", String.valueOf(jsonBody));*/
-        JsonObjectRequest jobReq = new JsonObjectRequest(Request.Method.POST, URL, jsonBody,
+    public void SQLite_exitencia() throws JSONException {
+        if (obj_wifi!=null){
+            obj_wifi.sqLite= new Sqlite_DB_manejo(Obj_Context.getContext());
+            obj_wifi.cursor=consulta_entidad();
+            if(obj_wifi.cursor.getCount()>0){
+                Log.e("si","existe el dato");
+                URL= "http://pruebas-upemor.ddns.net:1026/v2/entities/"+obj_wifi.getId_dip()+"/attrs";
+                Log.e("URL de actualizacion",":"+URL);
+                Request_Method=1;//metodo pach para actualizar
+                tipo_json=1;
+            }else
+            {
+                Log.e("no","existe el dato");
+                Log.e("pero","ahora si existe");
+                URL= "http://pruebas-upemor.ddns.net:1026/v2/entities";
+                Request_Method=1;//metodo post para registrar
+                tipo_json=0;
+            }
+            if(insertar_entidad_wifi())
+                envio_wifi();
+        }
+    }
+
+    private Cursor consulta_entidad()//en este método se consulta si existe el dato con el id Id_dipositivo
+    {
+        sql="select * from Entidad_wifi where Id_dip='"+obj_wifi.getId_dip()+"'";
+        Log.e("aqui",""+sql);
+        return obj_wifi.sqLite.consultaSQL(sql);
+    }
+
+    private boolean insertar_entidad_wifi()// insertara los datos en la tabla
+    {
+        String sql="insert into Entidad_wifi values(NULL,'"+obj_wifi.getId_dip()+"','"+obj_wifi.getNombre_dispos()+"','"+
+                obj_wifi.getMacaddres()+"','"+obj_wifi.getRSSI()+"','"+
+                obj_wifi.getFecha_cap()+"','"+ obj_wifi.getHora()+"','"+obj_wifi.getId_user()
+                +"','"+obj_wifi.getId_tip_dispo()+"');";
+        Log.e("cadena","contacto"+sql);
+        return obj_wifi.sqLite.ejecutaSQL(sql);
+    }
+
+    public void envio_wifi() throws JSONException{
+
+        transfor_json(tipo_json);//json para
+        Log.e("valor del json", String.valueOf(jsonBody));
+        JsonObjectRequest jobReq = new JsonObjectRequest(Request_Method, URL, jsonBody,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
+                        request.getCache().clear();
                         Log.e("el valor","el valor del jason");
                         Log.e("json",":"+jsonObject);
                     }
@@ -54,13 +91,16 @@ public class Registro_wifi_volley {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-
+                        Log.e("json",":"+volleyError);
                     }
 
                 }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
+                if (tipo_json==1){
+                    headers.put("X-HTTP-Method-Override", "PATCH");
+                }
                 headers.put("Accept", "application/json");
                 headers.put("Content-Type", "application/json");
                 return headers;
@@ -70,28 +110,17 @@ public class Registro_wifi_volley {
         request.add(jobReq);
     }
 
-    private void transfor_json() throws JSONException {
+    private void transfor_json(int i) throws JSONException {
         Obj_json_wifi_bluetooth jsonWifiBluetooth=new Obj_json_wifi_bluetooth();
-        Log.e("id",""+obj_wifi.getNombre_dispos());
-        obj_wifi.setId_user("68");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
-        Date date = new Date();
-        String fecha = dateFormat.format(date);
-        String hora = hourFormat.format(date);
-        obj_wifi.setFecha_cap(fecha);
-        obj_wifi.setHora(hora);
-        obj_wifi.setId_tip_dispo("1");
         jsonWifiBluetooth.setObj_wifi(obj_wifi);
-        jsonWifiBluetooth.cargar_json();
-
+        if (i==0){
+            jsonWifiBluetooth.primer_registro_json();
+        }else{
+            jsonWifiBluetooth.actualizacion_entidad();
+        }
         jsonBody = new JSONObject(jsonWifiBluetooth.getJson());
     }
 
-
-    public Obj_wifi getObj_wifi() {
-        return obj_wifi;
-    }
 
     public void setObj_wifi(Obj_wifi obj_wifi) {
         this.obj_wifi = obj_wifi;

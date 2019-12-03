@@ -1,7 +1,14 @@
 package com.example.captureapp2_0.objetos;
 
+import android.database.Cursor;
+
+import com.example.captureapp2_0.DB_lite.Sqlite_DB_manejo;
+
 public class Obj_wifi {
     String Nombre_dispos,id_dip,macaddres,RSSI,id_tip_dispo,id_user,fecha_cap,hora;
+
+    public static Sqlite_DB_manejo sqLite=null;
+    public static Cursor cursor=null;
 
     public Obj_wifi() {
     }

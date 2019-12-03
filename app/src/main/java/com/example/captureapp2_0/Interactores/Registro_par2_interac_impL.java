@@ -15,7 +15,7 @@ public class Registro_par2_interac_impL implements interRegistro_par2_Interactor
     private Obj_usuario obj_usuario;
     private oninter_Registro_par2_Finishlicener listener;
 
-    @Override
+    @Override//valida cadenas para ver que no esten vacías
     public void validar_registrop2_intera(Obj_usuario obj_usuario, final String fecha, final String estado,
                                           final String municipio, final String calle, final String colonia, final String CP,
                                           final oninter_Registro_par2_Finishlicener listener) {
@@ -23,45 +23,44 @@ public class Registro_par2_interac_impL implements interRegistro_par2_Interactor
         this.obj_usuario=obj_usuario;
         bandera=1;
         new Handler().postDelayed(new Runnable() {
-
             @Override
             public void run() {
-                prueba(fecha,estado,municipio,calle,colonia,CP);
-                if ((fecha.equals("Fecha")||fecha.equals("campo vacio")) && estado.equals("Estado")
+                //en esta seccion se verifica la existencia de campos vacío
+                if ((fecha.equals("Fecha")||fecha.equals("Campo vacío")) && estado.equals("Estado")
                         && municipio.isEmpty() && calle.isEmpty() && colonia.isEmpty() && CP.isEmpty()) {
-                    listener.fecha_seterror("campo vacio");
-                    listener.spiner_seterror("campo vacio");
-                    listener.municipio_seterror("campo vacio");
-                    listener.calle_seterror("campo vacio");
-                    listener.colonia_setrror("campo vacio");
-                    listener.CP_seterror("campo vacio");
+                    listener.fecha_seterror("Campo vacío");
+                    listener.spiner_seterror("Campo vacío");
+                    listener.municipio_seterror("Campo vacío");
+                    listener.calle_seterror("Campo vacío");
+                    listener.colonia_setrror("Campo vacío");
+                    listener.CP_seterror("Campo vacío");
                 }
                 else{
-                    if (fecha.equals("Fecha")||fecha.equals("campo vacio") ){
-                        listener.fecha_seterror("campo vacio");
+                    if (fecha.equals("Fecha")||fecha.equals("Campo vacío") ){
+                        listener.fecha_seterror("Campo vacío");
                         bandera=0;
                     }
                     if ( estado.equals("Estado")) {
-                        listener.spiner_seterror("campo vacio");
+                        listener.spiner_seterror("Campo vacío");
                         bandera=0;
                     }
                     if (municipio.equals("")) {
-                        listener.municipio_seterror("campo vacio");
+                        listener.municipio_seterror("Campo vacío");
                         bandera=0;
                     }
                     if (calle.equals("")) {
-                        listener.calle_seterror("campo vacio");
+                        listener.calle_seterror("Campo vacío");
                         bandera=0;
                     }
                     if (colonia.equals("")) {
-                        listener.colonia_setrror("campo vacio");
+                        listener.colonia_setrror("Campo vacío");
                         bandera=0;
                     }
                     if (CP.equals("")) {
-                        listener.CP_seterror("campo vacio");
+                        listener.CP_seterror("Campo vacío");
                         bandera=0;
                     }
-                    if (bandera!=0){
+                    if (bandera==1){
                         validar_cadenas(fecha,estado,municipio, calle,colonia,CP);
                     }
                 }
@@ -69,6 +68,7 @@ public class Registro_par2_interac_impL implements interRegistro_par2_Interactor
         },100);
     }
 
+    //aqui se validan las cadenas para no tener datos no esperados
     private void validar_cadenas(String fecha, String estado, String municipio, String calle, String colonia, String cp) {
         bandera=1;
         if (!(cp.length()>=5&&cp.length()<=8)){
@@ -83,7 +83,6 @@ public class Registro_par2_interac_impL implements interRegistro_par2_Interactor
             obj_usuario.setFecha_nac(fecha);
             obj_usuario.setMunicipio(municipio);
             obj_usuario.setIdEstado(obj_estados.contenedor_stados.get(estado));
-            prueba(fecha, estado, municipio, calle, colonia, cp);
             resgistro_volley_sqlite();
         }
     }
@@ -93,8 +92,4 @@ public class Registro_par2_interac_impL implements interRegistro_par2_Interactor
         registro_user.Registro_usuario();
     }
 
-    private void prueba(String fecha, String estado, String municipio, String calle, String colonia, String cp) {
-        Log.e("usuario","contra::"+obj_usuario.getContrasena()+" correo:"+obj_usuario.getCorreo()+"\n");
-        Log.e("datos","fecha:"+fecha+" estado:"+estado);
-    }
 }

@@ -17,12 +17,14 @@ public class Sqlite_DB_manejo {
     private Helper helper;
     private SQLiteDatabase bd;
     String nombre_base = "bd";// nombre de la base de datos
-    int version = 1;
+    int version = 2;
     String[] tablas = {"CREATE TABLE IF NOT EXISTS usuario (id_user INTEGER PRIMARY KEY, nombre text, " +
             "apelldioP text, apellidoM text, correo text,contrasena text,municipio text, calle text, colonia text,fecha text," +
             "cp text,idEstado INTEGER)",
             "CREATE TABLE IF NOT EXISTS Entidad_wifi (id INTEGER PRIMARY KEY AUTOINCREMENT, Id_dip text, Nombre_dispositivo text, Macaddres text, " +
-                    "RSSI text, Fecha text,Hora text, Id_user INTEGER,Id_tipo_disposi INTEGER)"};///Aqui van todas las tablas a crear,
+                    "RSSI text, Fecha text,Hora text, Id_user INTEGER,Id_tipo_disposi INTEGER)",
+            "CREATE TABLE IF NOT EXISTS Entidad_Bluetooth (id INTEGER PRIMARY KEY AUTOINCREMENT,Id_dip text,UUID text,Macaddres text,RSSI text,"+
+                    "TX text,MAJOR text,Fecha text,Hora text,Id_user INTEGER,Id_tipo_disposi INTEGER)"};///Aqui van todas las tablas a crear,
     // para hacer modificaciones a la base de datos borrar la aplicacion e instalar nuevamente
     public Sqlite_DB_manejo(Context context)
     {

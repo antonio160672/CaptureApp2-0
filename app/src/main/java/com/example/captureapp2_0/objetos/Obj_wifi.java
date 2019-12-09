@@ -10,10 +10,6 @@ public class Obj_wifi {
     public static Sqlite_DB_manejo sqLite=null;
     public static Cursor cursor=null;
 
-    public Obj_wifi() {
-    }
-
-
     public String getId_dip() {
         return id_dip;
     }

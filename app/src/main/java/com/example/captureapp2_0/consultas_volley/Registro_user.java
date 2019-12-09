@@ -37,7 +37,8 @@ public class Registro_user {
     public void Registro_usuario(){
         request= Volley.newRequestQueue(context);//se instancia un nuevo reques con el contexto de la aplicación
         final boolean[] bandera = new boolean[1];
-        String URL = "http://pruebas-upemor.ddns.net/android/insertar.php";//se crea una url
+        //String URL = "http://192.168.1.75/android/insert.php";
+        String URL = "http://pruebas-upemor.ddns.net/android/insert.php";//se crea una url
         StringRequest getRequest = new StringRequest(Request.Method.POST, URL,//se indica el metodo
                 //de comunicación tipo post, la url y la información
                 new Response.Listener<String>() {
@@ -90,7 +91,7 @@ public class Registro_user {
         if (jsonObject.optString("status").equals("true")){
             saveInfo(response);
         }else {
-            Log.e("ya teeee chingas",""+jsonObject.getString("message"));
+            Log.e("contenido erro",""+jsonObject.getString("message"));
         }
     }
 

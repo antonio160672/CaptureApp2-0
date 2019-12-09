@@ -3,6 +3,7 @@ package com.example.captureapp2_0.Vistas.cap_segnals.vistas_listas;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
@@ -17,6 +18,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.captureapp2_0.R;
+import com.example.captureapp2_0.consultas_volley.Registro_bluetooth_volley;
+import com.example.captureapp2_0.objetos.Obj_Context;
+import com.example.captureapp2_0.objetos.Obj_bluetooth;
 
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconConsumer;
@@ -24,10 +28,15 @@ import org.altbeacon.beacon.BeaconManager;
 import org.altbeacon.beacon.BeaconParser;
 import org.altbeacon.beacon.RangeNotifier;
 import org.altbeacon.beacon.Region;
+import org.json.JSONException;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class fragmen_listas_bluetooth extends Fragment implements BeaconConsumer {
     ListView listView;
@@ -35,18 +44,28 @@ public class fragmen_listas_bluetooth extends Fragment implements BeaconConsumer
     ArrayAdapter<String> adaptador;
     public  List<String> Lista_beacon = new ArrayList<String>();
     private BeaconManager beaconManager=null;
+    private Obj_bluetooth obj_bluetooth;
+    private String ID;
+    private Registro_bluetooth_volley bluetooth_volley;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragmen_listas_wifi_blue, container, false);
         listView = view.findViewById(R.id.Lista_señales);
+        SharedPreferences preferences= Obj_Context.getContext().getSharedPreferences
+                ("userid",Obj_Context.getContext().MODE_PRIVATE);
+        ID=preferences.getString("Id_User","nulo");
         cargarlista();
+        /*try {
+            cargarlista();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }*/
         return view;
     }
 
     void cargarlista(){
-        Log.e("si entro beacon","porrrrx1");
         beaconManager = BeaconManager.getInstanceForApplication(getApplicationContext());//instancia los servicios de beacon
         //las siguientes dos lineas hacen referencia al modelo de beacon en este caso estimote
         beaconManager.getBeaconParsers().add(new
@@ -55,6 +74,10 @@ public class fragmen_listas_bluetooth extends Fragment implements BeaconConsumer
         //protocolo
         beaconManager.getBeaconParsers().add(new BeaconParser().
                 setBeaconLayout(BeaconParser.EDDYSTONE_UID_LAYOUT));
+
+        obj_bluetooth=new Obj_bluetooth();
+        bluetooth_volley =new Registro_bluetooth_volley();
+
         beaconManager.bind(this);
         adaptador = new ArrayAdapter<String>(getApplicationContext(),
                 android.R.layout.simple_list_item_1, Lista_beacon);
@@ -63,7 +86,6 @@ public class fragmen_listas_bluetooth extends Fragment implements BeaconConsumer
 
     @Override
     public void onBeaconServiceConnect() {
-        Log.e("si entro beacon","ya no aqui");
         beaconManager.removeAllRangeNotifiers();
         beaconManager.addRangeNotifier(new RangeNotifier() {
             @Override
@@ -72,12 +94,35 @@ public class fragmen_listas_bluetooth extends Fragment implements BeaconConsumer
                     Lista_beacon.clear();
                     for (Beacon beacon : beacons) {
                         if (beacons.contains(beacon)){
+                            SimpleDateFormat dateFormat = new //crea la estructura de la fecha
+                                    SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                            DateFormat hourFormat = new //crea estrucutra de la hora
+                                    SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+                            Date date = new Date();//se instancia la hora y fecha
+                            String fecha = dateFormat.format(date);//se les da formato
+                            String hora = hourFormat.format(date);//se les da formato
                             Lista_beacon.add("UUID: " + beacon.getId1()
                                     + "\nMAJOR: " + beacon.getId2()
                                     + "\nRSSI: " + beacon.getRssi()
                                     + "\nTX: " + beacon.getTxPower()
                                     + "\nDISTANCE: " + beacon.getDistance()
                                     +"\nBluetoothAddress:"+beacon.getBluetoothAddress());
+                            obj_bluetooth.setUUID(beacon.getId1().toString());
+                            obj_bluetooth.setBluetoothAddress(beacon.getBluetoothAddress());
+                            obj_bluetooth.setId_dip(beacon.getBluetoothAddress()+":"+ID);
+                            obj_bluetooth.setMAJOR(beacon.getId2().toString());
+                            obj_bluetooth.setRSSI(Integer.toString(beacon.getRssi()));
+                            obj_bluetooth.setTX(Integer.toString(beacon.getTxPower()));
+                            obj_bluetooth.setId_tip_dispo("2");
+                            obj_bluetooth.setId_user(ID);
+                            obj_bluetooth.setFecha_cap(fecha);
+                            obj_bluetooth.setHora(hora);
+                            bluetooth_volley.setObj_bluetooth(obj_bluetooth);
+                            try {
+                                bluetooth_volley.SQLite_exitencia();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                     updateList();

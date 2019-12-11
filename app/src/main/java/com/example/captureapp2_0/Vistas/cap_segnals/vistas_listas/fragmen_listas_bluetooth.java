@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.captureapp2_0.R;
+import com.example.captureapp2_0.Vistas.cap_segnals.Adaptador_lista_diseño.Adaptador;
 import com.example.captureapp2_0.consultas_volley.Registro_bluetooth_volley;
 import com.example.captureapp2_0.objetos.Obj_Context;
 import com.example.captureapp2_0.objetos.Obj_bluetooth;
@@ -41,12 +42,13 @@ import java.util.Locale;
 public class fragmen_listas_bluetooth extends Fragment implements BeaconConsumer {
     ListView listView;
     View view;
-    ArrayAdapter<String> adaptador;
-    public  List<String> Lista_beacon = new ArrayList<String>();
+    public  ArrayList<Obj_bluetooth> Lista_beacon = new ArrayList<Obj_bluetooth>();
     private BeaconManager beaconManager=null;
     private Obj_bluetooth obj_bluetooth;
     private String ID;
     private Registro_bluetooth_volley bluetooth_volley;
+
+    Adaptador adaptador;
 
     @Nullable
     @Override
@@ -57,11 +59,6 @@ public class fragmen_listas_bluetooth extends Fragment implements BeaconConsumer
                 ("userid",Obj_Context.getContext().MODE_PRIVATE);
         ID=preferences.getString("Id_User","nulo");
         cargarlista();
-        /*try {
-            cargarlista();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }*/
         return view;
     }
 
@@ -74,13 +71,10 @@ public class fragmen_listas_bluetooth extends Fragment implements BeaconConsumer
         //protocolo
         beaconManager.getBeaconParsers().add(new BeaconParser().
                 setBeaconLayout(BeaconParser.EDDYSTONE_UID_LAYOUT));
-
-        obj_bluetooth=new Obj_bluetooth();
         bluetooth_volley =new Registro_bluetooth_volley();
 
         beaconManager.bind(this);
-        adaptador = new ArrayAdapter<String>(getApplicationContext(),
-                android.R.layout.simple_list_item_1, Lista_beacon);
+        adaptador=new Adaptador(null,Obj_Context.getContext(),  Lista_beacon);
         listView.setAdapter(adaptador);
     }
 
@@ -94,6 +88,7 @@ public class fragmen_listas_bluetooth extends Fragment implements BeaconConsumer
                     Lista_beacon.clear();
                     for (Beacon beacon : beacons) {
                         if (beacons.contains(beacon)){
+                            obj_bluetooth=new Obj_bluetooth();
                             SimpleDateFormat dateFormat = new //crea la estructura de la fecha
                                     SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                             DateFormat hourFormat = new //crea estrucutra de la hora
@@ -101,12 +96,6 @@ public class fragmen_listas_bluetooth extends Fragment implements BeaconConsumer
                             Date date = new Date();//se instancia la hora y fecha
                             String fecha = dateFormat.format(date);//se les da formato
                             String hora = hourFormat.format(date);//se les da formato
-                            Lista_beacon.add("UUID: " + beacon.getId1()
-                                    + "\nMAJOR: " + beacon.getId2()
-                                    + "\nRSSI: " + beacon.getRssi()
-                                    + "\nTX: " + beacon.getTxPower()
-                                    + "\nDISTANCE: " + beacon.getDistance()
-                                    +"\nBluetoothAddress:"+beacon.getBluetoothAddress());
                             obj_bluetooth.setUUID(beacon.getId1().toString());
                             obj_bluetooth.setBluetoothAddress(beacon.getBluetoothAddress());
                             obj_bluetooth.setId_dip(beacon.getBluetoothAddress()+":"+ID);
@@ -117,6 +106,7 @@ public class fragmen_listas_bluetooth extends Fragment implements BeaconConsumer
                             obj_bluetooth.setId_user(ID);
                             obj_bluetooth.setFecha_cap(fecha);
                             obj_bluetooth.setHora(hora);
+                            Lista_beacon.add(obj_bluetooth);
                             bluetooth_volley.setObj_bluetooth(obj_bluetooth);
                             try {
                                 bluetooth_volley.SQLite_exitencia();

@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.captureapp2_0.R;
+import com.example.captureapp2_0.Vistas.cap_segnals.Adaptador_lista_diseño.Adaptador;
 import com.example.captureapp2_0.consultas_volley.Registro_wifi_volley;
 import com.example.captureapp2_0.objetos.Obj_Context;
 import com.example.captureapp2_0.objetos.Obj_wifi;
@@ -41,8 +42,8 @@ import java.util.Locale;
 public class fragment_lista_wifi extends Fragment {
     ListView listView;
     View view;
-    ArrayAdapter<String> adaptador;
-    public List<String> Lista_wifi = new ArrayList<String>();
+    Adaptador adaptador1;
+    public ArrayList<Obj_wifi> Lista_wifi = new ArrayList<Obj_wifi>();
     WifiManager wifiManager;//esta variable saca la informacion del wifi
     WifiInfo wifiInfo;//este extrae informacion del wifimanger
     WifiScanReceiver wifiReciever;
@@ -75,13 +76,13 @@ public class fragment_lista_wifi extends Fragment {
         //a una variable para informar
         wifiReciever = new WifiScanReceiver();//esto es la clase que se tiene abajo esto
         //inicia la captura
-        wifiManager.startScan();
+        wifiManager.startScan();/*
         adaptador = new ArrayAdapter<String>(Obj_Context.getContext(),
-                android.R.layout.simple_list_item_1, Lista_wifi);
-        listView.setAdapter(adaptador);
-
-        obj_wifi=new Obj_wifi();
+                android.R.layout.simple_list_item_1, Lista_wifi);*/
         registro_wifi_volley=new Registro_wifi_volley();
+
+        adaptador1=new Adaptador(Lista_wifi,Obj_Context.getContext(),null);
+        listView.setAdapter(adaptador1);
 
     }
 
@@ -107,11 +108,11 @@ public class fragment_lista_wifi extends Fragment {
             List<ScanResult> wifiScanList = wifiManager.getScanResults();
             //inicia la lista del manger por eso el . get resultados saca los
             //resultados de la busqueda del momento
-
-            Lista_wifi.clear();
             if (wifiScanList.size()>0){
+                Lista_wifi.clear();
                 //va sacando cada entidad de los datos
                 for (int i = 0; i < wifiScanList.size(); i++) {//recorre la lista y muestra los datos
+                    obj_wifi=new Obj_wifi();
                     String level= Integer.toString(wifiScanList.get(i).level);
                     String ssid = wifiScanList.get(i).SSID; //Get the SSID
                     String bssid =  wifiScanList.get(i).BSSID; //Get the BSSID
@@ -123,10 +124,6 @@ public class fragment_lista_wifi extends Fragment {
                     Date date = new Date();//se instancia la hora y fecha
                     String fecha = dateFormat.format(date);//se les da formato
                     String hora = hourFormat.format(date);//se les da formato
-                    Lista_wifi.add("Nombre: " + ssid
-                            + "\nMacaddres: " + bssid
-                            + "\nRSSI: " + level);
-
                     obj_wifi.setId_dip((bssid+":"+ID));//id Dispositivo
                     obj_wifi.setNombre_dispos(ssid);//nombre dispositico
                     obj_wifi.setMacaddres(bssid);//macaddres
@@ -135,13 +132,15 @@ public class fragment_lista_wifi extends Fragment {
                     obj_wifi.setHora(hora);
                     obj_wifi.setId_user(ID);//iD Usuario
                     obj_wifi.setId_tip_dispo("1");
-
+                    Lista_wifi.add(obj_wifi);
                     registro_wifi_volley.setObj_wifi(obj_wifi);
                     try {
                         registro_wifi_volley.SQLite_exitencia();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                    Log.e("esta","valor itera:"+i);
+
                 }
             }
             updateList();
@@ -153,7 +152,7 @@ public class fragment_lista_wifi extends Fragment {
             @Override
             public void run() {
                 //this should wipe out all existing adapter data
-                adaptador.notifyDataSetChanged();
+                adaptador1.notifyDataSetChanged();
             }
         });
     }

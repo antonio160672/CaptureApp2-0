@@ -21,7 +21,7 @@
         android:id="@+id/nav_slideshow"
         android:name="com.example.captureapp2_0.Vistas.ui_vistas.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_conexion_servidores" />
 
     <fragment
         android:id="@+id/nav_tools"

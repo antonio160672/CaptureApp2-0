@@ -11,22 +11,19 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.captureapp2_0.R;
 import com.example.captureapp2_0.Vistas.cap_segnals.Adaptador_lista_diseño.Adaptador;
-import com.example.captureapp2_0.consultas_volley.Registro_wifi_volley;
+import com.example.captureapp2_0.consultas_volley_sqlite.Registro_wifi_volley;
 import com.example.captureapp2_0.objetos.Obj_Context;
 import com.example.captureapp2_0.objetos.Obj_wifi;
 
@@ -139,7 +136,6 @@ public class fragment_lista_wifi extends Fragment {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    Log.e("esta","valor itera:"+i);
 
                 }
             }

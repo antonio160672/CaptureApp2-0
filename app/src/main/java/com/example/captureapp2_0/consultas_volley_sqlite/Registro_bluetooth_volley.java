@@ -1,4 +1,4 @@
-package com.example.captureapp2_0.consultas_volley;
+package com.example.captureapp2_0.consultas_volley_sqlite;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -11,6 +11,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.captureapp2_0.DB_lite.Sqlite_DB_manejo;
+import com.example.captureapp2_0.funciones_generas.fechas_trasnformacion;
 import com.example.captureapp2_0.objetos.Obj_Context;
 import com.example.captureapp2_0.objetos.Obj_bluetooth;
 import com.example.captureapp2_0.objetos.Obj_json_wifi_bluetooth;
@@ -18,6 +19,7 @@ import com.example.captureapp2_0.objetos.Obj_json_wifi_bluetooth;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,6 +30,7 @@ public class Registro_bluetooth_volley {
     private JSONObject jsonBody;
     private String URL, sql;
     private int Request_Method,tipo_json;//tipo de json para actualizar o registrar
+    private fechas_trasnformacion trasnformacion;
 
     public Registro_bluetooth_volley() {
         this.context = Obj_Context.getContext();
@@ -64,9 +67,15 @@ public class Registro_bluetooth_volley {
     }
     private boolean insertar_entidad_Bluetooth()// insertara los datos en la tabla
     {
+        trasnformacion=new fechas_trasnformacion();
+        try {
+            obj_bluetooth.setFecha_mili(trasnformacion.fecha_milisegundos((obj_bluetooth.getFecha_cap()+" "+obj_bluetooth.getHora()),"dd-MM-yyyy"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         String sql="insert into Entidad_Bluetooth values(NULL,'"+obj_bluetooth.getId_dip()+"','"+obj_bluetooth.getUUID()+"','"+
                 obj_bluetooth.getBluetoothAddress()+"','"+obj_bluetooth.getRSSI()+"','"+obj_bluetooth.getTX()+"','"+
-                obj_bluetooth.getMAJOR()+"','"+ obj_bluetooth.getFecha_cap()+"','"+obj_bluetooth.getHora()+
+                obj_bluetooth.getMAJOR()+"','"+ obj_bluetooth.getFecha_mili()+"','"+obj_bluetooth.getHora()+
                 "','"+obj_bluetooth.getId_user()+"','"+obj_bluetooth.getId_tip_dispo()+"');";
         Log.e("cadena","contacto"+sql);
         return obj_bluetooth.sqLite.ejecutaSQL(sql);

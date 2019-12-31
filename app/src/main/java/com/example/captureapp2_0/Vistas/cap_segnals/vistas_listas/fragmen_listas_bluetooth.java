@@ -6,11 +6,9 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.RemoteException;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -19,7 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.captureapp2_0.R;
 import com.example.captureapp2_0.Vistas.cap_segnals.Adaptador_lista_diseño.Adaptador;
-import com.example.captureapp2_0.consultas_volley.Registro_bluetooth_volley;
+import com.example.captureapp2_0.consultas_volley_sqlite.Registro_bluetooth_volley;
 import com.example.captureapp2_0.objetos.Obj_Context;
 import com.example.captureapp2_0.objetos.Obj_bluetooth;
 
@@ -36,7 +34,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 public class fragmen_listas_bluetooth extends Fragment implements BeaconConsumer {
@@ -106,13 +103,13 @@ public class fragmen_listas_bluetooth extends Fragment implements BeaconConsumer
                             obj_bluetooth.setId_user(ID);
                             obj_bluetooth.setFecha_cap(fecha);
                             obj_bluetooth.setHora(hora);
-                            Lista_beacon.add(obj_bluetooth);
                             bluetooth_volley.setObj_bluetooth(obj_bluetooth);
                             try {
                                 bluetooth_volley.SQLite_exitencia();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+                            Lista_beacon.add(obj_bluetooth);
                         }
                     }
                     updateList();

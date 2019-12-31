@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="330dp"
+    android:layout_height="400dp"
+    android:background="@drawable/dialog_bg"
+    android:orientation="vertical"
+    android:visibility="visible"
+    android:padding="5dp"
+    android:layout_gravity="center"
+    tools:context=".mini_registro_servidor">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+            <ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:alpha=".80"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/img_radi"
+                android:radius="30px"/>
+            <TextView
+                android:id="@+id/titulo_servi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Agregar nuevo servidor"
+                android:textColor="#0A0101"
+                android:textSize="26sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView12"
+                app:layout_constraintEnd_toEndOf="@+id/imageView12"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageView12" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/ip_servidor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="IP del servidor"
+            android:inputType="text"
+            android:nextFocusDown="@+id/DNS_ser"
+            app:met_baseColor="#FFFFFF"
+            app:met_errorColor="#F44336"
+            app:met_floatingLabel="highlight"
+            app:met_floatingLabelText="IP del servidor"
+            app:met_primaryColor="#92d0d0"
+            app:met_textColorHint="#FFFFFF"
+            app:met_underlineColor="#92d0d0" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/DNS_ser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="DNSS del servidor"
+            android:inputType="text"
+            android:nextFocusDown="@+id/Puerto_orion"
+            app:met_baseColor="#FFFFFF"
+            app:met_errorColor="#F44336"
+            app:met_floatingLabel="highlight"
+            app:met_floatingLabelText="DNNS"
+            app:met_primaryColor="#92d0d0"
+            app:met_textColorHint="#FFFFFF"
+            app:met_underlineColor="#92d0d0" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/Puerto_orion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Puerto de orion context broker "
+            android:inputType="number"
+            android:nextFocusDown="@+id/Puerto_crateDB"
+            app:met_baseColor="#FFFFFF"
+            app:met_errorColor="#F44336"
+            app:met_floatingLabel="highlight"
+            app:met_floatingLabelText="ORCB"
+            app:met_primaryColor="#92d0d0"
+            app:met_textColorHint="#FFFFFF"
+            app:met_underlineColor="#92d0d0" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/Puerto_crateDB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Puerto de CrateDB"
+            android:inputType="number"
+            app:met_baseColor="#FFFFFF"
+            app:met_errorColor="#F44336"
+            app:met_floatingLabel="highlight"
+            app:met_floatingLabelText="CrateDB"
+            app:met_primaryColor="#92d0d0"
+            app:met_textColorHint="#FFFFFF"
+            app:met_underlineColor="#92d0d0" />
+
+        <Button
+            android:id="@+id/Dia_btnRegistar"
+            android:layout_marginTop="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/botones"
+            android:text="Registrar servidor"
+            android:textColor="#ffffff"
+            tools:ignore="RtlCompat" />
+
+    </LinearLayout>
+    </ScrollView>
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

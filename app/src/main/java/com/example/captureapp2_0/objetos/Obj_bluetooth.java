@@ -6,6 +6,15 @@ public class Obj_bluetooth {
     public static Sqlite_DB_manejo sqLite=null;
     public static Cursor cursor=null;
     String UUID,BluetoothAddress,id_dip,MAJOR,RSSI,TX,id_tip_dispo,id_user,fecha_cap,hora;
+    Long fecha_mili;
+
+    public Long getFecha_mili() {
+        return fecha_mili;
+    }
+
+    public void setFecha_mili(Long fecha_mili) {
+        this.fecha_mili = fecha_mili;
+    }
 
     public String getUUID() {
         return UUID;

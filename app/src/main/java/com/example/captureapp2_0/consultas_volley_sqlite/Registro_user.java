@@ -1,4 +1,4 @@
-package com.example.captureapp2_0.consultas_volley;
+package com.example.captureapp2_0.consultas_volley_sqlite;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -12,6 +12,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.captureapp2_0.DB_lite.Sqlite_DB_manejo;
 import com.example.captureapp2_0.Interfaces.Registro_par2_interF.oninter_Registro_par2_Finishlicener;
+import com.example.captureapp2_0.funciones_generas.fechas_trasnformacion;
 import com.example.captureapp2_0.objetos.Obj_Context;
 import com.example.captureapp2_0.objetos.Obj_usuario;
 
@@ -19,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,11 +29,20 @@ public class Registro_user {
     private Context context;
     private Obj_usuario obj_usuario;
     private oninter_Registro_par2_Finishlicener listener;
+    private long fecha;
+    private fechas_trasnformacion trasnformacion;
 
     public Registro_user(Obj_usuario obj_usuario, oninter_Registro_par2_Finishlicener listener) {
         this.context = Obj_Context.getContext();
         this.obj_usuario = obj_usuario;
         this.listener=listener;
+        trasnformacion=new fechas_trasnformacion();
+        try {
+            fecha=trasnformacion.fecha_milisegundos(obj_usuario.getFecha_nac()+" 00:00:00","dd-MM-yyyy hh:mm:ss");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void Registro_usuario(){
@@ -135,7 +146,7 @@ public class Registro_user {
                 obj_usuario.getApellido_pater()+"','"+obj_usuario.getApellido_mater()+"','"+
                 obj_usuario.getCorreo()+"','"+ obj_usuario.getContrasena()+"','"+obj_usuario.getMunicipio()
                 +"','"+obj_usuario.getCalle()+"','"+obj_usuario.getColonia()+"','"+
-                obj_usuario.getFecha_nac()+"','"+obj_usuario.getCp()+"','"+obj_usuario.getIdEstado()+"');";
+                fecha+"','"+obj_usuario.getCp()+"','"+obj_usuario.getIdEstado()+"');";
         Log.e("cadena","contacto"+sql);
         return obj_usuario.sqLite.ejecutaSQL(sql);
     }

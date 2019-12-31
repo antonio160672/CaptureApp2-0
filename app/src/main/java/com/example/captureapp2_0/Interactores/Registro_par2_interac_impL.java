@@ -1,12 +1,11 @@
 package com.example.captureapp2_0.Interactores;
 
-import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 
 import com.example.captureapp2_0.Interfaces.Registro_par2_interF.interRegistro_par2_Interactor;
 import com.example.captureapp2_0.Interfaces.Registro_par2_interF.oninter_Registro_par2_Finishlicener;
-import com.example.captureapp2_0.consultas_volley.Registro_user;
+import com.example.captureapp2_0.consultas_volley_sqlite.Registro_user;
 import com.example.captureapp2_0.objetos.Obj_Estados;
 import com.example.captureapp2_0.objetos.Obj_usuario;
 

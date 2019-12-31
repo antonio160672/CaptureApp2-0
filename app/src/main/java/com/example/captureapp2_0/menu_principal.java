@@ -1,5 +1,6 @@
 package com.example.captureapp2_0;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import com.example.captureapp2_0.objetos.Obj_Context;
@@ -26,12 +27,12 @@ public class menu_principal extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     Obj_Context obj_context;
-
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_principal_view);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         obj_context=new Obj_Context(this);
         obj_context.setApplication(getApplication());

@@ -6,24 +6,47 @@
     android:background="@drawable/fondo1"
     android:orientation="vertical"
     android:visibility="visible">
-    <TextView
-        android:id="@+id/text_slideshow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+        android:layout_gravity="center"
+        android:layout_width="350dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/Titulo_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:background="#86080F5C"
+            android:textColor="@color/blanco"
+            android:text="Servidores registrados"/>
 
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:orientation="vertical"
+            android:background="#CCfff8f8">
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/Lista_servido">
+
+            </ListView>
+        </LinearLayout>
+        <Button
+            android:id="@+id/BTN_Registro_ser"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/botones"
+            android:onClick="Agregar_servi"
+            android:text="Agregar servidor"
+            android:textSize="16dp"
+            android:textColor="#ffffff" />
     </LinearLayout>
 
 </LinearLayout>

@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.captureapp2_0.funciones_generas.fechas_trasnformacion;
 import com.example.captureapp2_0.objetos.Obj_usuario;
 
 import java.util.ArrayList;
@@ -19,12 +20,13 @@ public class Sqlite_DB_manejo {
     String nombre_base = "bd";// nombre de la base de datos
     int version = 2;
     String[] tablas = {"CREATE TABLE IF NOT EXISTS usuario (id_user INTEGER PRIMARY KEY, nombre text, " +
-            "apelldioP text, apellidoM text, correo text,contrasena text,municipio text, calle text, colonia text,fecha text," +
+            "apelldioP text, apellidoM text, correo text,contrasena text,municipio text, calle text, colonia text,fecha INTEGER," +
             "cp text,idEstado INTEGER)",
             "CREATE TABLE IF NOT EXISTS Entidad_wifi (id INTEGER PRIMARY KEY AUTOINCREMENT, Id_dip text, Nombre_dispositivo text, Macaddres text, " +
-                    "RSSI text, Fecha text,Hora text, Id_user INTEGER,Id_tipo_disposi INTEGER)",
+                    "RSSI text, Fecha INTEGER,Hora text, Id_user INTEGER,Id_tipo_disposi INTEGER)",
             "CREATE TABLE IF NOT EXISTS Entidad_Bluetooth (id INTEGER PRIMARY KEY AUTOINCREMENT,Id_dip text,UUID text,Macaddres text,RSSI text,"+
-                    "TX text,MAJOR text,Fecha text,Hora text,Id_user INTEGER,Id_tipo_disposi INTEGER)"};///Aqui van todas las tablas a crear,
+                    "TX text,MAJOR text,Fecha INTEGER,Hora text,Id_user INTEGER,Id_tipo_disposi INTEGER)",
+            "CREATE TABLE IF NOT EXISTS Servidor(id INTEGER PRIMARY KEY AUTOINCREMENT,ip text, dnns text,perto_orion text,puerto_crate text)"};///Aqui van todas las tablas a crear,
     // para hacer modificaciones a la base de datos borrar la aplicacion e instalar nuevamente
     public Sqlite_DB_manejo(Context context)
     {
@@ -71,6 +73,7 @@ public class Sqlite_DB_manejo {
     public Obj_usuario Recuerar_datos_user(String sql,Obj_usuario obj_usuario)// consultas select * from para
     // llenar un objeto de tipo usuasrio
     {
+        fechas_trasnformacion trasnformacion=new fechas_trasnformacion();
         try {
             this.Abrir();
             Cursor c = bd.rawQuery(sql,null);//se inicia un cursor el cual se mueve en
@@ -85,7 +88,7 @@ public class Sqlite_DB_manejo {
                 obj_usuario.setMunicipio(c.getString(6));
                 obj_usuario.setCalle(c.getString(7));
                 obj_usuario.setColonia(c.getString(8));
-                obj_usuario.setFecha_nac(c.getString(9));
+                obj_usuario.setFecha_nac(trasnformacion.milisegundos_fecha(c.getString(9),"dd-MM-yyyy hh:mm:ss"));
                 obj_usuario.setCp(c.getString(10));
                 obj_usuario.setIdEstado(c.getString(11));
             }
@@ -96,6 +99,8 @@ public class Sqlite_DB_manejo {
         }
         return obj_usuario;
     }
+
+
 
     public ArrayList llenarlista_alar(String sql, int bandera)// consultas select * from para llenar las listas de las diferentes clases
     {

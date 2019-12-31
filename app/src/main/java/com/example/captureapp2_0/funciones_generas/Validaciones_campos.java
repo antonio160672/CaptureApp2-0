@@ -1,4 +1,4 @@
-package com.example.captureapp2_0.validaciones_cam;
+package com.example.captureapp2_0.funciones_generas;
 
 import android.widget.EditText;
 

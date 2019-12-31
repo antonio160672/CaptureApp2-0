@@ -54,7 +54,8 @@ public class captacion_Fragment_view extends Fragment  implements View.OnClickLi
         presetador.varificar_servicios();//verifica que esten activo los servicios esto se hace
                                         //desde el presentador
 
-        adaptador_view=new Viewpager_adaptador_view(getFragmentManager());
+        adaptador_view=new Viewpager_adaptador_view(getFragmentManager());//agrega los fragmentos aun
+        //adaptador de vistas es el que permite moverse entre las dos imagenes
 
         return root;
     }
@@ -86,7 +87,6 @@ public class captacion_Fragment_view extends Fragment  implements View.OnClickLi
         adaptador_view=new Viewpager_adaptador_view(getFragmentManager());
         tabLayout=root.findViewById(R.id.TAP);
         actionButton.setOnClickListener(this);
-
         desactib=root.findViewById(R.id.Desactivar_button);
         desactib.setVisibility(root.GONE);
         desactib.setOnClickListener(this);

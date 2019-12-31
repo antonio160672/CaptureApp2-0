@@ -5,10 +5,19 @@ import android.database.Cursor;
 import com.example.captureapp2_0.DB_lite.Sqlite_DB_manejo;
 
 public class Obj_wifi {
-    String Nombre_dispos,id_dip,macaddres,RSSI,id_tip_dispo,id_user,fecha_cap,hora;
 
     public static Sqlite_DB_manejo sqLite=null;
     public static Cursor cursor=null;
+    String Nombre_dispos,id_dip,macaddres,RSSI,id_tip_dispo,id_user,fecha_cap,hora;
+    Long fecha_mili;
+
+    public Long getFecha_mili() {
+        return fecha_mili;
+    }
+
+    public void setFecha_mili(Long fecha_mili) {
+        this.fecha_mili = fecha_mili;
+    }
 
     public String getId_dip() {
         return id_dip;

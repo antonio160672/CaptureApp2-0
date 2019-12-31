@@ -1,17 +1,17 @@
-package com.example.captureapp2_0.consultas_volley;
+package com.example.captureapp2_0.consultas_volley_sqlite;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.captureapp2_0.DB_lite.Sqlite_DB_manejo;
+import com.example.captureapp2_0.funciones_generas.fechas_trasnformacion;
 import com.example.captureapp2_0.objetos.Obj_Context;
 import com.example.captureapp2_0.objetos.Obj_json_wifi_bluetooth;
 import com.example.captureapp2_0.objetos.Obj_wifi;
@@ -19,6 +19,7 @@ import com.example.captureapp2_0.objetos.Obj_wifi;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +30,8 @@ public class Registro_wifi_volley {
     private JSONObject jsonBody;
     private String URL, sql;
     private int Request_Method,tipo_json;
+    private fechas_trasnformacion trasnformacion;
+
     public Registro_wifi_volley() {
         this.context = Obj_Context.getContext();
         if (context!=null)
@@ -67,16 +70,23 @@ public class Registro_wifi_volley {
 
     private boolean insertar_entidad_wifi()// insertara los datos en la tabla
     {
+        trasnformacion=new fechas_trasnformacion();
+        try {
+            Long fecha=trasnformacion.fecha_milisegundos((obj_wifi.getFecha_cap()+" "+obj_wifi.getHora()),"yyyy-MM-dd");
+            Log.e("fecha wifi",":  "+fecha);
+            obj_wifi.setFecha_mili(fecha);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         String sql="insert into Entidad_wifi values(NULL,'"+obj_wifi.getId_dip()+"','"+obj_wifi.getNombre_dispos()+"','"+
-                obj_wifi.getMacaddres()+"','"+obj_wifi.getRSSI()+"','"+
-                obj_wifi.getFecha_cap()+"','"+ obj_wifi.getHora()+"','"+obj_wifi.getId_user()
+                obj_wifi.getMacaddres()+"','"+obj_wifi.getRSSI()+"',"+
+                obj_wifi.getFecha_mili()+",'"+ obj_wifi.getHora()+"','"+obj_wifi.getId_user()
                 +"','"+obj_wifi.getId_tip_dispo()+"');";
         Log.e("cadena","contacto"+sql);
         return obj_wifi.sqLite.ejecutaSQL(sql);
     }
 
     public void envio_wifi() throws JSONException{
-
         transfor_json(tipo_json);//json para
         Log.e("valor del json", String.valueOf(jsonBody));
         JsonObjectRequest jobReq = new JsonObjectRequest(Request_Method, URL, jsonBody,

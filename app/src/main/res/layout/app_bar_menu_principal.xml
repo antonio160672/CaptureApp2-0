@@ -16,7 +16,10 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:background="@color/otro"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:titleTextColor="@color/blanco"
+
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            android:theme="@style/ToolbarTheme"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

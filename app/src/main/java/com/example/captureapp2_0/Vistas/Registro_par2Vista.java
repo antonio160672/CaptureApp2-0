@@ -2,10 +2,12 @@ package com.example.captureapp2_0.Vistas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -54,15 +56,16 @@ public class Registro_par2Vista extends AppCompatActivity implements Interf_Regi
         text_fech.setError(null);
         final Calendar calen=Calendar.getInstance();
         datos_fecha_hor[0]=calen.get(Calendar.DAY_OF_MONTH);
-        datos_fecha_hor[1]=calen.get(Calendar.MONTH)+1;
+        datos_fecha_hor[1]=(calen.get(Calendar.MONTH)+1);
         datos_fecha_hor[2]=calen.get(Calendar.YEAR);
-        DatePickerDialog calenda= new DatePickerDialog(this,R.style.datepicker,
+        DatePickerDialog calenda= new DatePickerDialog(this, AlertDialog.THEME_HOLO_LIGHT,
                 new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int mes, int dia) {
-                text_fech.setText(year+"-"+mes+"-"+dia);
+                text_fech.setText(dia+"-"+(mes+1)+"-"+year);
             }
         },datos_fecha_hor[2],datos_fecha_hor[1],datos_fecha_hor[0]);
+        calenda.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         calenda.show();
         /*Obj_Estados obj_estados=new Obj_Estados();
         Spinner spAnimals = (Spinner)findViewById(R.id.spinner_estados);
@@ -75,6 +78,7 @@ public class Registro_par2Vista extends AppCompatActivity implements Interf_Regi
     }
 
     public void Registrar(View view) {
+        Log.e("fecha actiual","mesaje:"+text_fech.getText().toString());
         presentador.validar_Registro_interacto(obj_usuario,text_fech.getText().toString(),Estado_spi.getSelectedItem().toString(),
                 municipi.getText().toString(),calle.getText().toString(),colonia.getText().toString(),
                 CP.getText().toString());

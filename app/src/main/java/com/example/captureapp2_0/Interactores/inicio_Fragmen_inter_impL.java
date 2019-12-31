@@ -41,6 +41,7 @@ public class inicio_Fragmen_inter_impL implements inter_inicioFragmen_interactor
         listener.cargar_colonia_show(obj_usuario.getColonia());
         listener.cargar_calle_show(obj_usuario.getCalle());
         listener.cargar_CP_show(obj_usuario.getCp());
-        listener.cargar_edad_show(obj_usuario.getFecha_nac());
+        String[] arrayfecha = obj_usuario.getFecha_nac().split(" ");
+        listener.cargar_edad_show(arrayfecha[0]);
     }
 }

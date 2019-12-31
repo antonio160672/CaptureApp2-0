@@ -19,15 +19,15 @@
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.example.captureapp2_0.Vistas.ui_vistas.slideshow.SlideshowFragment"
+        android:name="com.example.captureapp2_0.Vistas.Servidores_frag.servidor_view_Fragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_conexion_servidores" />
 
     <fragment
         android:id="@+id/nav_tools"
-        android:name="com.example.captureapp2_0.Vistas.ui_vistas.tools.ToolsFragment"
+        android:name="com.example.captureapp2_0.Vistas.Graficas.Vista_graficas_Fragment"
         android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
+        tools:layout="@layout/fragment_grafcias" />
 
     <fragment
         android:id="@+id/nav_share"

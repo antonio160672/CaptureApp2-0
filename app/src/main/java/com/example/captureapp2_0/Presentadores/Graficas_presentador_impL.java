@@ -5,6 +5,10 @@ import com.example.captureapp2_0.Interfaces.Graficas_intF.Graficas_interactores_
 import com.example.captureapp2_0.Interfaces.Graficas_intF.Graficas_presentador_inter;
 import com.example.captureapp2_0.Interfaces.Graficas_intF.onlistener_graficas;
 import com.example.captureapp2_0.Vistas.Graficas.Vista_graficas_Fragment;
+import com.github.mikephil.charting.components.LegendEntry;
+import com.github.mikephil.charting.data.BarData;
+
+import java.util.ArrayList;
 
 public class Graficas_presentador_impL implements Graficas_presentador_inter, onlistener_graficas {
     private Vista_graficas_Fragment vista_grafi;
@@ -24,7 +28,8 @@ public class Graficas_presentador_impL implements Graficas_presentador_inter, on
     }
 
     @Override
-    public void retornar_grafica() {
+    public void retornar_grafica(BarData data, ArrayList<LegendEntry> etiquetas) {
+        vista_grafi.mostrar_grafica(data,etiquetas);
 
     }
 

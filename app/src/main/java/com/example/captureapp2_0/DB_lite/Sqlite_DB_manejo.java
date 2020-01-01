@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.captureapp2_0.funciones_generas.fechas_trasnformacion;
+import com.example.captureapp2_0.objetos.Obj_bluetooth;
 import com.example.captureapp2_0.objetos.Obj_usuario;
 
 import java.util.ArrayList;
@@ -100,56 +101,25 @@ public class Sqlite_DB_manejo {
         return obj_usuario;
     }
 
-
-
-    public ArrayList llenarlista_alar(String sql, int bandera)// consultas select * from para llenar las listas de las diferentes clases
+    public ArrayList<Obj_bluetooth> Recuperar_lista_bluetooth(String sql)// consultas select * from para llenar las listas de las diferentes clases
     {
-        ArrayList lista=new ArrayList();
+        ArrayList<Obj_bluetooth> lista_blueList=new ArrayList();
         try {
             this.Abrir();
             Cursor c = bd.rawQuery(sql,null);
             if(c.moveToFirst()){
-                String datos="";
-                if (bandera==1){
-                    do {
-                        lista.add(c.getString(1));
-                        lista.add(c.getString(2));
-                        lista.add(c.getString(3));
-                        lista.add(c.getString(4));
-                        lista.add(c.getString(5));
-                    }while (c.moveToNext());
-                }else if (bandera==2){
-                    do {
-                        lista.add(c.getString(0));
-                        lista.add(c.getString(1));
-                        lista.add(c.getString(2));
-                        lista.add(c.getString(3));
-                        lista.add(c.getString(4));
-                        lista.add(c.getString(5));
-                    }while (c.moveToNext());
-                }else if (bandera==3){
-                    do {
-                        datos=c.getString(0)+" ,"+c.getString(1)+", "+c.getString(2)+", "+c.getString(3)+", "+
-                                c.getString(4)+", "+c.getString(5);
-                        Log.e("cadena",""+datos);
-                        lista.add(datos);
-                    }while (c.moveToNext());
-                }else if (bandera==4){
-                    do {
-                        lista.add(c.getString(1));
-                        lista.add(c.getString(2));
-                        lista.add(c.getString(3));
-                        lista.add(c.getString(4));
-                        lista.add(c.getString(5));
-                        lista.add(c.getString(6));
-                        lista.add(c.getString(7));
-                    }while (c.moveToNext());
-                }
+                do {
+                    Obj_bluetooth bluetooth=new Obj_bluetooth();
+                    bluetooth.setId_dip(c.getString(0));//id numero primera fila
+                    bluetooth.setUUID(c.getString(2));
+                    bluetooth.setBluetoothAddress(c.getString(3));
+                    bluetooth.setRSSI(c.getString(4));
+                    lista_blueList.add(bluetooth);
+                }while (c.moveToNext());
+                return lista_blueList;
             }else{
-                lista.add("0");
-                Log.e("cadena","no hay datos");
+                return null;
             }
-            return lista;
         }catch (SQLiteException s)
         {
             this.Cerrar();

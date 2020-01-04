@@ -1,7 +1,14 @@
 package com.example.captureapp2_0.objetos;
 
+import android.database.Cursor;
+
+import com.example.captureapp2_0.DB_lite.Sqlite_DB_manejo;
+
 public class Obje_servi {
     String ip_servidor,DNS_ser,Puerto_orion,Puerto_crateDB;
+    public int servidor_predeter;
+    public Sqlite_DB_manejo sqLite=null;
+    public Cursor cursor=null;
 
     public String getIp_servidor() {
         return ip_servidor;

@@ -69,7 +69,7 @@ public class Registro_bluetooth_volley {
     {
         trasnformacion=new fechas_trasnformacion();
         try {
-            obj_bluetooth.setFecha_mili(trasnformacion.fecha_milisegundos((obj_bluetooth.getFecha_cap()+" "+obj_bluetooth.getHora()),"dd-MM-yyyy"));
+            obj_bluetooth.setFecha_mili(trasnformacion.fecha_milisegundos((obj_bluetooth.getFecha_cap()+" "+obj_bluetooth.getHora()),"yyyy-MM-dd"));
         } catch (ParseException e) {
             e.printStackTrace();
         }

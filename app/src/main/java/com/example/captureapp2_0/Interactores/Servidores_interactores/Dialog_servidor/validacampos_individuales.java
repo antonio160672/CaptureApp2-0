@@ -1,4 +1,4 @@
-package com.example.captureapp2_0.Vistas.Servidores_frag.Dialog_servidor;
+package com.example.captureapp2_0.Interactores.Servidores_interactores.Dialog_servidor;
 
 import android.widget.TextView;
 

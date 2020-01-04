@@ -14,20 +14,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.captureapp2_0.Interfaces.Servidores_interactores.servidores_presentador_frag_inteR;
 import com.example.captureapp2_0.Interfaces.Servidores_interactores.servidores_view_fragmen_inteR;
 import com.example.captureapp2_0.Presentadores.sevidores_presen_impL;
 import com.example.captureapp2_0.R;
-import com.example.captureapp2_0.Vistas.Servidores_frag.Dialog_servidor.validar_Servi_datos;
-import com.example.captureapp2_0.Vistas.cap_segnals.Viewpager_adaptador_view;
+import com.example.captureapp2_0.Interactores.Servidores_interactores.Dialog_servidor.validar_Servi_datos;
 import com.example.captureapp2_0.objetos.Obj_Context;
 import com.example.captureapp2_0.objetos.Obje_servi;
 
@@ -99,7 +94,6 @@ public class servidor_view_Fragment extends Fragment implements servidores_view_
                     Obje_servi obje_servi=new Obje_servi();
                     obje_servi=validar_servi_datos.getObjeServi();
                     presentador_frag.registrar_servidor(obje_servi);
-
                 }else{
                     Log.e("datos22222","ni madress vato");
                 }

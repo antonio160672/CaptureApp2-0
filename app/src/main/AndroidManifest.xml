@@ -18,7 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".mini_registro_servidor"></activity>
+        <activity android:name=".Vistas.mini_registro_servidor"></activity>
         <activity
             android:name=".menu_principal"
             android:label="@string/title_activity_menu_principal"

@@ -1,4 +1,4 @@
-package com.example.captureapp2_0.Interactores;
+package com.example.captureapp2_0.Interactores.Servidores_interactores;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -16,7 +16,9 @@ public class servidores_interactor_impL implements servidores_interactor_inT {
     public void registrar_servidor(Obje_servi obje_servi) {
         if (obje_servi!=null){
             Registro_sqlite_Servidores servidores=new Registro_sqlite_Servidores();
-            servidores.Sql_servidores_registrar(obje_servi);
+            if (servidores.Sql_servidores_registrar(obje_servi)){
+                onlistenerRegistro.retornar_mensaje();
+            }
         }
     }
 }

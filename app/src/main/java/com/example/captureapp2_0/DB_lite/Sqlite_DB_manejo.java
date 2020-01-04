@@ -10,6 +10,7 @@ import android.util.Log;
 import com.example.captureapp2_0.funciones_generas.fechas_trasnformacion;
 import com.example.captureapp2_0.objetos.Obj_bluetooth;
 import com.example.captureapp2_0.objetos.Obj_usuario;
+import com.example.captureapp2_0.objetos.Obj_wifi;
 
 import java.util.ArrayList;
 
@@ -27,7 +28,7 @@ public class Sqlite_DB_manejo {
                     "RSSI text, Fecha INTEGER,Hora text, Id_user INTEGER,Id_tipo_disposi INTEGER)",
             "CREATE TABLE IF NOT EXISTS Entidad_Bluetooth (id INTEGER PRIMARY KEY AUTOINCREMENT,Id_dip text,UUID text,Macaddres text,RSSI text,"+
                     "TX text,MAJOR text,Fecha INTEGER,Hora text,Id_user INTEGER,Id_tipo_disposi INTEGER)",
-            "CREATE TABLE IF NOT EXISTS Servidor(id INTEGER PRIMARY KEY AUTOINCREMENT,ip text, dnns text,perto_orion text,puerto_crate text)"};///Aqui van todas las tablas a crear,
+            "CREATE TABLE IF NOT EXISTS Servidor(id INTEGER PRIMARY KEY AUTOINCREMENT,ip text, dnns text,perto_orion text,puerto_crate text,servidor_prede INTEGER)"};///Aqui van todas las tablas a crear,
     // para hacer modificaciones a la base de datos borrar la aplicacion e instalar nuevamente
     public Sqlite_DB_manejo(Context context)
     {
@@ -117,6 +118,32 @@ public class Sqlite_DB_manejo {
                     lista_blueList.add(bluetooth);
                 }while (c.moveToNext());
                 return lista_blueList;
+            }else{
+                return null;
+            }
+        }catch (SQLiteException s)
+        {
+            this.Cerrar();
+            return null;
+        }
+
+    }
+
+    public ArrayList<Obj_wifi> Recuperar_lista_wifi(String sql)// consultas select * from para llenar las listas de las diferentes clases
+    {
+        ArrayList<Obj_wifi> lista_wifi=new ArrayList();
+        try {
+            this.Abrir();
+            Cursor c = bd.rawQuery(sql,null);
+            if(c.moveToFirst()){
+                do {
+                    Obj_wifi wifi=new Obj_wifi();
+                    wifi.setId_dip(c.getString(0));//id numero primera fila
+                    wifi.setMacaddres(c.getString(3));
+                    wifi.setRSSI(c.getString(4));
+                    lista_wifi.add(wifi);
+                }while (c.moveToNext());
+                return lista_wifi;
             }else{
                 return null;
             }

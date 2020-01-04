@@ -1,6 +1,6 @@
 package com.example.captureapp2_0.Presentadores;
 
-import com.example.captureapp2_0.Interactores.servidores_interactor_impL;
+import com.example.captureapp2_0.Interactores.Servidores_interactores.servidores_interactor_impL;
 import com.example.captureapp2_0.Interfaces.Servidores_interactores.onlistener_Registro_servidores_frag_interac;
 import com.example.captureapp2_0.Interfaces.Servidores_interactores.servidores_presentador_frag_inteR;
 import com.example.captureapp2_0.Vistas.Servidores_frag.servidor_view_Fragment;

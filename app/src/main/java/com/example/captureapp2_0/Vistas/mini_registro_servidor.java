@@ -1,8 +1,10 @@
-package com.example.captureapp2_0;
+package com.example.captureapp2_0.Vistas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.captureapp2_0.R;
 
 public class mini_registro_servidor extends AppCompatActivity {
 

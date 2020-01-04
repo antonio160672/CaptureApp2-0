@@ -9,7 +9,7 @@
     android:visibility="visible"
     android:padding="5dp"
     android:layout_gravity="center"
-    tools:context=".mini_registro_servidor">
+    tools:context=".Vistas.mini_registro_servidor">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"

@@ -169,25 +169,27 @@ public class Graficas_interactores_impL implements Graficas_interactores_interfa
         String sql="SELECT * FROM Entidad_Bluetooth where Fecha>="+fecha_ini+" and Fecha<="+fecha_fin;
         lista_blueList=bluetooth.sqLite.Recuperar_lista_bluetooth(sql);
         List_blue_grafi=new ArrayList();
-        if (lista_blueList!=null)
-        for (Obj_bluetooth objetos:lista_blueList) {
-            bandera=false;
-            for (int x=0;x<List_blue_grafi.size();x++){//recorre toda la lista pero de la
-                //de objetos de la lista de graficos
-                if (List_blue_grafi.get(x).getBluetoothAddress().equals(objetos.getBluetoothAddress())){
-                    //en caso de que tenga el mismo identificador solo agrega el RSSi
-                    List_blue_grafi.get(x).lista_Rssi.add(objetos.getRSSI());
-                    bandera=true;
+        if (lista_blueList!=null){
+            for (Obj_bluetooth objetos:lista_blueList) {
+                bandera=false;
+                for (int x=0;x<List_blue_grafi.size();x++){//recorre toda la lista pero de la
+                    //de objetos de la lista de graficos
+                    if (List_blue_grafi.get(x).getBluetoothAddress().equals(objetos.getBluetoothAddress())){
+                        //en caso de que tenga el mismo identificador solo agrega el RSSi
+                        List_blue_grafi.get(x).lista_Rssi.add(objetos.getRSSI());
+                        bandera=true;
+                    }
+                }
+                if(bandera==false){
+                    Objeto_bluetoo_grafica nueva_grafi=new Objeto_bluetoo_grafica();
+                    nueva_grafi.setId_db(objetos.getId_dip());
+                    nueva_grafi.setBluetoothAddress(objetos.getBluetoothAddress());
+                    nueva_grafi.lista_Rssi.add(objetos.getRSSI());
+                    List_blue_grafi.add(nueva_grafi);
                 }
             }
-            if(bandera==false){
-                Objeto_bluetoo_grafica nueva_grafi=new Objeto_bluetoo_grafica();
-                nueva_grafi.setId_db(objetos.getId_dip());
-                nueva_grafi.setBluetoothAddress(objetos.getBluetoothAddress());
-                nueva_grafi.lista_Rssi.add(objetos.getRSSI());
-                List_blue_grafi.add(nueva_grafi);
-            }
-        }
+        }else
+            onlistenerGraficas.enviar_error_logico_fechas("Sin datos en rangos de fechas");
     }
 
     @Override
@@ -198,30 +200,31 @@ public class Graficas_interactores_impL implements Graficas_interactores_interfa
         String sql="SELECT * FROM Entidad_wifi where Fecha>="+fecha_ini+" and Fecha<="+fecha_fin;
         Log.e("tirulo",sql);
         lista_wiif=wifi.sqLite.Recuperar_lista_wifi(sql);//recupera datos
-        Log.e("datos","lista graficos wifi"+lista_wiif.size());
-
         List_Wifi_grafi=new ArrayList();//se inicia la lista de wifi pero para graficos
-         if (lista_wiif!=null)
-            for (Obj_wifi objetos:lista_wiif) {
-                bandera=false;
-                for (int x=0;x<List_Wifi_grafi.size();x++){//recorre toda la lista pero de la
-                    //de objetos de la lista de graficos
-                    if (List_Wifi_grafi.get(x).getMacaddres().equals(objetos.getMacaddres())){
-                        //en caso de que tenga el mismo identificador solo agrega el RSSi
-                        List_Wifi_grafi.get(x).lista_Rssi.add(Integer.parseInt(objetos.getRSSI()));
-                        bandera=true;
-                    }
-                }
-                if(bandera==false){
-                    Objeto_wifi_grafica nueva_grafi=new Objeto_wifi_grafica();//en caso de que ya
-                    //existan algun dato en la lista de graficos, pero no exista el dato recopilado
-                    //se crea un objeto de grafico wifi y se carga de informacion y se agrega
-                    nueva_grafi.setId_db(objetos.getId_dip());
-                    nueva_grafi.setMacaddres(objetos.getMacaddres());
-                    nueva_grafi.lista_Rssi.add(Integer.parseInt(objetos.getRSSI()));
-                    List_Wifi_grafi.add(nueva_grafi);//se agrega el nuevo objeto
-                }
-            }
+         if (lista_wiif!=null){
+             for (Obj_wifi objetos:lista_wiif) {
+                 bandera=false;
+                 for (int x=0;x<List_Wifi_grafi.size();x++){//recorre toda la lista pero de la
+                     //de objetos de la lista de graficos
+                     if (List_Wifi_grafi.get(x).getMacaddres().equals(objetos.getMacaddres())){
+                         //en caso de que tenga el mismo identificador solo agrega el RSSi
+                         List_Wifi_grafi.get(x).lista_Rssi.add(Integer.parseInt(objetos.getRSSI()));
+                         bandera=true;
+                     }
+                 }
+                 if(bandera==false){
+                     Objeto_wifi_grafica nueva_grafi=new Objeto_wifi_grafica();//en caso de que ya
+                     //existan algun dato en la lista de graficos, pero no exista el dato recopilado
+                     //se crea un objeto de grafico wifi y se carga de informacion y se agrega
+                     nueva_grafi.setId_db(objetos.getId_dip());
+                     nueva_grafi.setMacaddres(objetos.getMacaddres());
+                     nueva_grafi.lista_Rssi.add(Integer.parseInt(objetos.getRSSI()));
+                     List_Wifi_grafi.add(nueva_grafi);//se agrega el nuevo objeto
+                 }
+             }
+         }else
+             onlistenerGraficas.enviar_error_logico_fechas("Sin datos en rangos");
+
     }
 
     private void generar_grafica_wifi_barras(ArrayList<Objeto_wifi_grafica> list_blue_grafi) {

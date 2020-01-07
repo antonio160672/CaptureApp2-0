@@ -10,6 +10,7 @@ public class validar_Servi_datos {
     private TextView Dia_ip_servidor,Dia_DNS_ser,Dia_Puerto_orion,Dia_Puerto_crateDB;
     Dialog dialog;
     String ip_servidor,DNS_ser,Puerto_orion,Puerto_crateDB;
+    public int servi_pr;
     private Obje_servi objeServi;
 
     public validar_Servi_datos(Dialog dialog) {
@@ -116,6 +117,7 @@ public class validar_Servi_datos {
         objeServi.setDNS_ser(DNS_ser);
         objeServi.setPuerto_orion(Puerto_orion);
         objeServi.setPuerto_crateDB(Puerto_crateDB);
+        objeServi.setServidor_predeter(servi_pr);//en caso de que tenga algo el dato
         setObjeServi(objeServi);
     }
 

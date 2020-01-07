@@ -174,7 +174,7 @@ public class Vista_graficas_Fragment extends Fragment implements Graficas_vistas
 
     @Override
     public void show_error_logico_fechas(String mensaje) {
-
+        Toast.makeText(Obj_Context.getContext(),mensaje,Toast.LENGTH_LONG).show();
     }
 
     @Override

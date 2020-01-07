@@ -30,12 +30,12 @@
             android:layout_height="450dp"
             android:orientation="vertical"
             android:background="#CCfff8f8">
-            <ListView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RecycleServi"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/Lista_servido">
+                android:layout_height="match_parent">
 
-            </ListView>
+            </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
         <Button
             android:id="@+id/BTN_Registro_ser"

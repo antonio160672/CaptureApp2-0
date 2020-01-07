@@ -37,9 +37,9 @@ import java.util.List;
 import java.util.Locale;
 
 public class fragment_lista_wifi extends Fragment {
-    ListView listView;
+    ListView listView;//list para la interfas grafica
     View view;
-    Adaptador adaptador1;
+    Adaptador adaptador1;//este se ocupa para el diseño de la lista
     public ArrayList<Obj_wifi> Lista_wifi = new ArrayList<Obj_wifi>();
     WifiManager wifiManager;//esta variable saca la informacion del wifi
     WifiInfo wifiInfo;//este extrae informacion del wifimanger

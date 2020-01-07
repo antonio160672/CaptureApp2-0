@@ -11,6 +11,7 @@ import com.example.captureapp2_0.funciones_generas.fechas_trasnformacion;
 import com.example.captureapp2_0.objetos.Obj_bluetooth;
 import com.example.captureapp2_0.objetos.Obj_usuario;
 import com.example.captureapp2_0.objetos.Obj_wifi;
+import com.example.captureapp2_0.objetos.Obje_servi;
 
 import java.util.ArrayList;
 
@@ -154,6 +155,36 @@ public class Sqlite_DB_manejo {
         }
 
     }
+
+    public ArrayList<Obje_servi> Recuperar_servido(String sql)// consultas select * from para llenar las listas de las diferentes clases
+    {
+        ArrayList<Obje_servi> Lista_sevidores=new ArrayList();
+        try {
+            this.Abrir();
+            Cursor c = bd.rawQuery(sql,null);
+            if(c.moveToFirst()){
+                do {
+                    Obje_servi servi=new Obje_servi();
+                    servi.setId_servi(c.getInt(0));//id numero primera fila
+                    servi.setIp_servidor(c.getString(1));
+                    servi.setDNS_ser(c.getString(2));
+                    servi.setPuerto_orion(c.getString(3));
+                    servi.setPuerto_crateDB(c.getString(4));
+                    servi.setServidor_predeter(c.getInt(5));
+                    Lista_sevidores.add(servi);
+                }while (c.moveToNext());
+                return Lista_sevidores;
+            }else{
+                return null;
+            }
+        }catch (SQLiteException s)
+        {
+            this.Cerrar();
+            return null;
+        }
+
+    }
+
 
     public ArrayList llenar_repo(String sql, int bandera)// consultas select * from para llenar las listas de las diferentes clases
     {

@@ -5,10 +5,27 @@ import android.database.Cursor;
 import com.example.captureapp2_0.DB_lite.Sqlite_DB_manejo;
 
 public class Obje_servi {
+    private int id_servi;
     String ip_servidor,DNS_ser,Puerto_orion,Puerto_crateDB;
-    public int servidor_predeter;
+    private int servidor_predeter;
     public Sqlite_DB_manejo sqLite=null;
     public Cursor cursor=null;
+
+    public int getId_servi() {
+        return id_servi;
+    }
+
+    public void setId_servi(int id_servi) {
+        this.id_servi = id_servi;
+    }
+
+    public int getServidor_predeter() {
+        return servidor_predeter;
+    }
+
+    public void setServidor_predeter(int servidor_predeter) {
+        this.servidor_predeter = servidor_predeter;
+    }
 
     public String getIp_servidor() {
         return ip_servidor;

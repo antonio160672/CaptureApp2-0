@@ -14,7 +14,7 @@ import com.example.captureapp2_0.Interfaces.Menu_princi_inter.inter_inicioFragme
 import com.example.captureapp2_0.Interfaces.Menu_princi_inter.inter_inicioFragment_view;
 import com.example.captureapp2_0.Presentadores.inicioFragmen_presen_impL;
 import com.example.captureapp2_0.R;
-import com.example.captureapp2_0.objetos.Obj_Context;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Context;
 
 public class inicioFragment_view extends Fragment implements inter_inicioFragment_view {
     private TextView titulo,usuario_titu,text_Nombre,Nombre_sql,text_Correo,Correo_sql,text_Estado;

@@ -10,15 +10,11 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,10 +28,9 @@ import com.example.captureapp2_0.Interfaces.Servidores_interactores.servidores_p
 import com.example.captureapp2_0.Interfaces.Servidores_interactores.servidores_view_fragmen_inteR;
 import com.example.captureapp2_0.Presentadores.sevidores_presen_impL;
 import com.example.captureapp2_0.R;
-import com.example.captureapp2_0.Interactores.Servidores_interactores.Dialog_servidor.validar_Servi_datos;
-import com.example.captureapp2_0.Vistas.cap_segnals.Adaptador_lista_diseño.Adaptador;
-import com.example.captureapp2_0.objetos.Obj_Context;
-import com.example.captureapp2_0.objetos.Obje_servi;
+import com.example.captureapp2_0.Modelo.Modelo.Interactores.Servidores_interactores.Dialog_servidor.validar_Servi_datos;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Context;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obje_servi;
 
 import java.util.ArrayList;
 
@@ -115,11 +110,10 @@ public class servidor_view_Fragment extends Fragment implements servidores_view_
         }
         servidores_adap.notifyDataSetChanged();
         //updateList();
-        for (int i=0;i<servis_l.size();i++){
-            Log.e("tamaño lista","lista:"+servis_l.size());
+        /*for (int i=0;i<servis_l.size();i++){
             Log.e("se entro en vista","DNNS:"+servis_l.get(i).getDNS_ser()+" IP:"+servis_l.get(i).getIp_servidor()+
                     " ID:"+servis_l.get(i).getId_servi()+" Serpre:"+servis_l.get(i).getServidor_predeter()+"\n");
-        }
+        }*/
     }
 
     @Override
@@ -133,7 +127,7 @@ public class servidor_view_Fragment extends Fragment implements servidores_view_
     public void eliminar_servi(final int dato, final Obje_servi obje_servi) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Eliminar Servidor");
-        builder.setMessage("Desea eliminar este servidor");
+        builder.setMessage("¿Desea eliminar este servidor?");
         builder.setCancelable(false);
         builder.setPositiveButton(android.R.string.ok, null);
         builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
@@ -143,7 +137,6 @@ public class servidor_view_Fragment extends Fragment implements servidores_view_
         });
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {
-             //   cancelar();
             }
         });
         builder.show();
@@ -207,5 +200,25 @@ public class servidor_view_Fragment extends Fragment implements servidores_view_
         dialog.show();
 
 
+    }
+
+    @Override
+    public void Servidor_por_defecto(final int dato, final Obje_servi obje_servi) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Cambiar servidor por defecto");
+        builder.setMessage("¿Desea camniar el servidor por defecto?");
+        builder.setCancelable(false);
+        builder.setPositiveButton(android.R.string.ok, null);
+        builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                presentador_frag.cambiar_servidor(dato,obje_servi);
+            }
+        });
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                //   cancelar();
+            }
+        });
+        builder.show();
     }
 }

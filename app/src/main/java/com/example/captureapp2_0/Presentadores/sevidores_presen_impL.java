@@ -2,12 +2,12 @@ package com.example.captureapp2_0.Presentadores;
 
 import android.util.Log;
 
-import com.example.captureapp2_0.Interactores.Servidores_interactores.servidores_interactor_impL;
+import com.example.captureapp2_0.Modelo.Modelo.Interactores.Servidores_interactores.servidores_interactor_impL;
 import com.example.captureapp2_0.Interfaces.Servidores_interactores.onlistener_Registro_servidores_frag_interac;
 import com.example.captureapp2_0.Interfaces.Servidores_interactores.servidores_interactor_inT;
 import com.example.captureapp2_0.Interfaces.Servidores_interactores.servidores_presentador_frag_inteR;
 import com.example.captureapp2_0.Vistas.Servidores_frag.servidor_view_Fragment;
-import com.example.captureapp2_0.objetos.Obje_servi;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obje_servi;
 
 import java.util.ArrayList;
 
@@ -47,6 +47,14 @@ public class sevidores_presen_impL implements onlistener_Registro_servidores_fra
     public void registrar_servidor(Obje_servi obje_servi) {
         if(servidor_view_fragment!=null){
             servidores_interactor_impL.registrar_servidor(obje_servi);
+            Log.e("servidor","valor del dnss:"+obje_servi.getDNS_ser());
+        }
+    }
+
+    @Override
+    public void cambiar_servidor(int dato, Obje_servi obje_servi) {
+        if(servidor_view_fragment!=null){
+            servidores_interactor_impL.servidor_por_defecto(dato,obje_servi);
             Log.e("servidor","valor del dnss:"+obje_servi.getDNS_ser());
         }
     }

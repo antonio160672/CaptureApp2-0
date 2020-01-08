@@ -1,18 +1,16 @@
-package com.example.captureapp2_0.Interactores;
+package com.example.captureapp2_0.Modelo.Modelo.Interactores;
 
 import android.util.Log;
 
-import com.example.captureapp2_0.DB_lite.Sqlite_DB_manejo;
+import com.example.captureapp2_0.Modelo.Modelo.DB_lite.Sqlite_DB_manejo;
 import com.example.captureapp2_0.Interfaces.Graficas_intF.Graficas_interactores_interface;
 import com.example.captureapp2_0.Interfaces.Graficas_intF.onlistener_graficas;
-import com.example.captureapp2_0.Presentadores.Graficas_presentador_impL;
-import com.example.captureapp2_0.funciones_generas.fechas_trasnformacion;
-import com.example.captureapp2_0.objetos.Obj_Context;
-import com.example.captureapp2_0.objetos.Obj_bluetooth;
-import com.example.captureapp2_0.objetos.Obj_wifi;
-import com.example.captureapp2_0.objetos.Objeto_bluetoo_grafica;
-import com.example.captureapp2_0.objetos.Objeto_wifi_grafica;
-import com.github.mikephil.charting.charts.BarChart;
+import com.example.captureapp2_0.Modelo.Modelo.funciones_generas.fechas_trasnformacion;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Context;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_bluetooth;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_wifi;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Objeto_bluetoo_grafica;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Objeto_wifi_grafica;
 import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -20,7 +18,6 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 

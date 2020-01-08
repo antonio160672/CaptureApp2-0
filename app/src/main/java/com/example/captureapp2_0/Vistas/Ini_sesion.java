@@ -8,14 +8,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.captureapp2_0.Interfaces.Ini_sesion_interF.Ini_sesion_presentador;
 import com.example.captureapp2_0.Interfaces.Ini_sesion_interF.Ini_sesion_vista;
 import com.example.captureapp2_0.Presentadores.Ini_sesion_presen_impL;
 import com.example.captureapp2_0.R;
 import com.example.captureapp2_0.menu_principal;
-import com.example.captureapp2_0.objetos.Obj_Context;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Context;
 
 public class Ini_sesion extends AppCompatActivity implements Ini_sesion_vista {
 

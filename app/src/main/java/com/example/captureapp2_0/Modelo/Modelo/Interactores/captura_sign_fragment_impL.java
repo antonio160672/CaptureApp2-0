@@ -1,10 +1,7 @@
-package com.example.captureapp2_0.Interactores;
-
-import android.util.Log;
+package com.example.captureapp2_0.Modelo.Modelo.Interactores;
 
 import com.example.captureapp2_0.Interfaces.Capta_segnl_interfaces.Interactor_captuSig;
 import com.example.captureapp2_0.Interfaces.Capta_segnl_interfaces.onlistener_captura_segnas_interf;
-import com.example.captureapp2_0.objetos.Obj_Context;
 
 public class captura_sign_fragment_impL implements Interactor_captuSig{
     onlistener_captura_segnas_interf listener;

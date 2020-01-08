@@ -12,13 +12,13 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
-import com.example.captureapp2_0.Interactores.captura_sign_fragment_impL;
+import com.example.captureapp2_0.Modelo.Modelo.Interactores.captura_sign_fragment_impL;
 import com.example.captureapp2_0.Interfaces.Capta_segnl_interfaces.Interactor_captuSig;
 import com.example.captureapp2_0.Interfaces.Capta_segnl_interfaces.onlistener_captura_segnas_interf;
 import com.example.captureapp2_0.Interfaces.Capta_segnl_interfaces.presentador_captureFragment_interface;
 
 import com.example.captureapp2_0.Vistas.cap_segnals.captacion_Fragment_view;
-import com.example.captureapp2_0.objetos.Obj_Context;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Context;
 import java.util.List;
 
 public class capturaSeg_fragment_presenta_impL implements presentador_captureFragment_interface, onlistener_captura_segnas_interf {

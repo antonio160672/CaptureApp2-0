@@ -1,7 +1,6 @@
 package com.example.captureapp2_0.Vistas.cap_segnals.Adaptador_lista_diseño;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.captureapp2_0.R;
-import com.example.captureapp2_0.objetos.Obj_bluetooth;
-import com.example.captureapp2_0.objetos.Obj_wifi;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_bluetooth;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_wifi;
 
 import java.util.ArrayList;
 

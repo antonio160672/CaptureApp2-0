@@ -1,13 +1,8 @@
 package com.example.captureapp2_0;
 
-import android.graphics.Typeface;
 import android.os.Bundle;
 
-import com.example.captureapp2_0.objetos.Obj_Context;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import android.view.View;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Context;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;

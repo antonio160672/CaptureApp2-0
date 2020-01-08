@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -15,15 +14,14 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.captureapp2_0.Interfaces.Registro_par2_interF.Interf_Registro_par2_vista;
 import com.example.captureapp2_0.Interfaces.Registro_par2_interF.inter_Registro_par2_presentador;
 import com.example.captureapp2_0.Presentadores.Registro_par2_presen_impL;
 import com.example.captureapp2_0.R;
 import com.example.captureapp2_0.menu_principal;
-import com.example.captureapp2_0.objetos.Obj_Context;
-import com.example.captureapp2_0.objetos.Obj_usuario;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Context;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_usuario;
 import java.util.Calendar;
 
 public class Registro_par2Vista extends AppCompatActivity implements Interf_Registro_par2_vista{

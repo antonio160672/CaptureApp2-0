@@ -1,14 +1,14 @@
-package com.example.captureapp2_0.Interactores;
+package com.example.captureapp2_0.Modelo.Modelo.Interactores;
 
 
 import android.content.SharedPreferences;
 
-import com.example.captureapp2_0.DB_lite.Sqlite_DB_manejo;
+import com.example.captureapp2_0.Modelo.Modelo.DB_lite.Sqlite_DB_manejo;
 import com.example.captureapp2_0.Interfaces.Menu_princi_inter.inter_inicioFragmen_interactor;
 import com.example.captureapp2_0.Interfaces.Menu_princi_inter.oninter_inicioFragment_Finishlicener;
-import com.example.captureapp2_0.objetos.Obj_Context;
-import com.example.captureapp2_0.objetos.Obj_Estados;
-import com.example.captureapp2_0.objetos.Obj_usuario;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Context;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Estados;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_usuario;
 
 public class inicio_Fragmen_inter_impL implements inter_inicioFragmen_interactor {
 

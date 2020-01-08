@@ -1,11 +1,11 @@
 package com.example.captureapp2_0.Presentadores;
 
-import com.example.captureapp2_0.Interactores.Registro_par1_interac_impL;
+import com.example.captureapp2_0.Modelo.Modelo.Interactores.Registro_par1_interac_impL;
 import com.example.captureapp2_0.Interfaces.Registro_par1_interf.interRegistro_par1_Interactor;
 import com.example.captureapp2_0.Interfaces.Registro_par1_interf.inter_Registro_par1_presentador;
 import com.example.captureapp2_0.Interfaces.Registro_par1_interf.oninter_Registro_par1_Finishlicener;
 import com.example.captureapp2_0.Vistas.Registro_par1Vista;
-import com.example.captureapp2_0.objetos.Obj_usuario;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_usuario;
 
 public class Registro_par1_presen_impL implements inter_Registro_par1_presentador, oninter_Registro_par1_Finishlicener {
 

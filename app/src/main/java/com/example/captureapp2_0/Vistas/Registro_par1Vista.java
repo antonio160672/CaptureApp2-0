@@ -13,7 +13,7 @@ import com.example.captureapp2_0.Interfaces.Registro_par1_interf.inter_Registro_
 import com.example.captureapp2_0.Interfaces.Registro_par1_interf.inter_Registro_par1_vista;
 import com.example.captureapp2_0.Presentadores.Registro_par1_presen_impL;
 import com.example.captureapp2_0.R;
-import com.example.captureapp2_0.objetos.Obj_usuario;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_usuario;
 
 public class Registro_par1Vista extends AppCompatActivity implements inter_Registro_par1_vista{
 

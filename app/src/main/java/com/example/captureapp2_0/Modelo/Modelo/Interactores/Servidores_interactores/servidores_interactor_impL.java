@@ -1,11 +1,11 @@
-package com.example.captureapp2_0.Interactores.Servidores_interactores;
+package com.example.captureapp2_0.Modelo.Modelo.Interactores.Servidores_interactores;
 
 import android.util.Log;
 
 import com.example.captureapp2_0.Interfaces.Servidores_interactores.onlistener_Registro_servidores_frag_interac;
 import com.example.captureapp2_0.Interfaces.Servidores_interactores.servidores_interactor_inT;
-import com.example.captureapp2_0.consultas_volley_sqlite.gestion_sqlite_Servidores;
-import com.example.captureapp2_0.objetos.Obje_servi;
+import com.example.captureapp2_0.Modelo.Modelo.consultas_volley_sqlite.gestion_sqlite_Servidores;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obje_servi;
 
 import java.util.ArrayList;
 
@@ -52,6 +52,7 @@ public class servidores_interactor_impL implements servidores_interactor_inT {
             servis=servidores.recuperardatos_servi(obje_servi);
             onlistenerRegistro.retornar_lista(servis);
             onlistenerRegistro.retornar_mensaje();
+            servidores=null;
         }
     }
 
@@ -62,6 +63,19 @@ public class servidores_interactor_impL implements servidores_interactor_inT {
             servis=servidores.recuperardatos_servi(obje_servi);
             onlistenerRegistro.retornar_lista(servis);
             onlistenerRegistro.retornar_mensaje();
+            servidores=null;
         }
+    }
+
+    @Override
+    public void servidor_por_defecto(int dato, Obje_servi obje_servi) {
+        gestion_sqlite_Servidores servidores=new gestion_sqlite_Servidores();
+        if(servidores.cambiar_servidor_sql(dato,obje_servi)){
+            servis=servidores.recuperardatos_servi(obje_servi);
+            onlistenerRegistro.retornar_lista(servis);
+            onlistenerRegistro.retornar_mensaje();
+            servidores=null;
+        }
+
     }
 }

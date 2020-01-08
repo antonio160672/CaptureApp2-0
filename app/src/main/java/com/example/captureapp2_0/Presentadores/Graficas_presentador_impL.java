@@ -1,6 +1,6 @@
 package com.example.captureapp2_0.Presentadores;
 
-import com.example.captureapp2_0.Interactores.Graficas_interactores_impL;
+import com.example.captureapp2_0.Modelo.Modelo.Interactores.Graficas_interactores_impL;
 import com.example.captureapp2_0.Interfaces.Graficas_intF.Graficas_interactores_interface;
 import com.example.captureapp2_0.Interfaces.Graficas_intF.Graficas_presentador_inter;
 import com.example.captureapp2_0.Interfaces.Graficas_intF.onlistener_graficas;

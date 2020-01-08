@@ -27,7 +27,7 @@ import com.example.captureapp2_0.Presentadores.capturaSeg_fragment_presenta_impL
 import com.example.captureapp2_0.R;
 import com.example.captureapp2_0.Vistas.cap_segnals.vistas_listas.fragmen_listas_bluetooth;
 import com.example.captureapp2_0.Vistas.cap_segnals.vistas_listas.fragment_lista_wifi;
-import com.example.captureapp2_0.objetos.Obj_Context;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Context;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 

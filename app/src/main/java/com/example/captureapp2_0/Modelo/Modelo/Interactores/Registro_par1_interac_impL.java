@@ -1,12 +1,12 @@
-package com.example.captureapp2_0.Interactores;
+package com.example.captureapp2_0.Modelo.Modelo.Interactores;
 
 import android.os.Handler;
 import android.util.Patterns;
 
 import com.example.captureapp2_0.Interfaces.Registro_par1_interf.interRegistro_par1_Interactor;
 import com.example.captureapp2_0.Interfaces.Registro_par1_interf.oninter_Registro_par1_Finishlicener;
-import com.example.captureapp2_0.objetos.Obj_usuario;
-import com.example.captureapp2_0.funciones_generas.Validaciones_campos;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_usuario;
+import com.example.captureapp2_0.Modelo.Modelo.funciones_generas.Validaciones_campos;
 
 public class Registro_par1_interac_impL implements interRegistro_par1_Interactor {
     private int bandera;

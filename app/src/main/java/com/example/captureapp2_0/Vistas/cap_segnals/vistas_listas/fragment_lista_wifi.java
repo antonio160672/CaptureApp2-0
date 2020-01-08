@@ -23,9 +23,9 @@ import androidx.fragment.app.Fragment;
 
 import com.example.captureapp2_0.R;
 import com.example.captureapp2_0.Vistas.cap_segnals.Adaptador_lista_diseño.Adaptador;
-import com.example.captureapp2_0.consultas_volley_sqlite.Registro_wifi_volley;
-import com.example.captureapp2_0.objetos.Obj_Context;
-import com.example.captureapp2_0.objetos.Obj_wifi;
+import com.example.captureapp2_0.Modelo.Modelo.consultas_volley_sqlite.Registro_wifi_volley;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Context;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_wifi;
 
 import org.json.JSONException;
 

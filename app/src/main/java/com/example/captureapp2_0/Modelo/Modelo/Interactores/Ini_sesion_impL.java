@@ -1,10 +1,10 @@
-package com.example.captureapp2_0.Interactores;
+package com.example.captureapp2_0.Modelo.Modelo.Interactores;
 
-import com.example.captureapp2_0.DB_lite.Sqlite_DB_manejo;
+import com.example.captureapp2_0.Modelo.Modelo.DB_lite.Sqlite_DB_manejo;
 import com.example.captureapp2_0.Interfaces.Ini_sesion_interF.Ini_sesion_Interactor;
 import com.example.captureapp2_0.Interfaces.Ini_sesion_interF.onIni_sesion_Finishlicener;
-import com.example.captureapp2_0.objetos.Obj_Context;
-import com.example.captureapp2_0.objetos.Obj_usuario;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Context;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_usuario;
 
 import android.content.SharedPreferences;
 import android.database.Cursor;

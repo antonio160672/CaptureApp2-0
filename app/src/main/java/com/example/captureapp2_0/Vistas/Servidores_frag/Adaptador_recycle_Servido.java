@@ -11,7 +11,7 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.captureapp2_0.R;
-import com.example.captureapp2_0.objetos.Obje_servi;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obje_servi;
 
 import java.util.ArrayList;
 
@@ -70,6 +70,8 @@ public class Adaptador_recycle_Servido
             Puerto_CTDB.setText("CDB:"+obje_servi.getPuerto_crateDB());
             if(obje_servi.getServidor_predeter()==0){
                 servidor_pre.setImageResource(R.drawable.tache);
+            }else{
+                servidor_pre.setImageResource(R.drawable.seleccionado);
             }
         }
 
@@ -96,7 +98,11 @@ public class Adaptador_recycle_Servido
                     break;
                 case R.id.Servidor_pordefecto:
                     if (servidor_view_fragment_1!=null){
-                        servidor_view_fragment_1.mensaje_sin_servido("item de servidor"+String.valueOf(getAdapterPosition()));
+                        if(Lista_servi.get(getAdapterPosition()).getServidor_predeter()==1){
+                            servidor_view_fragment_1.mensaje_sin_servido("Servidor por defecto");
+                        }else{
+                            servidor_view_fragment_1.Servidor_por_defecto(Lista_servi.get(getAdapterPosition()).getId_servi(),Lista_servi.get(getAdapterPosition()));
+                        }
                     }
                     break;
             }

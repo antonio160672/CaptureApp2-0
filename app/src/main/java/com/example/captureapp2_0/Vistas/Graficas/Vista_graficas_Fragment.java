@@ -7,7 +7,6 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,21 +24,16 @@ import com.example.captureapp2_0.Interfaces.Graficas_intF.Graficas_presentador_i
 import com.example.captureapp2_0.Interfaces.Graficas_intF.Graficas_vistas_Inter;
 import com.example.captureapp2_0.Presentadores.Graficas_presentador_impL;
 import com.example.captureapp2_0.R;
-import com.example.captureapp2_0.objetos.Obj_Context;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Context;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LegendEntry;
-import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 public class Vista_graficas_Fragment extends Fragment implements Graficas_vistas_Inter ,View.OnClickListener{
     private Graficas_presentador_inter graficas_presentador;

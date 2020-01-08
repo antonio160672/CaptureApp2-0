@@ -1,10 +1,10 @@
-package com.example.captureapp2_0.Interactores.Servidores_interactores.Dialog_servidor;
+package com.example.captureapp2_0.Modelo.Modelo.Interactores.Servidores_interactores.Dialog_servidor;
 
 import android.app.Dialog;
 import android.widget.TextView;
 
 import com.example.captureapp2_0.R;
-import com.example.captureapp2_0.objetos.Obje_servi;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obje_servi;
 
 public class validar_Servi_datos {
     private TextView Dia_ip_servidor,Dia_DNS_ser,Dia_Puerto_orion,Dia_Puerto_crateDB;

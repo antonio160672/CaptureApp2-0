@@ -1,4 +1,5 @@
 package com.example.captureapp2_0.Vistas.Servidores_frag;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Context;
 import com.example.captureapp2_0.R;
 import com.example.captureapp2_0.Modelo.Modelo.objetos.Obje_servi;
 

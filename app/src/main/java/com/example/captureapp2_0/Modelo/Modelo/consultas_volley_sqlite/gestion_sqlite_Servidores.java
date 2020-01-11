@@ -1,6 +1,7 @@
 package com.example.captureapp2_0.Modelo.Modelo.consultas_volley_sqlite;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.util.Log;
 

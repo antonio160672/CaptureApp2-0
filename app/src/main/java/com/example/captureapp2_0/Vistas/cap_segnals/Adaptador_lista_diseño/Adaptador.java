@@ -1,6 +1,7 @@
 package com.example.captureapp2_0.Vistas.cap_segnals.Adaptador_lista_diseño;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,7 @@ public class Adaptador extends BaseAdapter {
         Lista_wifi = lista_wifi;
         this.context = context;
         obj_bluetooths=Lista_bluetooth;
-        inflater= (LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        inflater= (LayoutInflater)this.context.getSystemService(this.context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -53,6 +54,13 @@ public class Adaptador extends BaseAdapter {
             MAJOR.setText("Major: "+obj_bluetooths.get(i).getMAJOR());
             TX.setText("TX:"+obj_bluetooths.get(i).getTX());
         }
+
+        Tipo_dispo.setTextColor(Color.BLACK);
+        UUID_Nombre.setTextColor(Color.BLACK);
+        Address.setTextColor(Color.BLACK);
+        RSSI.setTextColor(Color.BLACK);
+        MAJOR.setTextColor(Color.BLACK);
+        TX.setTextColor(Color.BLACK);
 
         return view1;
     }

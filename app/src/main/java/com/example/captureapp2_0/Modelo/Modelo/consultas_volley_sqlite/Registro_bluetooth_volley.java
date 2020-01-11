@@ -59,12 +59,14 @@ public class Registro_bluetooth_volley {
                 envio_bluetooth();
         }
     }
+
     private Cursor consulta_entidad()//en este método se consulta si existe el dato con el id Id_dipositivo
     {
         sql="select * from Entidad_Bluetooth where Id_dip='"+obj_bluetooth.getId_dip()+"'";
         Log.e("aqui",""+sql);
         return obj_bluetooth.sqLite.consultaSQL(sql);
     }
+
     private boolean insertar_entidad_Bluetooth()// insertara los datos en la tabla
     {
         trasnformacion=new fechas_trasnformacion();

@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -23,6 +24,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.captureapp2_0.Interfaces.Capta_segnl_interfaces.presentador_captureFragment_interface;
 import com.example.captureapp2_0.Interfaces.Capta_segnl_interfaces.view_captacion_fragmen_intfa;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obje_servi;
 import com.example.captureapp2_0.Presentadores.capturaSeg_fragment_presenta_impL;
 import com.example.captureapp2_0.R;
 import com.example.captureapp2_0.Vistas.cap_segnals.vistas_listas.fragmen_listas_bluetooth;
@@ -31,6 +33,8 @@ import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Context;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
+import org.json.JSONException;
+
 public class captacion_Fragment_view extends Fragment  implements View.OnClickListener, view_captacion_fragmen_intfa {
     private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
     private static final int REQUEST_CODE_ASK_PERMISSIONS = 1;
@@ -38,8 +42,10 @@ public class captacion_Fragment_view extends Fragment  implements View.OnClickLi
     TabLayout tabLayout;//permite moverse entre diferentes fragments en una misma vista
     FloatingActionButton actionButton,desactib;//boton para activar servicios
     View root;//la vista
+    Obj_Context obj_context;
     Viewpager_adaptador_view adaptador_view;//aqui se agregan los fragments es una clse que esta
     //en cao_segnals
+    private Obje_servi obje_servi;
     private presentador_captureFragment_interface presetador;//presentador esta en las interfaces
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -48,10 +54,10 @@ public class captacion_Fragment_view extends Fragment  implements View.OnClickLi
         //linea 49 extrae la vista para trabajar con ella
         root = inflater.inflate(R.layout.fragment_captacion_segnl, container, false);
 
-        Obj_Context obj_context=new Obj_Context(getContext());//carga el objeto context con este contexto
+        obj_context=new Obj_Context(getContext());//carga el objeto context con este contexto
         cargar_datos();//esto inicia todas las variables carga las referencias
         presetador =new capturaSeg_fragment_presenta_impL(this);//instancia al presentador
-        presetador.varificar_servicios();//verifica que esten activo los servicios esto se hace
+        presetador.verificar_servicios();//verifica que esten activo los servicios esto se hace
                                         //desde el presentador
 
         adaptador_view=new Viewpager_adaptador_view(getFragmentManager());//agrega los fragmentos aun
@@ -65,9 +71,16 @@ public class captacion_Fragment_view extends Fragment  implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ActionButton:
-                actionButton.setVisibility(view.GONE);
-                desactib.setVisibility(view.VISIBLE);
-                presetador.escaneo_wifi_bluethoo();
+                if (presetador.verificar_conexion_servi(obje_servi.getDNS_ser(),obje_servi.getIp_servidor())){
+                    actionButton.setVisibility(view.GONE);
+                    desactib.setVisibility(view.VISIBLE);
+                    presetador.escaneo_wifi_bluethoo_con_conexion(obje_servi);
+                }else{
+                    error_en_servidors("imposible conectarse con el servidor");
+                    actionButton.setVisibility(root.GONE);
+                    desactib.setVisibility(root.VISIBLE);
+                    capturar_sin_internet();
+                }
                 break;
             case R.id.Desactivar_button:
                 presetador.destruir();
@@ -81,6 +94,31 @@ public class captacion_Fragment_view extends Fragment  implements View.OnClickLi
                 break;
         }
     }
+
+    @Override
+    public void capturar_sin_internet() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Sin conexión al servidor");
+        builder.setMessage("¿Desea capturar datos y luego enviar al servidor?");
+        builder.setCancelable(false);
+        builder.setPositiveButton(android.R.string.ok, null);
+        builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                presetador.escaneo_wifi_bluethoo_sin_conexion();
+            }
+        });
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+            }
+        });
+        builder.show(); 
+    }
+
+    @Override
+    public void cargar_datos_servi(Obje_servi obje_servi) {
+        this.obje_servi=obje_servi;
+    }
+
     @SuppressLint("RestrictedApi")
     private void cargar_datos() {
         actionButton=root.findViewById(R.id.ActionButton);
@@ -129,15 +167,20 @@ public class captacion_Fragment_view extends Fragment  implements View.OnClickLi
         builder.show();
     }
 
+    @SuppressLint("RestrictedApi")
+    @Override
+    public void error_en_servidors(String mensaje) {
+        Toast.makeText(Obj_Context.getContext(),mensaje,Toast.LENGTH_LONG).show();
+        actionButton.setVisibility(root.GONE);
+    }
+/*
     @Override
     public void iniciar_captura() {
         presetador.escaneo_wifi_bluethoo();
-    }
-
-
+    }*/
 
     @Override
-    public void agregar_viewpager() {
+    public void viewpager_sin_conexion_internet() {
         adaptador_view=new Viewpager_adaptador_view(getFragmentManager());
         adaptador_view.addFRagmen(newinstance_wifi());
         adaptador_view.addFRagmen(newinstance_bluetooth());
@@ -145,10 +188,35 @@ public class captacion_Fragment_view extends Fragment  implements View.OnClickLi
         tabLayout.setupWithViewPager(viewPager);
     }
 
+    @Override
+    public void agregar_viewpager_conexion_internet(Obje_servi obje_servi) {
+        adaptador_view=new Viewpager_adaptador_view(getFragmentManager());
+        adaptador_view.addFRagmen(newinstance_wifi(obje_servi));
+        adaptador_view.addFRagmen(newinstance_bluetooth(obje_servi));
+        viewPager.setAdapter(adaptador_view);
+        tabLayout.setupWithViewPager(viewPager);
+    }
+
+    private fragmen_listas_bluetooth newinstance_bluetooth(Obje_servi obje_servi){
+        Log.e("con internet","esta dentro de blue con internet");
+        fragmen_listas_bluetooth fragmenwifi_blue=new fragmen_listas_bluetooth(obje_servi);
+        return fragmenwifi_blue;
+
+    }
+
+    private fragment_lista_wifi newinstance_wifi(Obje_servi obje_servi){
+        Log.e("con internet","esta dentro de wifi con internet");
+        fragment_lista_wifi fragment_lista_wifi=new fragment_lista_wifi(obje_servi);
+        return fragment_lista_wifi;
+    }
+
     private fragmen_listas_bluetooth newinstance_bluetooth(){
+        Log.e("sin internet","sin  internetttttt");
         fragmen_listas_bluetooth fragmenwifi_blue=new fragmen_listas_bluetooth();
+        fragmenwifi_blue.cargarlista();
         return fragmenwifi_blue;
     }
+
     private fragment_lista_wifi newinstance_wifi(){
         fragment_lista_wifi fragment_lista_wifi=new fragment_lista_wifi();
         return fragment_lista_wifi;

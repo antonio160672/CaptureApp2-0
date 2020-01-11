@@ -192,7 +192,7 @@ public class servidor_view_Fragment extends Fragment implements servidores_view_
                     presentador_frag.actualizar_dispo(dato,nuevoobje_servi[0]);
                     dialog.dismiss();
                 }else{
-                    Log.e("datos22222","ni madress vato");
+                    Toast.makeText(Obj_Context.getContext(),"No se logro editar el servidor",Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -206,7 +206,7 @@ public class servidor_view_Fragment extends Fragment implements servidores_view_
     public void Servidor_por_defecto(final int dato, final Obje_servi obje_servi) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Cambiar servidor por defecto");
-        builder.setMessage("¿Desea camniar el servidor por defecto?");
+        builder.setMessage("¿Desea cambiar el servidor por defecto?");
         builder.setCancelable(false);
         builder.setPositiveButton(android.R.string.ok, null);
         builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {

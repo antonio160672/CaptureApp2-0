@@ -95,12 +95,41 @@ public class Sqlite_DB_manejo {
                 obj_usuario.setCp(c.getString(10));
                 obj_usuario.setIdEstado(c.getString(11));
             }
+            this.Cerrar();
+            return obj_usuario;
         }catch (SQLiteException s)
         {
             this.Cerrar();
             return null;
         }
-        return obj_usuario;
+
+    }
+
+    public Obje_servi Recuperar_servidor_objeto(String sql,Obje_servi obje_servi){
+
+        try {
+            this.Abrir();
+            Cursor c = bd.rawQuery(sql,null);//se inicia un cursor el cual se mueve en
+            //la consulta
+            if(c.moveToFirst()){
+                Log.e("datos",""+c.getString(0));
+                obje_servi.setId_servi(c.getInt(0));
+                obje_servi.setIp_servidor(c.getString(1));
+                obje_servi.setDNS_ser(c.getString(2));
+                obje_servi.setPuerto_orion(c.getString(3));
+                obje_servi.setPuerto_crateDB(c.getString(4));
+                obje_servi.setServidor_predeter(c.getInt(5));
+                this.Cerrar();
+                return obje_servi;
+            }else{
+                return null;
+            }
+        }catch (SQLiteException s)
+        {
+            this.Cerrar();
+            return null;
+        }
+
     }
 
     public ArrayList<Obj_bluetooth> Recuperar_lista_bluetooth(String sql)// consultas select * from para llenar las listas de las diferentes clases
@@ -118,6 +147,7 @@ public class Sqlite_DB_manejo {
                     bluetooth.setRSSI(c.getString(4));
                     lista_blueList.add(bluetooth);
                 }while (c.moveToNext());
+                this.Cerrar();
                 return lista_blueList;
             }else{
                 return null;
@@ -144,6 +174,7 @@ public class Sqlite_DB_manejo {
                     wifi.setRSSI(c.getString(4));
                     lista_wifi.add(wifi);
                 }while (c.moveToNext());
+                this.Cerrar();
                 return lista_wifi;
             }else{
                 return null;
@@ -173,6 +204,7 @@ public class Sqlite_DB_manejo {
                     servi.setServidor_predeter(c.getInt(5));
                     Lista_sevidores.add(servi);
                 }while (c.moveToNext());
+                this.Cerrar();
                 return Lista_sevidores;
             }else{
                 return null;

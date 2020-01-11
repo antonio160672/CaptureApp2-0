@@ -11,6 +11,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obje_servi;
 import com.example.captureapp2_0.R;
 import com.example.captureapp2_0.Vistas.cap_segnals.Adaptador_lista_diseño.Adaptador;
 import com.example.captureapp2_0.Modelo.Modelo.consultas_volley_sqlite.Registro_wifi_volley;
@@ -48,6 +50,14 @@ public class fragment_lista_wifi extends Fragment {
     //linea 105
     Registro_wifi_volley registro_wifi_volley;
     String ID;
+    private Obje_servi obje_servi;
+
+    public fragment_lista_wifi(Obje_servi obje_servi) {
+        this.obje_servi = obje_servi;
+    }
+    public fragment_lista_wifi() {
+
+    }
 
     @Nullable
     @Override
@@ -62,11 +72,14 @@ public class fragment_lista_wifi extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        //instancia a la vista y la manda a la lista
         return view;
     }
 
+
+
     private void cargarlista() throws JSONException {
-        listView= view.findViewById(R.id.Lista_señales_wifi);//instancia a la vista y la manda a la lista
+        listView= view.findViewById(R.id.Lista_señales_wifi);
         wifiManager = (WifiManager) Obj_Context.getContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         //saca los datos de los servicios del telefono por eso el service y manda el wifi service
         wifiInfo = wifiManager.getConnectionInfo();//este saca la informacion de los servivios y los manda
@@ -131,11 +144,13 @@ public class fragment_lista_wifi extends Fragment {
                     obj_wifi.setId_tip_dispo("1");
                     Lista_wifi.add(obj_wifi);
                     registro_wifi_volley.setObj_wifi(obj_wifi);
-                    try {
+
+                    Log.e("dentro del fragmento","fragmento de lista_wifi");
+                    /*try {
                         registro_wifi_volley.SQLite_exitencia();
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    }
+                    }*/
 
                 }
             }

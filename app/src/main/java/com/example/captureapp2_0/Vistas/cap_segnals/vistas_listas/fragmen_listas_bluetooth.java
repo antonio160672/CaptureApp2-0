@@ -6,6 +6,7 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.RemoteException;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obje_servi;
 import com.example.captureapp2_0.R;
 import com.example.captureapp2_0.Vistas.cap_segnals.Adaptador_lista_diseño.Adaptador;
 import com.example.captureapp2_0.Modelo.Modelo.consultas_volley_sqlite.Registro_bluetooth_volley;
@@ -44,22 +46,31 @@ public class fragmen_listas_bluetooth extends Fragment implements BeaconConsumer
     private Obj_bluetooth obj_bluetooth;
     private String ID;
     private Registro_bluetooth_volley bluetooth_volley;
-
+    private Obje_servi obje_servi;
     Adaptador adaptador;
+
+
+    public fragmen_listas_bluetooth(Obje_servi obje_servi) {
+        this.obje_servi = obje_servi;
+    }
+    public fragmen_listas_bluetooth() {
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragmen_listas_wifi_blue, container, false);
+
         listView = view.findViewById(R.id.Lista_señales);
         SharedPreferences preferences= Obj_Context.getContext().getSharedPreferences
                 ("userid",Obj_Context.getContext().MODE_PRIVATE);
         ID=preferences.getString("Id_User","nulo");
+
         cargarlista();
         return view;
     }
 
-    void cargarlista(){
+    public void cargarlista(){
         beaconManager = BeaconManager.getInstanceForApplication(getApplicationContext());//instancia los servicios de beacon
         //las siguientes dos lineas hacen referencia al modelo de beacon en este caso estimote
         beaconManager.getBeaconParsers().add(new
@@ -71,8 +82,7 @@ public class fragmen_listas_bluetooth extends Fragment implements BeaconConsumer
         bluetooth_volley =new Registro_bluetooth_volley();
 
         beaconManager.bind(this);
-        adaptador=new Adaptador(null,Obj_Context.getContext(),  Lista_beacon);
-        listView.setAdapter(adaptador);
+        adaptador=new Adaptador(null,Obj_Context.getContext().getApplicationContext(),  Lista_beacon);
     }
 
     @Override
@@ -104,11 +114,16 @@ public class fragmen_listas_bluetooth extends Fragment implements BeaconConsumer
                             obj_bluetooth.setFecha_cap(fecha);
                             obj_bluetooth.setHora(hora);
                             bluetooth_volley.setObj_bluetooth(obj_bluetooth);
-                            try {
+                            if (obje_servi!=null&&!(obje_servi.getDNS_ser().equals("")||obje_servi.getIp_servidor().equals(""))){
+                                Log.e("con datos en","tamaño lista"+Lista_beacon.size());
+                            }else{
+                                Log.e("sin datos","tamaño lista"+Lista_beacon.size());
+                            }
+                            /*try {
                                 bluetooth_volley.SQLite_exitencia();
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                            }
+                            }*/
                             Lista_beacon.add(obj_bluetooth);
                         }
                     }
@@ -131,9 +146,12 @@ public class fragmen_listas_bluetooth extends Fragment implements BeaconConsumer
             public void run() {
                 //this should wipe out all existing adapter data
                 adaptador.notifyDataSetChanged();
+                listView.setAdapter(adaptador);
             }
         });
     }
+
+
 
     @Override
     public void onStop() {
@@ -149,17 +167,17 @@ public class fragmen_listas_bluetooth extends Fragment implements BeaconConsumer
 
     @Override
     public Context getApplicationContext() {
-        return getActivity().getApplicationContext();
+        return Obj_Context.getContext().getApplicationContext();
     }
 
     @Override
     public void unbindService(ServiceConnection serviceConnection) {
-        getActivity().unbindService(serviceConnection);
+        getApplicationContext().unbindService(serviceConnection);
     }
 
     @Override
     public boolean bindService(Intent intent, ServiceConnection serviceConnection, int i) {
-        return getActivity().bindService(intent, serviceConnection, i);
+        return getApplicationContext().bindService(intent, serviceConnection, i);
 
     }
 }

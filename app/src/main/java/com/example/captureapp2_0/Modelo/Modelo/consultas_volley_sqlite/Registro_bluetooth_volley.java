@@ -37,13 +37,13 @@ public class Registro_bluetooth_volley {
         if (context!=null)
             request= Volley.newRequestQueue(context);
     }
-    public void SQLite_exitencia() throws JSONException {
+    public void SQLite_exitencia_registro(String direccion,String puer_crate,String puerto_Orion) throws JSONException {
         if (obj_bluetooth!=null){
             obj_bluetooth.sqLite= new Sqlite_DB_manejo(Obj_Context.getContext());
             obj_bluetooth.cursor=consulta_entidad();
             if(obj_bluetooth.cursor.getCount()>0){
                 Log.e("si","existe el dato");
-                URL= "http://pruebas-upemor.ddns.net:1026/v2/entities/"+obj_bluetooth.getId_dip()+"/attrs";
+                URL= "http://"+direccion+":"+puerto_Orion+"/v2/entities/"+obj_bluetooth.getId_dip()+"/attrs";
                 Log.e("URL de actualizacion",":"+URL);
                 Request_Method=1;//metodo pach para actualizar
                 tipo_json=1;
@@ -51,7 +51,7 @@ public class Registro_bluetooth_volley {
             {
                 Log.e("no","existe el dato");
                 Log.e("pero","ahora si existe");
-                URL= "http://pruebas-upemor.ddns.net:1026/v2/entities";
+                URL= "http://"+direccion+":"+puerto_Orion+"/v2/entities/";
                 Request_Method=1;//metodo post para registrar
                 tipo_json=0;
             }
@@ -78,6 +78,19 @@ public class Registro_bluetooth_volley {
         String sql="insert into Entidad_Bluetooth values(NULL,'"+obj_bluetooth.getId_dip()+"','"+obj_bluetooth.getUUID()+"','"+
                 obj_bluetooth.getBluetoothAddress()+"','"+obj_bluetooth.getRSSI()+"','"+obj_bluetooth.getTX()+"','"+
                 obj_bluetooth.getMAJOR()+"','"+ obj_bluetooth.getFecha_mili()+"','"+obj_bluetooth.getHora()+
+                "','"+obj_bluetooth.getId_user()+"','"+obj_bluetooth.getId_tip_dispo()+"');";
+        Log.e("cadena","contacto"+sql);
+        return obj_bluetooth.sqLite.ejecutaSQL(sql);
+    }
+
+    public boolean Insertar_sin_servidor_Sin_conexion_entidad_Bluetooth()// insertara los datos en la tabla
+            //de señales bluetooth pero sin conexion a sservidor
+    {
+        obj_bluetooth.sqLite= new Sqlite_DB_manejo(Obj_Context.getContext());
+        String sql="insert into Sin_conexion_entidad_Bluetooth values(NULL,'"+obj_bluetooth.getId_dip()+
+                "','"+obj_bluetooth.getUUID()+"','"+
+                obj_bluetooth.getBluetoothAddress()+"','"+obj_bluetooth.getRSSI()+"','"+obj_bluetooth.getTX()+"','"+
+                obj_bluetooth.getMAJOR()+"','"+ obj_bluetooth.getFecha_cap()+"','"+obj_bluetooth.getHora()+
                 "','"+obj_bluetooth.getId_user()+"','"+obj_bluetooth.getId_tip_dispo()+"');";
         Log.e("cadena","contacto"+sql);
         return obj_bluetooth.sqLite.ejecutaSQL(sql);

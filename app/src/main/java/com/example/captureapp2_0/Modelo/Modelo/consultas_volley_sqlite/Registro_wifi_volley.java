@@ -38,13 +38,13 @@ public class Registro_wifi_volley {
             request= Volley.newRequestQueue(context);
     }
 
-    public void SQLite_exitencia() throws JSONException {
+    public void SQLite_exitencia_registro(String direccion,String puer_crate,String puerto_Orion) throws JSONException {
         if (obj_wifi!=null){
             obj_wifi.sqLite= new Sqlite_DB_manejo(Obj_Context.getContext());
             obj_wifi.cursor=consulta_entidad();
             if(obj_wifi.cursor.getCount()>0){
                 Log.e("si","existe el dato");
-                URL= "http://pruebas-upemor.ddns.net:1026/v2/entities/"+obj_wifi.getId_dip()+"/attrs";
+                URL= "http://"+direccion+":"+puerto_Orion+"/v2/entities/"+obj_wifi.getId_dip()+"/attrs";
                 Log.e("URL de actualizacion",":"+URL);
                 Request_Method=1;//metodo pach para actualizar
                 tipo_json=1;
@@ -52,7 +52,7 @@ public class Registro_wifi_volley {
             {
                 Log.e("no","existe el dato\n");
                 Log.e("pero","ahora si  va a existir\n");
-                URL= "http://pruebas-upemor.ddns.net:1026/v2/entities";
+                URL= "http://"+direccion+":"+puerto_Orion+"/v2/entities";
                 Request_Method=1;//metodo post para registrar
                 tipo_json=0;
             }
@@ -84,6 +84,19 @@ public class Registro_wifi_volley {
                 +"','"+obj_wifi.getId_tip_dispo()+"');";
         Log.e("cadena","contacto"+sql);
         return obj_wifi.sqLite.ejecutaSQL(sql);
+    }
+
+    public boolean insertar_sin_conexion_entidad_wifi()// insertara los datos en la tabla
+    {
+            obj_wifi.sqLite = new Sqlite_DB_manejo(Obj_Context.getContext());
+            String sql = "insert into Sin_conexion_entidad_wifi values(NULL,'" + obj_wifi.getId_dip() +
+                    "','" + obj_wifi.getNombre_dispos() + "','" +
+                    obj_wifi.getMacaddres() + "','" + obj_wifi.getRSSI() + "','" +
+                    obj_wifi.getFecha_cap() + "','" + obj_wifi.getHora() + "','" + obj_wifi.getId_user()
+                    + "','" + obj_wifi.getId_tip_dispo() + "');";
+            Log.e("cadena", "contacto" + sql);
+            return obj_wifi.sqLite.ejecutaSQL(sql);
+
     }
 
     public void envio_wifi() throws JSONException{

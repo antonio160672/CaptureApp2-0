@@ -14,6 +14,12 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.captureapp2_0.R;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class ShareFragment extends Fragment {
 
     private ShareViewModel shareViewModel;

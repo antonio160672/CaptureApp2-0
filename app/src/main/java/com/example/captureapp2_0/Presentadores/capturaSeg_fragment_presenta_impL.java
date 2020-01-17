@@ -8,7 +8,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -18,10 +17,13 @@ import com.example.captureapp2_0.Interfaces.Capta_segnl_interfaces.Interactor_ca
 import com.example.captureapp2_0.Interfaces.Capta_segnl_interfaces.onlistener_captura_segnas_interf;
 import com.example.captureapp2_0.Interfaces.Capta_segnl_interfaces.presentador_captureFragment_interface;
 
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_bluetooth;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_wifi;
 import com.example.captureapp2_0.Modelo.Modelo.objetos.Obje_servi;
 import com.example.captureapp2_0.Vistas.cap_segnals.captacion_Fragment_view;
 import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Context;
-import java.util.List;
+
+import java.util.ArrayList;
 
 public class capturaSeg_fragment_presenta_impL implements presentador_captureFragment_interface, onlistener_captura_segnas_interf {
     private captacion_Fragment_view fragmentView;
@@ -56,6 +58,21 @@ public class capturaSeg_fragment_presenta_impL implements presentador_captureFra
                     "Favor de registrar primero un servidor");
         }
 
+    }
+
+    @Override
+    public void verificar_datos_sin_conex() {
+        interactor_captuSig.verificar_recuperar_datos();
+    }
+
+    @Override
+    public void retornar_datos_sin_conx(ArrayList<Obj_bluetooth> Array_bluet, ArrayList<Obj_wifi> Array_wifi) {
+        fragmentView.Mensaje_datos_capt_sin_servidor(Array_bluet,Array_wifi);
+    }
+
+    @Override
+    public void enviar_datos_sinconex(ArrayList<Obj_bluetooth> Array_bluet, ArrayList<Obj_wifi> Array_wifi, Obje_servi obje_servi) {
+        interactor_captuSig.envio_datos_sinconex(Array_bluet,Array_wifi,obje_servi);
     }
 
     @Override

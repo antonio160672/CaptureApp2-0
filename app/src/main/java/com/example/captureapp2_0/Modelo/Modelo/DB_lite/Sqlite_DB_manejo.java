@@ -21,7 +21,7 @@ public class Sqlite_DB_manejo {
     private Helper helper;
     private SQLiteDatabase bd;
     String nombre_base = "bd";// nombre de la base de datos
-    int version = 2;
+    int version = 3;
     String[] tablas = {"CREATE TABLE IF NOT EXISTS usuario (id_user INTEGER PRIMARY KEY, nombre text, " +
             "apelldioP text, apellidoM text, correo text,contrasena text,municipio text, calle text, colonia text,fecha INTEGER," +
             "cp text,idEstado INTEGER)",
@@ -29,7 +29,11 @@ public class Sqlite_DB_manejo {
                     "RSSI text, Fecha INTEGER,Hora text, Id_user INTEGER,Id_tipo_disposi INTEGER)",
             "CREATE TABLE IF NOT EXISTS Entidad_Bluetooth (id INTEGER PRIMARY KEY AUTOINCREMENT,Id_dip text,UUID text,Macaddres text,RSSI text,"+
                     "TX text,MAJOR text,Fecha INTEGER,Hora text,Id_user INTEGER,Id_tipo_disposi INTEGER)",
-            "CREATE TABLE IF NOT EXISTS Servidor(id INTEGER PRIMARY KEY AUTOINCREMENT,ip text, dnns text,perto_orion text,puerto_crate text,servidor_prede INTEGER)"};///Aqui van todas las tablas a crear,
+            "CREATE TABLE IF NOT EXISTS Servidor(id INTEGER PRIMARY KEY AUTOINCREMENT,ip text, dnns text,perto_orion text,puerto_crate text,servidor_prede INTEGER)",
+            "CREATE TABLE IF NOT EXISTS Sin_conexion_entidad_wifi (id INTEGER PRIMARY KEY AUTOINCREMENT, Id_dip text, Nombre_dispositivo text, Macaddres text, " +
+                    "RSSI text, Fecha text,Hora text, Id_user INTEGER,Id_tipo_disposi INTEGER)",
+            "CREATE TABLE IF NOT EXISTS Sin_conexion_entidad_Bluetooth (id INTEGER PRIMARY KEY AUTOINCREMENT,Id_dip text,UUID text,Macaddres text,RSSI text,"+
+                    "TX text,MAJOR text,Fecha text,Hora text,Id_user INTEGER,Id_tipo_disposi INTEGER)"};///Aqui van todas las tablas a crear,
     // para hacer modificaciones a la base de datos borrar la aplicacion e instalar nuevamente
     public Sqlite_DB_manejo(Context context)
     {
@@ -106,7 +110,6 @@ public class Sqlite_DB_manejo {
     }
 
     public Obje_servi Recuperar_servidor_objeto(String sql,Obje_servi obje_servi){
-
         try {
             this.Abrir();
             Cursor c = bd.rawQuery(sql,null);//se inicia un cursor el cual se mueve en
@@ -141,10 +144,16 @@ public class Sqlite_DB_manejo {
             if(c.moveToFirst()){
                 do {
                     Obj_bluetooth bluetooth=new Obj_bluetooth();
-                    bluetooth.setId_dip(c.getString(0));//id numero primera fila
+                    bluetooth.setId_dip(c.getString(1));//id numero primera fila
                     bluetooth.setUUID(c.getString(2));
                     bluetooth.setBluetoothAddress(c.getString(3));
                     bluetooth.setRSSI(c.getString(4));
+                    bluetooth.setTX(c.getString(5));
+                    bluetooth.setMAJOR(c.getString(6));
+                    bluetooth.setFecha_cap(c.getString(7));
+                    bluetooth.setHora(c.getString(8));
+                    bluetooth.setId_user(c.getString(9));
+                    bluetooth.setId_tip_dispo((c.getString(10)));
                     lista_blueList.add(bluetooth);
                 }while (c.moveToNext());
                 this.Cerrar();
@@ -168,10 +177,16 @@ public class Sqlite_DB_manejo {
             Cursor c = bd.rawQuery(sql,null);
             if(c.moveToFirst()){
                 do {
+                    String Nombre_dispos,id_dip,macaddres,RSSI,id_tip_dispo,id_user,fecha_cap,hora;
                     Obj_wifi wifi=new Obj_wifi();
-                    wifi.setId_dip(c.getString(0));//id numero primera fila
+                    wifi.setId_dip(c.getString(1));//id numero primera fila
+                    wifi.setNombre_dispos(c.getString(2));
                     wifi.setMacaddres(c.getString(3));
                     wifi.setRSSI(c.getString(4));
+                    wifi.setFecha_cap(c.getString(5));
+                    wifi.setHora(c.getString(6));
+                    wifi.setId_user(c.getString(7));
+                    wifi.setId_tip_dispo(c.getString(8));
                     lista_wifi.add(wifi);
                 }while (c.moveToNext());
                 this.Cerrar();

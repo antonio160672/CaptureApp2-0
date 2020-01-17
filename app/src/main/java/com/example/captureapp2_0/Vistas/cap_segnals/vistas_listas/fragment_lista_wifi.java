@@ -144,14 +144,22 @@ public class fragment_lista_wifi extends Fragment {
                     obj_wifi.setId_tip_dispo("1");
                     Lista_wifi.add(obj_wifi);
                     registro_wifi_volley.setObj_wifi(obj_wifi);
-
-                    Log.e("dentro del fragmento","fragmento de lista_wifi");
-                    /*try {
-                        registro_wifi_volley.SQLite_exitencia();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }*/
-
+                    if (obje_servi!=null&&!(obje_servi.getDNS_ser().equals("")||obje_servi.getIp_servidor().equals(""))){
+                        try {
+                            if(!(obje_servi.getDNS_ser().equals(""))){
+                                registro_wifi_volley.SQLite_exitencia_registro(obje_servi.getDNS_ser(),obje_servi.getPuerto_crateDB(),
+                                        obje_servi.getPuerto_orion());
+                            }else{
+                                registro_wifi_volley.SQLite_exitencia_registro(obje_servi.getIp_servidor(),obje_servi.getPuerto_crateDB(),
+                                        obje_servi.getPuerto_orion());
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }else{
+                        registro_wifi_volley.insertar_sin_conexion_entidad_wifi();
+                        Log.e("sin wifi","tamaño lista"+Lista_wifi.size());
+                    }
                 }
             }
             updateList();

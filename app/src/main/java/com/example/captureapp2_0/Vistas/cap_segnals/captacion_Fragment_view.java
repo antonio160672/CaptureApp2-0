@@ -24,6 +24,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.captureapp2_0.Interfaces.Capta_segnl_interfaces.presentador_captureFragment_interface;
 import com.example.captureapp2_0.Interfaces.Capta_segnl_interfaces.view_captacion_fragmen_intfa;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_bluetooth;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_wifi;
 import com.example.captureapp2_0.Modelo.Modelo.objetos.Obje_servi;
 import com.example.captureapp2_0.Presentadores.capturaSeg_fragment_presenta_impL;
 import com.example.captureapp2_0.R;
@@ -34,6 +36,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONException;
+
+import java.util.ArrayList;
 
 public class captacion_Fragment_view extends Fragment  implements View.OnClickListener, view_captacion_fragmen_intfa {
     private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
@@ -63,6 +67,7 @@ public class captacion_Fragment_view extends Fragment  implements View.OnClickLi
         adaptador_view=new Viewpager_adaptador_view(getFragmentManager());//agrega los fragmentos aun
         //adaptador de vistas es el que permite moverse entre las dos imagenes
 
+        verificar_datos_sin_conex();
         return root;
     }
 
@@ -93,6 +98,35 @@ public class captacion_Fragment_view extends Fragment  implements View.OnClickLi
             default:
                 break;
         }
+    }
+
+    @Override
+    public void verificar_datos_sin_conex() {
+        presetador.verificar_datos_sin_conex();
+    }
+
+    @Override
+    public void Mensaje_datos_capt_sin_servidor(final ArrayList<Obj_bluetooth> Array_bluet, final ArrayList<Obj_wifi> Array_wifi) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Datos captados sin conexión");
+        builder.setMessage("¿Desea enviar los datos captados sin conexión?");
+        builder.setCancelable(false);
+        builder.setPositiveButton(android.R.string.ok, null);
+        builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                if (presetador.verificar_conexion_servi(obje_servi.getDNS_ser(),obje_servi.getIp_servidor())){
+                    presetador.enviar_datos_sinconex(Array_bluet,Array_wifi,obje_servi);
+                }else{
+                    error_en_servidors("No es posible conectar con el servidor de Fiware");
+                    error_en_servidors("Favor de cambiar servidor predeterminado");
+                }
+            }
+        });
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+            }
+        });
+        builder.show();
     }
 
     @Override

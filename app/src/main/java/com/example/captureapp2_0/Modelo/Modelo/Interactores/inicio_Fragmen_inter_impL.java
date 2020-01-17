@@ -10,6 +10,8 @@ import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Context;
 import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Estados;
 import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_usuario;
 
+import java.util.Calendar;
+
 public class inicio_Fragmen_inter_impL implements inter_inicioFragmen_interactor {
 
 
@@ -42,6 +44,10 @@ public class inicio_Fragmen_inter_impL implements inter_inicioFragmen_interactor
         listener.cargar_calle_show(obj_usuario.getCalle());
         listener.cargar_CP_show(obj_usuario.getCp());
         String[] arrayfecha = obj_usuario.getFecha_nac().split(" ");
-        listener.cargar_edad_show(arrayfecha[0]);
+        String[] naci=arrayfecha[0].split("-");
+        Calendar cal=Calendar.getInstance();
+        int year=cal.get(Calendar.YEAR);
+        int edad_real=(year-(Integer.parseInt(naci[2])));
+        listener.cargar_edad_show(Integer.toString(edad_real));
     }
 }

@@ -115,15 +115,23 @@ public class fragmen_listas_bluetooth extends Fragment implements BeaconConsumer
                             obj_bluetooth.setHora(hora);
                             bluetooth_volley.setObj_bluetooth(obj_bluetooth);
                             if (obje_servi!=null&&!(obje_servi.getDNS_ser().equals("")||obje_servi.getIp_servidor().equals(""))){
-                                Log.e("con datos en","tamaño lista"+Lista_beacon.size());
+                                try {
+                                    if(!(obje_servi.getDNS_ser().equals(""))){
+                                        bluetooth_volley.SQLite_exitencia_registro(obje_servi.getDNS_ser(),obje_servi.getPuerto_crateDB(),
+                                        obje_servi.getPuerto_orion());
+                                    }else{
+                                        bluetooth_volley.SQLite_exitencia_registro(obje_servi.getIp_servidor(),obje_servi.getPuerto_crateDB(),
+                                                obje_servi.getPuerto_orion());
+                                    }
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }else{
+                                bluetooth_volley.Insertar_sin_servidor_Sin_conexion_entidad_Bluetooth();
+
                                 Log.e("sin datos","tamaño lista"+Lista_beacon.size());
                             }
-                            /*try {
-                                bluetooth_volley.SQLite_exitencia();
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }*/
                             Lista_beacon.add(obj_bluetooth);
                         }
                     }

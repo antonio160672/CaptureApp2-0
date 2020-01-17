@@ -24,7 +24,6 @@ public class inicioFragmen_presen_impL implements inter_inicioFragment_presentad
             Obj_usuario obj_usuario=new Obj_usuario();
             Obj_Estados obj_estados=new Obj_Estados();
             interactor.cargar_datos(obj_usuario,obj_estados,this);
-
         }
 
     }

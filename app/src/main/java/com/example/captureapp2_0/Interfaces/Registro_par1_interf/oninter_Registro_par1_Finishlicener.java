@@ -10,4 +10,5 @@ public interface oninter_Registro_par1_Finishlicener {
     void Contra_seterro(String error);
 
     void exito_valida(Obj_usuario obj_usuario);
+    void dismi_progress(String mensajen);
 }

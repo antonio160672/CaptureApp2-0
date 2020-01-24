@@ -9,6 +9,8 @@
     android:orientation="vertical"
     android:visibility="visible">
 
+
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/TAP"
         android:layout_width="match_parent"

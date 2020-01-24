@@ -1,25 +1,34 @@
 package com.example.captureapp2_0.Modelo.Modelo.Interactores;
 
 import android.os.Handler;
+import android.util.Log;
 import android.util.Patterns;
 
+import com.android.volley.Response;
 import com.example.captureapp2_0.Interfaces.Registro_par1_interf.interRegistro_par1_Interactor;
 import com.example.captureapp2_0.Interfaces.Registro_par1_interf.oninter_Registro_par1_Finishlicener;
+import com.example.captureapp2_0.Interfaces.VolleyListener;
+import com.example.captureapp2_0.Modelo.Modelo.consultas_volley_sqlite.Registro_user;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Context;
 import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_usuario;
 import com.example.captureapp2_0.Modelo.Modelo.funciones_generas.Validaciones_campos;
 
-public class Registro_par1_interac_impL implements interRegistro_par1_Interactor {
-    private int bandera;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class Registro_par1_interac_impL implements interRegistro_par1_Interactor, VolleyListener {
+    private int bandera,Exist_cor;
     private Obj_usuario obj_usuario;
     private oninter_Registro_par1_Finishlicener listener;
+    boolean valor;
     @Override//este metodo valida que tengan datos los campos
     public void validarRegistropar1(final String Nombre, final String Apellido_parte, final String Apellido_mater,
                                     final String Correo, final String Contra, final String Conf_contra,
                                     final oninter_Registro_par1_Finishlicener listener) {
         this.listener=listener;
         bandera=1;
+        volley(Correo);
         new Handler().postDelayed(new Runnable(){
-
             @Override
             public void run() {
                 if (Nombre.isEmpty()&&Apellido_parte.isEmpty()&&Apellido_mater.isEmpty()&&
@@ -55,19 +64,57 @@ public class Registro_par1_interac_impL implements interRegistro_par1_Interactor
                         bandera=0;
                     }
                     if (bandera!=0){
-                        validar_cadenas(Nombre,Apellido_parte,Apellido_mater,Correo,Contra,Conf_contra);
+                        validar_cadenas(Nombre.trim(),Apellido_parte.trim()
+                                ,Apellido_mater.trim(),Correo.trim(),Contra.trim(),Conf_contra.trim());
                     }
 
                 }
 
             }
-        },100);
+        },1500);
+    }
+
+    @Override
+    public void requestFinished(boolean exsitance) {
+
+        Log.e("valo","formato: "+exsitance);
+        if (exsitance)
+            Exist_cor=2;
+        else
+            Exist_cor=1;
+    }
+
+    private void volley(final String Correo) {
+        Exist_cor=2;
+        final VolleyListener volleyListener = (VolleyListener) this;
+        Registro_user registro_user=new Registro_user(null,null);
+        valor=registro_user.validar_correo(Correo,
+                new Response.Listener<String>() {
+                    @Override//aqui se recibe una la respuesta
+                    public void onResponse(String response) {
+                        response= response.replace("Connected successfully","");
+                        Log.e("datos responce","formato: "+response);
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (jsonObject.optString("status").equals("true")){
+                                volleyListener.requestFinished(true);
+                            }else {
+                                volleyListener.requestFinished(false);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+
     }
 
     //aqui se validan que se cuente con los datos correctos
     //que no haya numeros en campos que solo reciben string
     private void validar_cadenas(final String Nombre, final String Apellido_parte, final String Apellido_mater,
                          final String Correo, final String Contra, final String Conf_contra){
+
         bandera=1;
         Validaciones_campos validaciones_campos=new Validaciones_campos();
         String error;
@@ -94,11 +141,24 @@ public class Registro_par1_interac_impL implements interRegistro_par1_Interactor
             listener.Contra_seterro("contraseñas diferentes");
             bandera=0;
         }
+        Log.e("tamaño",":"+Contra.length());
+        if (!((Contra.length()>=8&&Contra.length()<=40)&&(Conf_contra.length()>=8&&Conf_contra.length()<=40))){
+            listener.Contra_seterro("Tamaño minimo 8 caracteres");
+            bandera=0;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(Correo).matches()){
+            listener.Correo_seterro("Correo invalido");
+            bandera=0;
+        }
+        if (Exist_cor==2){
+            listener.Correo_seterro("El correo ya esta registrado");
+            bandera=0;
+        }
+        listener.dismi_progress("");
         if (bandera==1){
             //se debe mandar a llamar a volley para corroborar la inexistencia del correo
             //pero de momento se llamara al objeto de clase usuario.
             cargar_obejto_usuario(Nombre,Apellido_parte,Apellido_mater,Correo,Contra,Conf_contra,listener);
-
         }
     }
     //aqui se carga un objeto de tipo usuario con todos los datos del usurio

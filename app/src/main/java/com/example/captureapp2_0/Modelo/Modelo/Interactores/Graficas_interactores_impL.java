@@ -1,6 +1,10 @@
 package com.example.captureapp2_0.Modelo.Modelo.Interactores;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 import com.example.captureapp2_0.Modelo.Modelo.DB_lite.Sqlite_DB_manejo;
 import com.example.captureapp2_0.Interfaces.Graficas_intF.Graficas_interactores_interface;
@@ -11,6 +15,7 @@ import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_bluetooth;
 import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_wifi;
 import com.example.captureapp2_0.Modelo.Modelo.objetos.Objeto_bluetoo_grafica;
 import com.example.captureapp2_0.Modelo.Modelo.objetos.Objeto_wifi_grafica;
+import com.example.captureapp2_0.R;
 import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -23,6 +28,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Graficas_interactores_impL implements Graficas_interactores_interface {
     private onlistener_graficas onlistenerGraficas;
@@ -41,6 +47,7 @@ public class Graficas_interactores_impL implements Graficas_interactores_interfa
         trasnformacion=new fechas_trasnformacion();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void validacion_fechas(String fecha_ini,String fecha_fin,String dispositivo, String grafica) {
             this.fechaini_strin=fecha_ini;
@@ -52,8 +59,11 @@ public class Graficas_interactores_impL implements Graficas_interactores_interfa
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void validacion_campos() {
+        int [] arreglo_color_blue;
+        int [] arreglo_color_wifi;
         if (fechafin_string.isEmpty()&&fechaini_strin.isEmpty()&&
                 dispositivo.equals("Dispositivo")&&grafica.equals("Grafica")){
             onlistenerGraficas.enviar_error_fecha("Las fechas no fueron ingresadas");
@@ -78,34 +88,44 @@ public class Graficas_interactores_impL implements Graficas_interactores_interfa
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                Log.e("fechas","fecha ini:"+fecha_ini);
-                Log.e("fechas","fecha fin:"+fecha_fin);
 
                 if (!(fecha_fin>=fecha_ini)){
                     onlistenerGraficas.enviar_error_fecha("Rango de fechas no permitido");
                 }else{
+                    Recuperar_datos_wifi();
+                    Recuperar_datos_bluetooth();
+                    arreglo_color_blue=generar_colores(List_blue_grafi.size());
+                    arreglo_color_wifi=generar_colores(List_Wifi_grafi.size());
+                    //arreglo_color_wifi
                     if (dispositivo.equals("Wifi")&&grafica.equals("Barras")){
-                        Recuperar_datos_wifi();
-                        generar_grafica_wifi_barras(List_Wifi_grafi);
+                        generar_grafica_wifi_barras(List_Wifi_grafi,arreglo_color_wifi);
                     }
                     if (dispositivo.equals("Wifi")&&grafica.equals("Lineas")){
-                        Recuperar_datos_wifi();
-                        generar_grafica_wifi_Lineas(List_Wifi_grafi);
+                        generar_grafica_wifi_Lineas(List_Wifi_grafi,arreglo_color_wifi);
                     }
                     if (dispositivo.equals("Bluetooth")&&grafica.equals("Barras")){
-                       Recuperar_datos_bluetooth();
-                       generar_grafica_bluetooth_barras(List_blue_grafi);
+                       generar_grafica_bluetooth_barras(List_blue_grafi,arreglo_color_blue);
                     }
                     if (dispositivo.equals("Bluetooth")&&grafica.equals("Lineas")){
-                        Recuperar_datos_bluetooth();
-                        generar_grafica_bluetooth_Lineas(List_blue_grafi);
+                        generar_grafica_bluetooth_Lineas(List_blue_grafi,arreglo_color_blue);
                     }
                 }
             }
         }
     }
 
-    private void generar_grafica_wifi_Lineas(ArrayList<Objeto_wifi_grafica> list_wifi_grafi) {
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private int[] generar_colores(int size) {
+        int numero =0;
+        int [] arreglo_color=new int[size];
+        for (int x=0;x<size;x++){
+            arreglo_color[x]=ThreadLocalRandom.current().nextInt(-1000000, -1 + 1);
+        }
+        return arreglo_color;
+    }
+
+    private void generar_grafica_wifi_Lineas(ArrayList<Objeto_wifi_grafica> list_wifi_grafi, int[] arreglo_color_wifi) {
+        Log.e("tamaño lista","lista:wifi:"+list_wifi_grafi.size());
         ArrayList<LegendEntry> etiquetas = new ArrayList<LegendEntry>();
         ArrayList<ILineDataSet>dataSets=new ArrayList<>();
         int o=0;
@@ -118,11 +138,11 @@ public class Graficas_interactores_impL implements Graficas_interactores_interfa
                 f++;
             }
             LegendEntry entry=new LegendEntry();
-            entry.formColor=ColorTemplate.COLORFUL_COLORS[o];
+            entry.formColor=arreglo_color_wifi[o];
             entry.label=(datos_gra.getMacaddres());
             etiquetas.add(entry);
             LineDataSet set=new LineDataSet(Lineas,datos_gra.getMacaddres());
-            set.setColor(ColorTemplate.COLORFUL_COLORS[o]);
+            set.setColor(arreglo_color_wifi[o]);
             set.setFillAlpha(110);
             dataSets.add(set);
             o++;
@@ -132,7 +152,7 @@ public class Graficas_interactores_impL implements Graficas_interactores_interfa
         onlistenerGraficas.retornarr_grafica_lineal(data,etiquetas);
     }
 
-    private void generar_grafica_bluetooth_Lineas(ArrayList<Objeto_bluetoo_grafica> list_blue_grafi) {
+    private void generar_grafica_bluetooth_Lineas(ArrayList<Objeto_bluetoo_grafica> list_blue_grafi, int[] arreglo_color_blue) {
         ArrayList<LegendEntry> etiquetas = new ArrayList<LegendEntry>();
         ArrayList<ILineDataSet>dataSets=new ArrayList<>();
         int o=0;
@@ -144,11 +164,11 @@ public class Graficas_interactores_impL implements Graficas_interactores_interfa
                 f++;
             }
             LegendEntry entry=new LegendEntry();
-            entry.formColor=ColorTemplate.COLORFUL_COLORS[o];
+            entry.formColor=arreglo_color_blue[o];
             entry.label=(datos_gra.getBluetoothAddress());
             etiquetas.add(entry);
             LineDataSet set=new LineDataSet(Lineas,datos_gra.getBluetoothAddress());
-            set.setColor(ColorTemplate.COLORFUL_COLORS[o]);
+            set.setColor(arreglo_color_blue[o]);
             set.setFillAlpha(110);
             dataSets.add(set);
             o++;
@@ -224,15 +244,17 @@ public class Graficas_interactores_impL implements Graficas_interactores_interfa
 
     }
 
-    private void generar_grafica_wifi_barras(ArrayList<Objeto_wifi_grafica> list_blue_grafi) {
+    private void generar_grafica_wifi_barras(ArrayList<Objeto_wifi_grafica> list_wifi_grafi, int[] arreglo_color_wifi) {
+        Log.e("tamaño lista","lista:wifi:"+list_wifi_grafi.size());
+
         ArrayList<BarEntry> barras=new ArrayList<>();
         ArrayList<LegendEntry> etiquetas = new ArrayList<LegendEntry>();
-        float i= (float) 0.1;
+        float i= 1;
         int o=0;
-        for (Objeto_wifi_grafica datos_gra:list_blue_grafi) {
+        for (Objeto_wifi_grafica datos_gra:list_wifi_grafi) {
             barras.add(new BarEntry(i,datos_gra.lista_Rssi.size()));
             LegendEntry entry=new LegendEntry();
-            entry.formColor=ColorTemplate.COLORFUL_COLORS[o];
+            entry.formColor= arreglo_color_wifi[o];
             entry.label=(datos_gra.getMacaddres());
             etiquetas.add(entry);
             i++;
@@ -240,21 +262,21 @@ public class Graficas_interactores_impL implements Graficas_interactores_interfa
         }
         Log.e("tamaño lista","lista"+etiquetas.size());
         BarDataSet datos=new BarDataSet(barras,"Graficas de Bluetooth");
-        datos.setColors(ColorTemplate.COLORFUL_COLORS);
+        datos.setColors(arreglo_color_wifi);
         BarData data=new BarData(datos);
         data.setBarWidth(0.45f);
         onlistenerGraficas.retornar_grafica(data,etiquetas);
     }
 
-    private void generar_grafica_bluetooth_barras(ArrayList<Objeto_bluetoo_grafica> list_blue_grafi) {
+    private void generar_grafica_bluetooth_barras(ArrayList<Objeto_bluetoo_grafica> list_blue_grafi, int[] arreglo_color_blue) {
         ArrayList<BarEntry> barras=new ArrayList<>();
         ArrayList<LegendEntry> etiquetas = new ArrayList<LegendEntry>();
-        float i= (float) 0.1;
+        float i= 1;
         int o=0;
         for (Objeto_bluetoo_grafica datos_gra:list_blue_grafi) {
             barras.add(new BarEntry(i,datos_gra.lista_Rssi.size()));
             LegendEntry entry=new LegendEntry();
-            entry.formColor=ColorTemplate.COLORFUL_COLORS[o];
+            entry.formColor=arreglo_color_blue[0];
             entry.label=(datos_gra.getBluetoothAddress());
             etiquetas.add(entry);
             i++;
@@ -262,7 +284,7 @@ public class Graficas_interactores_impL implements Graficas_interactores_interfa
         }
         Log.e("tamaño lista","lista"+etiquetas.size());
         BarDataSet datos=new BarDataSet(barras,"Graficas de Bluetooth");
-        datos.setColors(ColorTemplate.COLORFUL_COLORS);
+        datos.setColors(arreglo_color_blue);
         BarData data=new BarData(datos);
         data.setBarWidth(0.45f);
         onlistenerGraficas.retornar_grafica(data,etiquetas);

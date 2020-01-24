@@ -114,7 +114,9 @@ public class fragmen_listas_bluetooth extends Fragment implements BeaconConsumer
                             obj_bluetooth.setFecha_cap(fecha);
                             obj_bluetooth.setHora(hora);
                             bluetooth_volley.setObj_bluetooth(obj_bluetooth);
-                            if (obje_servi!=null&&!(obje_servi.getDNS_ser().equals("")||obje_servi.getIp_servidor().equals(""))){
+                            if ((obje_servi!=null)&&(!obje_servi.getDNS_ser().equals("")||!obje_servi.getIp_servidor().equals(""))){
+                                Log.e("Nueva log","valor del servidor"+obje_servi.getDNS_ser());
+
                                 try {
                                     if(!(obje_servi.getDNS_ser().equals(""))){
                                         bluetooth_volley.SQLite_exitencia_registro(obje_servi.getDNS_ser(),obje_servi.getPuerto_crateDB(),

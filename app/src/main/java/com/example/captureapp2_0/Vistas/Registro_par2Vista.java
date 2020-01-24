@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -14,6 +15,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.captureapp2_0.Interfaces.Registro_par2_interF.Interf_Registro_par2_vista;
 import com.example.captureapp2_0.Interfaces.Registro_par2_interF.inter_Registro_par2_presentador;
@@ -31,6 +33,8 @@ public class Registro_par2Vista extends AppCompatActivity implements Interf_Regi
     private Obj_usuario obj_usuario;
     private inter_Registro_par2_presentador presentador;
     public Obj_Context obj_context;
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +85,24 @@ public class Registro_par2Vista extends AppCompatActivity implements Interf_Regi
                 municipi.getText().toString(),calle.getText().toString(),colonia.getText().toString(),
                 CP.getText().toString());
         obj_context=new Obj_Context(this);
+    }
+
+    @Override
+    public void progressbar_show() {
+        progressDialog= new ProgressDialog(this);
+        progressDialog.setMessage("Enviando datos al servidor");
+        //muestras el ProgressDialog
+        progressDialog.show();
+    }
+
+    @Override
+    public void progressbar_hiden(String mensaje) //en caso de existir error lo mostrara
+    {
+        Log.e("esconder","mensajeee");
+        progressDialog.dismiss();
+        if (!mensaje.isEmpty()){
+            Toast.makeText(Obj_Context.getContext(),mensaje,Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

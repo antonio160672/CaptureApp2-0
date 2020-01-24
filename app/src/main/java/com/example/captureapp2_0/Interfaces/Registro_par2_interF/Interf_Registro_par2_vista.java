@@ -8,5 +8,7 @@ public interface Interf_Registro_par2_vista {
     void showerrorcolonia(String error);
     void showerrorCP(String error);
     void navegador();
+    void progressbar_show();
+    void progressbar_hiden(String Error);
 
 }

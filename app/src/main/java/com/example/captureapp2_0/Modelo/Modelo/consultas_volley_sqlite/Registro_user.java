@@ -36,11 +36,13 @@ public class Registro_user {
         this.context = Obj_Context.getContext();
         this.obj_usuario = obj_usuario;
         this.listener=listener;
-        trasnformacion=new fechas_trasnformacion();
-        try {
-            fecha=trasnformacion.fecha_milisegundos(obj_usuario.getFecha_nac()+" 00:00:00","dd-MM-yyyy hh:mm:ss");
-        } catch (ParseException e) {
-            e.printStackTrace();
+        if (obj_usuario!=null){
+            trasnformacion=new fechas_trasnformacion();
+            try {
+                fecha=trasnformacion.fecha_milisegundos(obj_usuario.getFecha_nac()+" 00:00:00","dd-MM-yyyy hh:mm:ss");
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
 
     }
@@ -97,12 +99,47 @@ public class Registro_user {
         request.add(getRequest);//agrega a una pila para que sea enviada
     }
 
-    private void parseData(String response) throws JSONException {
+    public boolean validar_correo(final String correo,Response.Listener<String> onResponse){
+        request= Volley.newRequestQueue(context);//se instancia un nuevo reques con el contexto de la aplicación
+        final boolean[] bandera = new boolean[2];
+        String URL = "http://pruebas-upemor.ddns.net/android/Consulta_correo.php";//se crea una url
+        Log.e("valo","formato: "+URL);
+        StringRequest getRequest = new StringRequest(Request.Method.POST, URL,//se indica el metodo
+                //de comunicación tipo post, la url y la información
+                onResponse,
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if (null != error.networkResponse) {
+                            Log.e("error" + ": ", "Error Response code: " + error.networkResponse.statusCode);
+                            bandera[0]=false;
+                        }
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams() {//metodo para envío de datos
+                //mapea las instrucciones
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Correo",correo);
+                return params;
+            }
+
+        };
+        request.add(getRequest);//agrega a una pila para que sea enviada
+        return bandera[1];
+    }
+
+
+    private boolean parseData(String response) throws JSONException {
         JSONObject jsonObject = new JSONObject(response); ;
         if (jsonObject.optString("status").equals("true")){
-            saveInfo(response);
+            if (obj_usuario!=null){
+                saveInfo(response);
+            }
+            return true;
         }else {
             Log.e("contenido erro",""+jsonObject.getString("message"));
+            return false;
         }
     }
 
@@ -114,6 +151,8 @@ public class Registro_user {
                 for (int i = 0; i < dataArray.length(); i++) {
                     JSONObject dataobj = dataArray.getJSONObject(i);
                     obj_usuario.setId_usua(dataobj.getString("idUsuario"));
+                    obj_usuario.setContrasena(dataobj.getString("contrasena"));
+                    Log.e("contraseña","contra:"+obj_usuario.getContrasena());
                     salvar_preferencias();
                     Log.e("titlo",dataobj.getString("nombre"));
                     Log.e("titlo2",dataobj.getString("correo"));

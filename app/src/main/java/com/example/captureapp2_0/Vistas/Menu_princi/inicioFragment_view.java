@@ -1,17 +1,26 @@
 package com.example.captureapp2_0.Vistas.Menu_princi;
 
+import android.app.Dialog;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.captureapp2_0.Interfaces.Menu_princi_inter.inter_inicioFragment_presentador;
 import com.example.captureapp2_0.Interfaces.Menu_princi_inter.inter_inicioFragment_view;
+import com.example.captureapp2_0.Modelo.Modelo.Interactores.Servidores_interactores.Dialog_servidor.validar_Servi_datos;
+import com.example.captureapp2_0.Modelo.Modelo.funciones_generas.validar_preguntas;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Objeto_preguntas;
 import com.example.captureapp2_0.Presentadores.inicioFragmen_presen_impL;
 import com.example.captureapp2_0.R;
 import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Context;
@@ -23,6 +32,8 @@ public class inicioFragment_view extends Fragment implements inter_inicioFragmen
     private TextView CP_sql,Edad_sql,Municipio_sql;
     private View root;
     private inter_inicioFragment_presentador presentador;
+    private Dialog dialog;
+    private Objeto_preguntas preguntas;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +41,8 @@ public class inicioFragment_view extends Fragment implements inter_inicioFragmen
         activar_fuente();
         Obj_Context obj_context=new Obj_Context(getContext());
         presentador=new inicioFragmen_presen_impL(this);
+        presentador.validar_preguntas();
+
         return root;
     }
 
@@ -75,6 +88,34 @@ public class inicioFragment_view extends Fragment implements inter_inicioFragmen
     }//se cargan en los diferentes campos la fuente que usara
 
     @Override
+    public void mostrar_preguntas_recu() {
+        Button BTN_Registro_preguntas;
+        dialog=new Dialog(Obj_Context.getContext());
+        dialog.setContentView(R.layout.mini_preguntas);
+        BTN_Registro_preguntas=dialog.findViewById(R.id.dialog_but_pregun);
+        BTN_Registro_preguntas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                validar_preguntas validar_preguntas=new validar_preguntas(dialog);
+                validar_preguntas.iniciar_datos();
+                if (validar_preguntas.validarcamposblanco()){
+
+                    preguntas=validar_preguntas.getPreguntas();
+                    if (preguntas!=null){
+                        presentador.registrar_actualizar_pregun(preguntas);
+                        dialog.dismiss();
+                    }
+                }else{
+                    Log.e("datos22222","ni madress vato");
+                }
+            }
+        });
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+    }
+
+
+    @Override
     public void cargar_Nombre_sql(String dato) {
         Nombre_sql.setText(dato);
     }
@@ -112,5 +153,10 @@ public class inicioFragment_view extends Fragment implements inter_inicioFragmen
     @Override
     public void cargar_edad_sql(String dato) {
         Edad_sql.setText(dato);
+    }
+
+    @Override
+    public void mensaje_preguntas(String mensaje) {
+        Toast.makeText(Obj_Context.getContext(),mensaje,Toast.LENGTH_LONG).show();
     }
 }

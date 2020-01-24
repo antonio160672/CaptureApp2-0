@@ -9,4 +9,6 @@ public interface inter_inicioFragment_view {
     void cargar_CP_sql(String dato);
     void cargar_Municipio_sql(String dato);
     void cargar_edad_sql(String dato);
+    void mostrar_preguntas_recu();
+    void mensaje_preguntas(String mensaje);
 }

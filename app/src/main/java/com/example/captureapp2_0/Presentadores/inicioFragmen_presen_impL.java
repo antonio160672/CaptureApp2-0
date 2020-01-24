@@ -1,9 +1,12 @@
 package com.example.captureapp2_0.Presentadores;
 
+import android.util.Log;
+
 import com.example.captureapp2_0.Modelo.Modelo.Interactores.inicio_Fragmen_inter_impL;
 import com.example.captureapp2_0.Interfaces.Menu_princi_inter.inter_inicioFragmen_interactor;
 import com.example.captureapp2_0.Interfaces.Menu_princi_inter.inter_inicioFragment_presentador;
 import com.example.captureapp2_0.Interfaces.Menu_princi_inter.oninter_inicioFragment_Finishlicener;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Objeto_preguntas;
 import com.example.captureapp2_0.Vistas.Menu_princi.inicioFragment_view;
 import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Estados;
 import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_usuario;
@@ -19,6 +22,12 @@ public class inicioFragmen_presen_impL implements inter_inicioFragment_presentad
     }
 
     @Override
+    public void mensaje(String mensaje) {
+        if (inicioFragment_view!=null)
+            inicioFragment_view.mensaje_preguntas(mensaje);
+    }
+
+    @Override
     public void Llamar_consultaSQLite() {
         if (inicioFragment_view!=null){
             Obj_usuario obj_usuario=new Obj_usuario();
@@ -26,6 +35,27 @@ public class inicioFragmen_presen_impL implements inter_inicioFragment_presentad
             interactor.cargar_datos(obj_usuario,obj_estados,this);
         }
 
+    }
+
+    @Override
+    public void validar_preguntas() {
+        if (inicioFragment_view!=null){
+            interactor.consultar_preguntas_recu();
+        }
+    }
+
+    @Override
+    public void mostrar_preguntas() {
+        if(inicioFragment_view!=null){
+            inicioFragment_view.mostrar_preguntas_recu();
+        }
+    }
+
+    @Override
+    public void registrar_actualizar_pregun(Objeto_preguntas preguntas) {
+        if (inicioFragment_view!=null){
+            interactor.registrar_actualizar_pregun(preguntas);
+        }
     }
 
     @Override

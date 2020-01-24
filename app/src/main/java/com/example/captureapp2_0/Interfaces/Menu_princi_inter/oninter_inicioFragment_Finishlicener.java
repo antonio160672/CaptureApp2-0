@@ -9,4 +9,6 @@ public interface oninter_inicioFragment_Finishlicener {
     void cargar_edad_show(String dato);
     void cargar_CP_show(String dato);
     void cargar_Municipio_show(String dato);
+    void mostrar_preguntas();
+    void mensaje(String mensaje);
 }

@@ -17,5 +17,8 @@ public interface view_captacion_fragmen_intfa {
     void activar_servicios();
     void cargar_datos_servi(Obje_servi obje_servi);
     void Mensaje_datos_capt_sin_servidor(ArrayList<Obj_bluetooth> Array_bluet, ArrayList<Obj_wifi> Array_wifi);
+    void progressbar_show();
+    void progressbar_hiden(String Error);
+
 
 }

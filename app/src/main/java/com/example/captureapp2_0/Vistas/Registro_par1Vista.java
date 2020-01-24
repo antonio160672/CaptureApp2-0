@@ -2,15 +2,19 @@ package com.example.captureapp2_0.Vistas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.captureapp2_0.Interfaces.Registro_par1_interf.inter_Registro_par1_presentador;
 import com.example.captureapp2_0.Interfaces.Registro_par1_interf.inter_Registro_par1_vista;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Context;
 import com.example.captureapp2_0.Presentadores.Registro_par1_presen_impL;
 import com.example.captureapp2_0.R;
 import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_usuario;
@@ -20,12 +24,15 @@ public class Registro_par1Vista extends AppCompatActivity implements inter_Regis
     private EditText Nombre,Apellido_parte,Apellido_mater,Correo,Contra,Conf_contra;
     private TextView titulo;
     private inter_Registro_par1_presentador presentador;
+    private ProgressDialog progressDialog;
+    Obj_Context obj_context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registro_par1);
         getSupportActionBar().hide();//oculta la barra
+        obj_context=new Obj_Context(getBaseContext());
 
         Nombre= findViewById(R.id.NombreUsu_regi);//extrae el nombre del usuario
         Apellido_parte= findViewById(R.id.Apellido_pa);//extrae dato del apellido paterno
@@ -48,6 +55,25 @@ public class Registro_par1Vista extends AppCompatActivity implements inter_Regis
         presentador.validar_Registro_interacto(Nombre.getText().toString(),Apellido_parte.getText().toString(),
                 Apellido_mater.getText().toString(),Correo.getText().toString(),Contra.getText().toString(),
                 Conf_contra.getText().toString());
+    }
+
+    @Override
+    public void progressbar_show() {
+        progressDialog= new ProgressDialog(this);
+        progressDialog.setMessage("Validando datos");
+        //muestras el ProgressDialog
+        progressDialog.show();
+        Log.e("entroo","mensajeee");
+    }
+
+    @Override
+    public void progressbar_hiden(String mensaje) //en caso de existir error lo mostrara
+    {
+        Log.e("esconder","mensajeee");
+        progressDialog.dismiss();
+        if (!mensaje.isEmpty()){
+            Toast.makeText(Obj_Context.getContext(),mensaje,Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -84,6 +110,7 @@ public class Registro_par1Vista extends AppCompatActivity implements inter_Regis
         r.putExtra("usuario",obj_usuario);
         startActivity(r);
         overridePendingTransition(R.anim.left_in, R.anim.left_out);
+        finish();
 
     }
 }

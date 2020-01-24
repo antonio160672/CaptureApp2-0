@@ -15,7 +15,7 @@ public class Validaciones_campos {
         Pattern pattern = Pattern.compile("^[^ ]+( [^ ]+)*$");//expresión regular para espacios en
         Matcher matcher = pattern.matcher(s);//blanco
         if (matcher.find() == true) {//verifica si existen espacios en blanco al inicio o final
-            pattern = Pattern.compile("^[a-zA-Z\\u00F1\\u00D1\\s]+$");//solo letras
+            pattern = Pattern.compile("^[a-zA-ZÀ-ÖØ-öø-ÿ\\u00F1\\u00D1\\s]+$");//solo letras
             matcher = pattern.matcher(s);
             if (matcher.find() == true) {//comprueba si hay algún número o carácter extraño
                 return null;

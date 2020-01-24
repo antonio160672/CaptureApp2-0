@@ -1,5 +1,6 @@
 package com.example.captureapp2_0.Modelo.Modelo.Interactores;
 
+import android.os.Handler;
 import android.util.Log;
 
 import com.example.captureapp2_0.Interfaces.Capta_segnl_interfaces.Interactor_captuSig;
@@ -61,39 +62,48 @@ public class captura_sign_fragment_impL implements Interactor_captuSig{
     }
 
     @Override
-    public void envio_datos_sinconex(ArrayList<Obj_bluetooth> Array_bluet, ArrayList<Obj_wifi> Array_wifi, Obje_servi obje_servi) {
-        Registro_bluetooth_volley registro_bluetooth_volley=new Registro_bluetooth_volley();
-        Registro_wifi_volley registroWifiVolley=new Registro_wifi_volley();
+    public void envio_datos_sinconex(final ArrayList<Obj_bluetooth> Array_bluet, final ArrayList<Obj_wifi> Array_wifi, final Obje_servi obje_servi) {
+        final Obj_bluetooth bluetooth=Array_bluet.get(0);
+        final Obj_wifi wifi =Array_wifi.get(0);
+        new Handler().postDelayed(new Runnable(){//metodo para que se tenga un tiempo de
+            //respuesta más largo
+            @Override
+            public void run() {
+                Registro_bluetooth_volley registro_bluetooth_volley=new Registro_bluetooth_volley();
+                Registro_wifi_volley registroWifiVolley=new Registro_wifi_volley();
+                for (Obj_bluetooth objeto_blue:Array_bluet) {
+                    registro_bluetooth_volley.setObj_bluetooth(objeto_blue);
+                    try {
+                        if(!(obje_servi.getDNS_ser().equals(""))){
+                            registro_bluetooth_volley.SQLite_exitencia_registro(obje_servi.getDNS_ser(),obje_servi.getPuerto_crateDB(),
+                                    obje_servi.getPuerto_orion());
+                        }else{
+                            registro_bluetooth_volley.SQLite_exitencia_registro(obje_servi.getIp_servidor(),obje_servi.getPuerto_crateDB(),
+                                    obje_servi.getPuerto_orion());
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                for (Obj_wifi objeto_wifi:Array_wifi) {
+                    registroWifiVolley.setObj_wifi(objeto_wifi);
+                    try {
+                        if(!(obje_servi.getDNS_ser().equals(""))){
+                            registroWifiVolley.SQLite_exitencia_registro(obje_servi.getDNS_ser(),obje_servi.getPuerto_crateDB(),
+                                    obje_servi.getPuerto_orion());
+                        }else{
+                            registroWifiVolley.SQLite_exitencia_registro(obje_servi.getIp_servidor(),obje_servi.getPuerto_crateDB(),
+                                    obje_servi.getPuerto_orion());
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                listener.dismi_progress("");
+            }
+        },5000);
+        gestion_datos_sin_conexion_volley_sql sql=new gestion_datos_sin_conexion_volley_sql(bluetooth,wifi,this);
 
-        for (Obj_bluetooth objeto_blue:Array_bluet) {
-            registro_bluetooth_volley.setObj_bluetooth(objeto_blue);
-            try {
-                if(!(obje_servi.getDNS_ser().equals(""))){
-                    registro_bluetooth_volley.SQLite_exitencia_registro(obje_servi.getDNS_ser(),obje_servi.getPuerto_crateDB(),
-                            obje_servi.getPuerto_orion());
-                }else{
-                    registro_bluetooth_volley.SQLite_exitencia_registro(obje_servi.getIp_servidor(),obje_servi.getPuerto_crateDB(),
-                            obje_servi.getPuerto_orion());
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        for (Obj_wifi objeto_wifi:Array_wifi) {
-            registroWifiVolley.setObj_wifi(objeto_wifi);
-            try {
-                if(!(obje_servi.getDNS_ser().equals(""))){
-                    registroWifiVolley.SQLite_exitencia_registro(obje_servi.getDNS_ser(),obje_servi.getPuerto_crateDB(),
-                            obje_servi.getPuerto_orion());
-                }else{
-                    registroWifiVolley.SQLite_exitencia_registro(obje_servi.getIp_servidor(),obje_servi.getPuerto_crateDB(),
-                            obje_servi.getPuerto_orion());
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        gestion_datos_sin_conexion_volley_sql sql=new gestion_datos_sin_conexion_volley_sql(Array_bluet.get(0),Array_wifi.get(0),this);
         sql.limpieza_tablas();
     }
 
@@ -101,7 +111,6 @@ public class captura_sign_fragment_impL implements Interactor_captuSig{
     public void retonar_datos_sin_conex(ArrayList<Obj_bluetooth> Array_bluet, ArrayList<Obj_wifi> Array_wifi){
         listener.retornar_datos_sin_conx(Array_bluet,Array_wifi);
     }
-
 
 
 }

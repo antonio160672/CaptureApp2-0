@@ -9,4 +9,6 @@ public interface inter_Registro_par1_vista {
     void showerrorCorreo(String error);
     void showerrorContra(String error);
     void Siguiente_venta(Obj_usuario obj_usuario);
+    void progressbar_show();
+    void progressbar_hiden(String Error);
 }

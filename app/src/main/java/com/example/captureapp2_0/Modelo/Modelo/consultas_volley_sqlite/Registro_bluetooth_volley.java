@@ -42,15 +42,12 @@ public class Registro_bluetooth_volley {
             obj_bluetooth.sqLite= new Sqlite_DB_manejo(Obj_Context.getContext());
             obj_bluetooth.cursor=consulta_entidad();
             if(obj_bluetooth.cursor.getCount()>0){
-                Log.e("si","existe el dato");
                 URL= "http://"+direccion+":"+puerto_Orion+"/v2/entities/"+obj_bluetooth.getId_dip()+"/attrs";
                 Log.e("URL de actualizacion",":"+URL);
                 Request_Method=1;//metodo pach para actualizar
                 tipo_json=1;
             }else
             {
-                Log.e("no","existe el dato");
-                Log.e("pero","ahora si existe");
                 URL= "http://"+direccion+":"+puerto_Orion+"/v2/entities/";
                 Request_Method=1;//metodo post para registrar
                 tipo_json=0;

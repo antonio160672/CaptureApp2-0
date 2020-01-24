@@ -19,9 +19,18 @@ public class Registro_par2_presen_impL implements inter_Registro_par2_presentado
     @Override
     public void validar_Registro_interacto(Obj_usuario obj_usuario, String fecha, String estado,
                                            String municipio, String calle, String colonia, String CP) {
+        if (registro_par2Vista!=null)
+        registro_par2Vista.progressbar_show();
         interRegistro_par2_interactor.validar_registrop2_intera(obj_usuario,fecha,estado,municipio,
                                         calle,colonia,CP,this);
     }
+    @Override
+    public void dismi_progress(String mensajen) {
+        if (registro_par2Vista!=null){
+            registro_par2Vista.progressbar_hiden(mensajen);
+        }
+    }
+
 
     @Override
     public void fecha_seterror(String error) {

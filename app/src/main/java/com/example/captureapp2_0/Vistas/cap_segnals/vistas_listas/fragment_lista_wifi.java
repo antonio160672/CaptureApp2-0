@@ -144,7 +144,7 @@ public class fragment_lista_wifi extends Fragment {
                     obj_wifi.setId_tip_dispo("1");
                     Lista_wifi.add(obj_wifi);
                     registro_wifi_volley.setObj_wifi(obj_wifi);
-                    if (obje_servi!=null&&!(obje_servi.getDNS_ser().equals("")||obje_servi.getIp_servidor().equals(""))){
+                    if (obje_servi!=null&&(!obje_servi.getDNS_ser().equals("")||!obje_servi.getIp_servidor().equals(""))){
                         try {
                             if(!(obje_servi.getDNS_ser().equals(""))){
                                 registro_wifi_volley.SQLite_exitencia_registro(obje_servi.getDNS_ser(),obje_servi.getPuerto_crateDB(),

@@ -47,4 +47,12 @@
         <item>Barras</item>
         <item>Lineas</item>
     </string-array>
+
+    <string-array name="Preguntas">
+        <item>Preguntas de seguridad</item>
+        <item>¿Cuál es el nombre de tu mascota?</item>
+        <item>¿Cuál fue tú primer empleo?</item>
+        <item>¿Cuál es tú comida favorita?</item>
+        <item>¿Cuál es el nombre de tú primer profesor?</item>
+    </string-array>
 </resources>

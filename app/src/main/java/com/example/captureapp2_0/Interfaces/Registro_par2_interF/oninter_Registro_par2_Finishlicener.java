@@ -8,4 +8,6 @@ public interface oninter_Registro_par2_Finishlicener {
     void colonia_setrror(String error);
     void CP_seterror(String error);
     void exito_valida();
+    void dismi_progress(String mensajen);
+
 }

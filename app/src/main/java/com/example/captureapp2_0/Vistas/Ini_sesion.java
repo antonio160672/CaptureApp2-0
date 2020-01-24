@@ -75,6 +75,7 @@ public class Ini_sesion extends AppCompatActivity implements Ini_sesion_vista {
         Intent r = new Intent(this, Registro_par1Vista.class);
         startActivity(r);
         overridePendingTransition(R.anim.left_in,R.anim.left_out);
+        finish();
     }
 
     public void Ini_sesion(View view) //onclick para validar el inicio de sesión

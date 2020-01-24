@@ -145,7 +145,7 @@ public class servidor_view_Fragment extends Fragment implements servidores_view_
 
     @Override
     public void agregar_servi() {
-        dialog.setContentView(R.layout.mini);
+        dialog.setContentView(R.layout.mini_servidores);
         Dia_btnRegistar=dialog.findViewById(R.id.Dia_btnRegistar);
         Dia_btnRegistar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,9 +169,12 @@ public class servidor_view_Fragment extends Fragment implements servidores_view_
     @Override
     public void Editar_servi(final int dato,Obje_servi obje_servi) {
         final Obje_servi[] nuevoobje_servi = {obje_servi};
-        TextView Dia_ip_servidor,Dia_DNS_ser,Dia_Puerto_orion,Dia_Puerto_crateDB;
-        dialog.setContentView(R.layout.mini);
+        TextView Dia_ip_servidor,Dia_DNS_ser,Dia_Puerto_orion,Dia_Puerto_crateDB,titulo_servi;
+        dialog.setContentView(R.layout.mini_servidores);
+        titulo_servi=dialog.findViewById(R.id.titulo_servi);
         Dia_btnRegistar=dialog.findViewById(R.id.Dia_btnRegistar);
+        titulo_servi.setText("Editar servidor");
+        Dia_btnRegistar.setText("Editar");
         Dia_ip_servidor=dialog.findViewById(R.id.ip_servidor);
         Dia_DNS_ser=dialog.findViewById(R.id.DNS_ser);
         Dia_Puerto_orion=dialog.findViewById(R.id.Puerto_orion);

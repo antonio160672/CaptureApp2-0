@@ -18,6 +18,7 @@ public class validacampos_individuales {
         }
 
     }
+
     public boolean validar_dns(String s, TextView dia_dns){
         Pattern pattern = Pattern.compile("^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\\-]*[A-Za-z0-9])$");
         Matcher matcher = pattern.matcher(s);
@@ -29,6 +30,7 @@ public class validacampos_individuales {
             return false;
         }
     }
+
     public boolean validar_puerto(String s,TextView puerto){
         int puerto_num=Integer.parseInt(s);
         if (puerto_num>0&&puerto_num<=65536){
@@ -38,6 +40,23 @@ public class validacampos_individuales {
             return false;
         }
 
+    }
+
+    public String Val_Nombres(String s){//funcion que valida que solo existan
+        //letras en el campo
+        Pattern pattern = Pattern.compile("^[^ ]+( [^ ]+)*$");//expresión regular para espacios en
+        Matcher matcher = pattern.matcher(s);//blanco
+        if (matcher.find() == true) {//verifica si existen espacios en blanco al inicio o final
+            pattern = Pattern.compile("^[a-zA-ZÀ-ÖØ-öø-ÿ\\u00F1\\u00D1\\s]+$");//solo letras
+            matcher = pattern.matcher(s);
+            if (matcher.find() == true) {//comprueba si hay algún número o carácter extraño
+                return null;
+            } else {
+                return "Solo se permiten letras";
+            }
+        } else {
+            return "No se permiten espacial inicio";
+        }
     }
 
 }

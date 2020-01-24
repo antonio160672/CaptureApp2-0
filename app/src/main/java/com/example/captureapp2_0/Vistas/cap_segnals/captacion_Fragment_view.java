@@ -3,10 +3,12 @@ package com.example.captureapp2_0.Vistas.cap_segnals;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -52,13 +54,15 @@ public class captacion_Fragment_view extends Fragment  implements View.OnClickLi
     private Obje_servi obje_servi;
     private presentador_captureFragment_interface presetador;//presentador esta en las interfaces
 
+    private ProgressDialog progressDialog;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         //linea 49 extrae la vista para trabajar con ella
         root = inflater.inflate(R.layout.fragment_captacion_segnl, container, false);
-
         obj_context=new Obj_Context(getContext());//carga el objeto context con este contexto
+
         cargar_datos();//esto inicia todas las variables carga las referencias
         presetador =new capturaSeg_fragment_presenta_impL(this);//instancia al presentador
         presetador.verificar_servicios();//verifica que esten activo los servicios esto se hace
@@ -101,6 +105,24 @@ public class captacion_Fragment_view extends Fragment  implements View.OnClickLi
     }
 
     @Override
+    public void progressbar_show() {
+        progressDialog= new ProgressDialog(Obj_Context.getContext());
+        progressDialog.setMessage("Enviando datos al servidor");
+        //muestras el ProgressDialog
+        progressDialog.show();
+        Log.e("startAsyncTask", "start");
+    }
+
+    @Override
+    public void progressbar_hiden(String mensaje) //en caso de existir error lo mostrara
+    {
+        progressDialog.dismiss();
+        if (!mensaje.isEmpty()){
+            Toast.makeText(Obj_Context.getContext(),mensaje,Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
     public void verificar_datos_sin_conex() {
         presetador.verificar_datos_sin_conex();
     }
@@ -115,6 +137,7 @@ public class captacion_Fragment_view extends Fragment  implements View.OnClickLi
         builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {
                 if (presetador.verificar_conexion_servi(obje_servi.getDNS_ser(),obje_servi.getIp_servidor())){
+                    dialogo1.dismiss();
                     presetador.enviar_datos_sinconex(Array_bluet,Array_wifi,obje_servi);
                 }else{
                     error_en_servidors("No es posible conectar con el servidor de Fiware");
@@ -207,11 +230,6 @@ public class captacion_Fragment_view extends Fragment  implements View.OnClickLi
         Toast.makeText(Obj_Context.getContext(),mensaje,Toast.LENGTH_LONG).show();
         actionButton.setVisibility(root.GONE);
     }
-/*
-    @Override
-    public void iniciar_captura() {
-        presetador.escaneo_wifi_bluethoo();
-    }*/
 
     @Override
     public void viewpager_sin_conexion_internet() {

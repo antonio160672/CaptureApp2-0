@@ -11,9 +11,43 @@ public class Obj_usuario implements Serializable {
     public Cursor cursor=null;
 
     String id_usua,nombre,apellido_pater,apellido_mater,correo,
-            contrasena,calle,colonia,cp,fecha_nac,idEstado,municipio;
+            contrasena,calle,colonia,cp,fecha_nac,idEstado,municipio,respuesta1,respuesta2;
+    int pregunta1, pregunta2;
 
     public Obj_usuario() {
+    }
+
+
+    public String getRespuesta1() {
+        return respuesta1;
+    }
+
+    public void setRespuesta1(String respuesta1) {
+        this.respuesta1 = respuesta1;
+    }
+
+    public String getRespuesta2() {
+        return respuesta2;
+    }
+
+    public void setRespuesta2(String respuesta2) {
+        this.respuesta2 = respuesta2;
+    }
+
+    public int getPregunta1() {
+        return pregunta1;
+    }
+
+    public void setPregunta1(int pregunta1) {
+        this.pregunta1 = pregunta1;
+    }
+
+    public int getPregunta2() {
+        return pregunta2;
+    }
+
+    public void setPregunta2(int pregunta2) {
+        this.pregunta2 = pregunta2;
     }
 
     public String getMunicipio() {

@@ -8,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -72,7 +73,18 @@ public class capturaSeg_fragment_presenta_impL implements presentador_captureFra
 
     @Override
     public void enviar_datos_sinconex(ArrayList<Obj_bluetooth> Array_bluet, ArrayList<Obj_wifi> Array_wifi, Obje_servi obje_servi) {
-        interactor_captuSig.envio_datos_sinconex(Array_bluet,Array_wifi,obje_servi);
+        if (fragmentView!=null){
+            fragmentView.progressbar_show();
+            interactor_captuSig.envio_datos_sinconex(Array_bluet,Array_wifi,obje_servi);
+        }
+
+    }
+
+    @Override
+    public void dismi_progress(String mensajen) {
+        if (fragmentView!=null){
+            fragmentView.progressbar_hiden(mensajen);
+        }
     }
 
     @Override

@@ -20,11 +20,18 @@ public class Registro_par1_presen_impL implements inter_Registro_par1_presentado
     @Override
     public void validar_Registro_interacto(String Nombre, String Apellido_parte, String Apellido_mater,
                                  String Correo, String Contra, String Conf_contra) {
+        registro_par1Vista.progressbar_show();
         if (registro_par1Vista != null) {
             interRegistro_par1_interactor.validarRegistropar1(Nombre,Apellido_parte,Apellido_mater,
                     Correo,Contra,Conf_contra,this);
         }
+    }
 
+    @Override
+    public void dismi_progress(String mensajen) {
+        if (registro_par1Vista!=null){
+            registro_par1Vista.progressbar_hiden(mensajen);
+        }
     }
 
     @Override

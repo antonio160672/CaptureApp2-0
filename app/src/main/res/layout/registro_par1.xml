@@ -8,7 +8,7 @@
     android:background="@drawable/fondo1"
     android:orientation="vertical"
     android:visibility="visible"
-    tools:context=".Vistas.Registro_par1Vista">
+    tools:context=".Vistas.Registro_vistas.Registro_par1Vista">
     <LinearLayout
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"

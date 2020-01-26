@@ -87,6 +87,7 @@ public class servidor_view_Fragment extends Fragment implements servidores_view_
         activar_fuente();
 
     }
+
     @SuppressLint("RestrictedApi")
     @Override
     public void onClick(View view) {
@@ -145,6 +146,7 @@ public class servidor_view_Fragment extends Fragment implements servidores_view_
 
     @Override
     public void agregar_servi() {
+        dialog=new Dialog(Obj_Context.getContext());
         dialog.setContentView(R.layout.mini_servidores);
         Dia_btnRegistar=dialog.findViewById(R.id.Dia_btnRegistar);
         Dia_btnRegistar.setOnClickListener(new View.OnClickListener() {

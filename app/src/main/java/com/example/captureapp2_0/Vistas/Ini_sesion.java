@@ -13,6 +13,7 @@ import com.example.captureapp2_0.Interfaces.Ini_sesion_interF.Ini_sesion_present
 import com.example.captureapp2_0.Interfaces.Ini_sesion_interF.Ini_sesion_vista;
 import com.example.captureapp2_0.Presentadores.Ini_sesion_presen_impL;
 import com.example.captureapp2_0.R;
+import com.example.captureapp2_0.Vistas.Registro_vistas.Registro_par1Vista;
 import com.example.captureapp2_0.menu_principal;
 import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Context;
 

@@ -91,6 +91,7 @@ public class inicioFragment_view extends Fragment implements inter_inicioFragmen
     public void mostrar_preguntas_recu() {
         Button BTN_Registro_preguntas;
         dialog=new Dialog(Obj_Context.getContext());
+        dialog.setCancelable(false);
         dialog.setContentView(R.layout.mini_preguntas);
         BTN_Registro_preguntas=dialog.findViewById(R.id.dialog_but_pregun);
         BTN_Registro_preguntas.setOnClickListener(new View.OnClickListener() {

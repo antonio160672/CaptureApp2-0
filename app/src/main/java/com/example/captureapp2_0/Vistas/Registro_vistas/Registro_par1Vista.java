@@ -1,4 +1,4 @@
-package com.example.captureapp2_0.Vistas;
+package com.example.captureapp2_0.Vistas.Registro_vistas;
 
 import androidx.appcompat.app.AppCompatActivity;
 

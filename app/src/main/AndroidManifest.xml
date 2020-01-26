@@ -25,8 +25,8 @@
             android:name=".menu_principal"
             android:label="@string/title_activity_menu_principal"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Vistas.Registro_par2Vista" />
-        <activity android:name=".Vistas.Registro_par1Vista" />
+        <activity android:name=".Vistas.Registro_vistas.Registro_par2Vista" />
+        <activity android:name=".Vistas.Registro_vistas.Registro_par1Vista" />
         <activity android:name=".Vistas.Ini_sesion">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

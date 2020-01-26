@@ -31,9 +31,9 @@
 
     <fragment
         android:id="@+id/nav_share"
-        android:name="com.example.captureapp2_0.Vistas.ui_vistas.share.ShareFragment"
+        android:name="com.example.captureapp2_0.Vistas.Usurio_datos.usuario_datos_vistas"
         android:label="@string/menu_share"
-        tools:layout="@layout/fragment_share" />
+        tools:layout="@layout/fragment_edicion_usuario" />
 
     <fragment
         android:id="@+id/nav_send"

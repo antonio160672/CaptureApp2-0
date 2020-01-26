@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo1">
+    <LinearLayout
+        android:id="@+id/Contenedor_principal"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/Cambiar_usuario"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/botones"
+                android:text="Editar datos del usuario"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:id="@+id/Cambiar_direccion"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/botones"
+                android:text="Editar datos de la dirección"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/Contra_Nue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/contra"
+                android:ems="10"
+                android:hint="Nueva contraseña"
+                app:met_floatingLabelText="Contraseña"
+                android:inputType="textPassword"
+                app:met_baseColor="#FFFFFF"
+                app:met_errorColor="#F44336"
+                app:met_primaryColor="#92d0d0"
+                app:met_textColorHint="#FFFFFF"
+                app:met_underlineColor="#92d0d0" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/Contra_conf_Nuev"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/contra"
+                android:ems="10"
+                android:hint="Confirmar nueva contraseña"
+                android:inputType="textPassword"
+                app:met_baseColor="#FFFFFF"
+                app:met_errorColor="#F44336"
+                app:met_primaryColor="#92d0d0"
+                app:met_textColorHint="#FFFFFF"
+                app:met_underlineColor="#92d0d0"/>
+            <Button
+                android:id="@+id/btneditar"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/botones"
+                android:text="Editar contraseña"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

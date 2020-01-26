@@ -276,7 +276,7 @@ public class Graficas_interactores_impL implements Graficas_interactores_interfa
         for (Objeto_bluetoo_grafica datos_gra:list_blue_grafi) {
             barras.add(new BarEntry(i,datos_gra.lista_Rssi.size()));
             LegendEntry entry=new LegendEntry();
-            entry.formColor=arreglo_color_blue[0];
+            entry.formColor=arreglo_color_blue[o];
             entry.label=(datos_gra.getBluetoothAddress());
             etiquetas.add(entry);
             i++;

@@ -7,72 +7,81 @@
     android:background="@drawable/fondo1">
     <LinearLayout
         android:id="@+id/Contenedor_principal"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/Cambiar_usuario"
-                android:layout_marginTop="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/botones"
-                android:text="Editar datos del usuario"
-                android:textColor="#ffffff" />
+        android:layout_height="match_parent"
+        android:gravity="center">
 
-            <Button
-                android:id="@+id/Cambiar_direccion"
-                android:layout_marginTop="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/botones"
-                android:text="Editar datos de la dirección"
-                android:textColor="#ffffff" />
-        </LinearLayout>
         <LinearLayout
-            android:layout_marginTop="15dp"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/Contra_Nue"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/contra"
-                android:ems="10"
-                android:hint="Nueva contraseña"
-                app:met_floatingLabelText="Contraseña"
-                android:inputType="textPassword"
-                app:met_baseColor="#FFFFFF"
-                app:met_errorColor="#F44336"
-                app:met_primaryColor="#92d0d0"
-                app:met_textColorHint="#FFFFFF"
-                app:met_underlineColor="#92d0d0" />
+            android:layout_width="311dp"
+            android:layout_height="378dp"
+            android:layout_marginTop="-30dp"
+            android:background="#43FFFFFF"
+            android:orientation="vertical">
 
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/Contra_conf_Nuev"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="400dp"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/contra"
-                android:ems="10"
-                android:hint="Confirmar nueva contraseña"
-                android:inputType="textPassword"
-                app:met_baseColor="#FFFFFF"
-                app:met_errorColor="#F44336"
-                app:met_primaryColor="#92d0d0"
-                app:met_textColorHint="#FFFFFF"
-                app:met_underlineColor="#92d0d0"/>
-            <Button
-                android:id="@+id/btneditar"
                 android:layout_marginTop="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/botones"
-                android:text="Editar contraseña"
-                android:textColor="#ffffff" />
+                android:orientation="vertical">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/Contra_Nue"
+                    android:layout_width="310dp"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/contra"
+                    android:ems="10"
+                    android:hint="Nueva contraseña"
+                    android:inputType="textPassword"
+                    app:met_baseColor="#000000"
+                    app:met_errorColor="#F44336"
+                    app:met_floatingLabelText="Contraseña"
+                    app:met_primaryColor="#000000"
+                    app:met_textColorHint="#000000"
+                    app:met_underlineColor="#000000" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/Contra_conf_Nuev"
+                    android:layout_width="310dp"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/contra"
+                    android:ems="10"
+                    android:hint="Confirmar nueva contraseña"
+                    android:inputType="textPassword"
+                    app:met_baseColor="#000000"
+                    app:met_errorColor="#F44336"
+                    app:met_floatingLabelText="Contraseña"
+                    app:met_primaryColor="#000000"
+                    app:met_textColorHint="#000000"
+                    app:met_underlineColor="#000000" />
+
+                <Button
+                    android:id="@+id/btneditar"
+                    android:layout_width="310dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/botones"
+                    android:text="Editar contraseña"
+                    android:textColor="#ffffff" />
+
+                <Button
+                    android:id="@+id/Cambiar_usuario"
+                    android:layout_width="310dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/botones"
+                    android:text="Editar datos del usuario"
+                    android:textColor="#ffffff" />
+
+                <Button
+                    android:id="@+id/Cambiar_direccion"
+                    android:layout_width="310dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/botones"
+                    android:text="Editar datos de la dirección"
+                    android:textColor="#ffffff" />
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 

@@ -7,6 +7,7 @@ import com.example.captureapp2_0.Interfaces.Usuario_datos_interfaces.onlistener_
 import com.example.captureapp2_0.Interfaces.Usuario_datos_interfaces.usuario_datos_int_interF;
 import com.example.captureapp2_0.Interfaces.Usuario_datos_interfaces.usuario_datos_presnT_interF;
 import com.example.captureapp2_0.Modelo.Modelo.Interactores.usuario_datos_interactor_impL;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_usuario;
 import com.example.captureapp2_0.Vistas.Usurio_datos.usuario_datos_vistas;
 
 public class usuario_datos_preseN_impL implements usuario_datos_presnT_interF, onlistener_usuario {
@@ -16,6 +17,16 @@ public class usuario_datos_preseN_impL implements usuario_datos_presnT_interF, o
     public usuario_datos_preseN_impL(usuario_datos_vistas usuario_datos_vistas) {
         this.usuario_datos_vistas = usuario_datos_vistas;
         intInterF=new usuario_datos_interactor_impL(this);
+    }
+
+    @Override
+    public void recuperar_datos_usuario() {
+        intInterF.recuperar_datos_usuario();
+    }
+
+    @Override
+    public void enviar_datos_usuario(Obj_usuario usuario) {
+        usuario_datos_vistas.cargar_usuario(usuario);
     }
 
     @Override
@@ -46,5 +57,11 @@ public class usuario_datos_preseN_impL implements usuario_datos_presnT_interF, o
     public void enviar_error_nueva_contra(String mensaje) {
         usuario_datos_vistas.progressbar_hiden("");
         usuario_datos_vistas.error_nueva_contra(mensaje);
+    }
+
+    @Override
+    public void editar_datos_personales(Obj_usuario usuario) {
+        usuario_datos_vistas.progressbar_show();
+        intInterF.editar_datos_usuario(usuario);
     }
 }

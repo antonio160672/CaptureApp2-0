@@ -42,7 +42,25 @@ public class validacampos_individuales {
 
     }
 
-    public String Val_Nombres(String s){//funcion que valida que solo existan
+    public boolean Val_Nombres_bolean(String s){//funcion que valida que solo existan
+        //letras en el campo
+        Pattern pattern = Pattern.compile("^[^ ]+( [^ ]+)*$");//expresión regular para espacios en
+        Matcher matcher = pattern.matcher(s);//blanco
+        if (matcher.find() == true) {//verifica si existen espacios en blanco al inicio o final
+            pattern = Pattern.compile("^[a-zA-ZÀ-ÖØ-öø-ÿ\\u00F1\\u00D1\\s]+$");//solo letras
+            matcher = pattern.matcher(s);
+            if (matcher.find() == true) {//comprueba si hay algún número o carácter extraño
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public String Val_Nombres(String s){
+        //funcion que valida que solo existan
         //letras en el campo
         Pattern pattern = Pattern.compile("^[^ ]+( [^ ]+)*$");//expresión regular para espacios en
         Matcher matcher = pattern.matcher(s);//blanco

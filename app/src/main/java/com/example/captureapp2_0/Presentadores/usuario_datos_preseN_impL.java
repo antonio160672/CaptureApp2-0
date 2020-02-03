@@ -8,6 +8,7 @@ import com.example.captureapp2_0.Interfaces.Usuario_datos_interfaces.usuario_dat
 import com.example.captureapp2_0.Interfaces.Usuario_datos_interfaces.usuario_datos_presnT_interF;
 import com.example.captureapp2_0.Modelo.Modelo.Interactores.usuario_datos_interactor_impL;
 import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_usuario;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Objeto_preguntas;
 import com.example.captureapp2_0.Vistas.Usurio_datos.usuario_datos_vistas;
 
 public class usuario_datos_preseN_impL implements usuario_datos_presnT_interF, onlistener_usuario {
@@ -63,5 +64,16 @@ public class usuario_datos_preseN_impL implements usuario_datos_presnT_interF, o
     public void editar_datos_personales(Obj_usuario usuario) {
         usuario_datos_vistas.progressbar_show();
         intInterF.editar_datos_usuario(usuario);
+    }
+
+    @Override
+    public void validar_preguntas(Objeto_preguntas validar_preguntas) {
+        usuario_datos_vistas.progressbar_show();
+        intInterF.validar_preguntas_volley(validar_preguntas);
+    }
+
+    @Override
+    public void progress_hiden_sin_mensaje(String mensaje) {
+        usuario_datos_vistas.progressbar_hiden_sin_mensa(mensaje);
     }
 }

@@ -27,8 +27,10 @@ import androidx.fragment.app.Fragment;
 import com.example.captureapp2_0.Interfaces.Usuario_datos_interfaces.usuario_datos_interF_vistas;
 import com.example.captureapp2_0.Interfaces.Usuario_datos_interfaces.usuario_datos_presnT_interF;
 import com.example.captureapp2_0.Modelo.Modelo.Interactores.Servidores_interactores.Dialog_servidor.validar_Servi_datos;
+import com.example.captureapp2_0.Modelo.Modelo.funciones_generas.validar_preguntas;
 import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Context;
 import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_usuario;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Objeto_preguntas;
 import com.example.captureapp2_0.Presentadores.usuario_datos_preseN_impL;
 import com.example.captureapp2_0.R;
 import com.example.captureapp2_0.Vistas.Usurio_datos.model_usuario_val_mini_dialg.validar_datos_usuario_gestion;
@@ -44,6 +46,8 @@ public class usuario_datos_vistas extends Fragment implements usuario_datos_inte
     private EditText Contra_Nue,Contra_conf_Nuev;
     private ProgressDialog progressDialog;
     private Obj_usuario objUsuario;
+    private Objeto_preguntas preguntas;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -162,10 +166,10 @@ public class usuario_datos_vistas extends Fragment implements usuario_datos_inte
 
     @Override
     public void progressbar_hiden(String mensaje) {
-        Contra_Nue.setText("");
-        Contra_conf_Nuev.setText("");
         progressDialog.dismiss();
         if (!mensaje.isEmpty()){
+            Contra_Nue.setText("");
+            Contra_conf_Nuev.setText("");
             Toast.makeText(Obj_Context.getContext(),mensaje,Toast.LENGTH_LONG).show();
         }
     }
@@ -190,6 +194,7 @@ public class usuario_datos_vistas extends Fragment implements usuario_datos_inte
         cambi_contra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                generar_dialog_preguntas();
             }
         });
         Ingresar.setOnClickListener(new View.OnClickListener() {
@@ -207,6 +212,32 @@ public class usuario_datos_vistas extends Fragment implements usuario_datos_inte
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
+                getFragmentManager().popBackStack();
+            }
+        });
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+    }
+
+    @Override
+    public void generar_dialog_preguntas() {
+        dialog.dismiss();
+        Button BTN_preguntas;
+        dialog=new Dialog(Obj_Context.getContext());
+        dialog.setContentView(R.layout.mini_preguntas);
+        BTN_preguntas=dialog.findViewById(R.id.dialog_but_pregun);
+        BTN_preguntas.setText("Validar");
+        BTN_preguntas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                validar_preguntas validar_preguntas=new validar_preguntas(dialog);
+                validar_preguntas.iniciar_datos();
+                if (validar_preguntas.validarcamposblanco()){
+                    preguntas=validar_preguntas.getPreguntas();
+                    if (preguntas!=null){
+                        presnTInterF.validar_preguntas(preguntas);
+                    }
+                }
             }
         });
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -215,6 +246,10 @@ public class usuario_datos_vistas extends Fragment implements usuario_datos_inte
 
     @Override
     public void ocurtar_dialog_mostrardatos() {
+
+        if (dialog!=null){
+            dialog.dismiss();
+        }
         presnTInterF.recuperar_datos_usuario();
         dialog.dismiss();
         Typeface face=Typeface.createFromAsset(getActivity().getAssets(),"fonts/Mohave-Bold.otf");
@@ -233,5 +268,13 @@ public class usuario_datos_vistas extends Fragment implements usuario_datos_inte
         Contra_Nue.setTypeface(face);
         Contra_conf_Nuev.setTypeface(face);
         Cambiar_direccion.setTypeface(face);
+    }
+
+    @Override
+    public void progressbar_hiden_sin_mensa(String mensaje) {
+        progressDialog.hide();
+        if(!mensaje.equals("")){
+            Toast.makeText(Obj_Context.getContext(),mensaje,Toast.LENGTH_LONG).show();
+        }
     }
 }

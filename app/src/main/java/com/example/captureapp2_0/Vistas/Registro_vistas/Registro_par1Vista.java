@@ -45,6 +45,7 @@ public class Registro_par1Vista extends AppCompatActivity implements inter_Regis
         presentador=new Registro_par1_presen_impL(this);
     }
 
+
     private void activar_fuente() {
         titulo = findViewById(R.id.Titulo);   //definimos en ONCREATE donde esta por                                                                                                     //medio de un ID
         Typeface face=Typeface.createFromAsset(getAssets(),"fonts/Mohave-Bold.otf");

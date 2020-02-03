@@ -1,4 +1,4 @@
-package com.example.captureapp2_0.Vistas.ui_vistas.send;
+package com.example.captureapp2_0.Vistas.ui_vistas.informacion;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

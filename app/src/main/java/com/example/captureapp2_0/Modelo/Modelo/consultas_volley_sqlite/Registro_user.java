@@ -48,8 +48,7 @@ public class Registro_user {
     }
 
     public void Registro_usuario(){
-        request= Volley.newRequestQueue(context);//se instancia un nuevo reques con el contexto de la aplicación
-        final boolean[] bandera = new boolean[1];
+        request= Volley.newRequestQueue(context);//se instancia un nuevo request
         //String URL = "http://192.168.1.75/android/insert.php";
         String URL = "http://pruebas-upemor.ddns.net/android/insert.php";//se crea una url
         StringRequest getRequest = new StringRequest(Request.Method.POST, URL,//se indica el metodo
@@ -59,10 +58,9 @@ public class Registro_user {
                     public void onResponse(String response) {
                         request.getCache().clear();//se limpia la respuesta
                         response= response.replace("Connected successfully","");
-                        Log.e("datos responce","formato: "+response);
                         try {
                             parseData(response);//transforma un json para ser analizado
-                            if(Registro_sql()){//manda a llmar la funcion para el registro sqlite
+                            if(Registro_sql()){//manda a llmar la función para el registro sqlite
                                 listener.exito_valida();//manda a llamar el metodo del presentador
                             }
                         } catch (JSONException e) {
@@ -75,7 +73,6 @@ public class Registro_user {
                     public void onErrorResponse(VolleyError error) {
                         if (null != error.networkResponse) {
                             Log.e("error" + ": ", "Error Response code: " + error.networkResponse.statusCode);
-                            bandera[0]=false;
                         }
                     }
                 }){

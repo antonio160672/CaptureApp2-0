@@ -11,6 +11,7 @@ import com.example.captureapp2_0.Modelo.Modelo.DB_lite.Sqlite_DB_manejo;
 import com.example.captureapp2_0.Modelo.Modelo.consultas_volley_sqlite.Gestion_usuario_sql_volley;
 import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Context;
 import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_usuario;
+import com.example.captureapp2_0.Modelo.Modelo.objetos.Objeto_preguntas;
 
 public class usuario_datos_interactor_impL implements usuario_datos_int_interF {
     onlistener_usuario usuario;
@@ -39,6 +40,16 @@ public class usuario_datos_interactor_impL implements usuario_datos_int_interF {
         volley =new Gestion_usuario_sql_volley(usuario);
         volley.consutar_contra_voller(contra,contrase,ID);
 
+    }
+
+    @Override
+    public void validar_preguntas_volley(final Objeto_preguntas objetoPreguntas) {
+        new Handler().postDelayed(new Runnable(){
+            @Override
+            public void run() {
+                volley =new Gestion_usuario_sql_volley(usuario);
+                volley.verificar_preguntas(objetoPreguntas,ID);
+            }},1500);
     }
 
     @Override

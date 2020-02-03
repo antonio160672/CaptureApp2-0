@@ -9,7 +9,9 @@ public interface usuario_datos_interF_vistas {
     void error_nueva_contra(String mensaje);
     void progressbar_show();
     void  progressbar_hiden(String mensaje);
+    void progressbar_hiden_sin_mensa(String mensaje);
     void cargar_usuario(Obj_usuario usuario);
     void dialog_datosEdit_usuario();
+    void generar_dialog_preguntas();
 
 }

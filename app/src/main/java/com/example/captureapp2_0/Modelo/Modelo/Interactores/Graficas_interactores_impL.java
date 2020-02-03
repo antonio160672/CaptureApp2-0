@@ -115,8 +115,7 @@ public class Graficas_interactores_impL implements Graficas_interactores_interfa
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private int[] generar_colores(int size) {
-        int numero =0;
+    private int[] generar_colores(int size) {//generar colores aleatorios
         int [] arreglo_color=new int[size];
         for (int x=0;x<size;x++){
             arreglo_color[x]=ThreadLocalRandom.current().nextInt(-1000000, -1 + 1);
@@ -125,31 +124,29 @@ public class Graficas_interactores_impL implements Graficas_interactores_interfa
     }
 
     private void generar_grafica_wifi_Lineas(ArrayList<Objeto_wifi_grafica> list_wifi_grafi, int[] arreglo_color_wifi) {
-        Log.e("tamaño lista","lista:wifi:"+list_wifi_grafi.size());
+        //se inician las listas para etiquetas y etiquetas de colores
         ArrayList<LegendEntry> etiquetas = new ArrayList<LegendEntry>();
         ArrayList<ILineDataSet>dataSets=new ArrayList<>();
-        int o=0;
-        for (Objeto_wifi_grafica datos_gra:list_wifi_grafi) {
-            Log.e("veces que","veces que entro"+o);
-            ArrayList<Entry> Lineas=new ArrayList<>();
-            int f=1;
-            for (int x=0;x<datos_gra.lista_Rssi.size();x++){
-                Lineas.add(new Entry(f,datos_gra.lista_Rssi.get(x)));
+        int o=0;//para recorrer los colores
+        for (Objeto_wifi_grafica datos_gra:list_wifi_grafi) {//se recorre la lista de wifi
+            ArrayList<Entry> Lineas=new ArrayList<>();//las entradas
+            int f=1;//distancia entre datos
+            for (int x=0;x<datos_gra.lista_Rssi.size();x++){//se recorre el tamaño de la lista
+                Lineas.add(new Entry(f,datos_gra.lista_Rssi.get(x)));//se agregan los datos a las entradas
                 f++;
             }
-            LegendEntry entry=new LegendEntry();
-            entry.formColor=arreglo_color_wifi[o];
-            entry.label=(datos_gra.getMacaddres());
-            etiquetas.add(entry);
-            LineDataSet set=new LineDataSet(Lineas,datos_gra.getMacaddres());
-            set.setColor(arreglo_color_wifi[o]);
+            LegendEntry entry=new LegendEntry();//se generan las leyendas
+            entry.formColor=arreglo_color_wifi[o];//se asignan colores
+            entry.label=(datos_gra.getMacaddres());//se agregan las Mac a las leyendas
+            etiquetas.add(entry);//se agregan a las listas de entradas
+            LineDataSet set=new LineDataSet(Lineas,datos_gra.getMacaddres());//se crea la linea
+            set.setColor(arreglo_color_wifi[o]);//se asigna color
             set.setFillAlpha(110);
-            dataSets.add(set);
+            dataSets.add(set);//se agrega la linea para ser mstrada
             o++;
         }
-        LineData data=new LineData(dataSets);
-        Log.e("tamaño del set",":"+dataSets.size());
-        onlistenerGraficas.retornarr_grafica_lineal(data,etiquetas);
+        LineData data=new LineData(dataSets);//se agregan los datos de las lineas
+        onlistenerGraficas.retornarr_grafica_lineal(data,etiquetas);//se envian al presentador
     }
 
     private void generar_grafica_bluetooth_Lineas(ArrayList<Objeto_bluetoo_grafica> list_blue_grafi, int[] arreglo_color_blue) {

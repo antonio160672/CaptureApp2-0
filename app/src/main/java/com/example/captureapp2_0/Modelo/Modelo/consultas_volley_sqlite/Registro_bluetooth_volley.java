@@ -37,17 +37,20 @@ public class Registro_bluetooth_volley {
         if (context!=null)
             request= Volley.newRequestQueue(context);
     }
+
     public void SQLite_exitencia_registro(String direccion,String puer_crate,String puerto_Orion) throws JSONException {
-        if (obj_bluetooth!=null){
+        //se revisa si el dispositivo ya está registrado
+        if (obj_bluetooth!=null){//que no sea nulo
             obj_bluetooth.sqLite= new Sqlite_DB_manejo(Obj_Context.getContext());
-            obj_bluetooth.cursor=consulta_entidad();
-            if(obj_bluetooth.cursor.getCount()>0){
+            obj_bluetooth.cursor=consulta_entidad();//se consulta a la DB
+            if(obj_bluetooth.cursor.getCount()>0){//en caso de que si exista
                 URL= "http://"+direccion+":"+puerto_Orion+"/v2/entities/"+obj_bluetooth.getId_dip()+"/attrs";
+                //actualiza la entidad en el OCB
                 Log.e("URL de actualizacion",":"+URL);
                 Request_Method=1;//metodo pach para actualizar
                 tipo_json=1;
             }else
-            {
+            {//en caso de que no
                 URL= "http://"+direccion+":"+puerto_Orion+"/v2/entities/";
                 Request_Method=1;//metodo post para registrar
                 tipo_json=0;
@@ -81,9 +84,10 @@ public class Registro_bluetooth_volley {
     }
 
     public boolean Insertar_sin_servidor_Sin_conexion_entidad_Bluetooth()// insertara los datos en la tabla
-            //de señales bluetooth pero sin conexion a sservidor
+            //de señales bluetooth pero sin conexion a servidor
     {
         obj_bluetooth.sqLite= new Sqlite_DB_manejo(Obj_Context.getContext());
+        //sentencia sql
         String sql="insert into Sin_conexion_entidad_Bluetooth values(NULL,'"+obj_bluetooth.getId_dip()+
                 "','"+obj_bluetooth.getUUID()+"','"+
                 obj_bluetooth.getBluetoothAddress()+"','"+obj_bluetooth.getRSSI()+"','"+obj_bluetooth.getTX()+"','"+

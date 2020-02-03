@@ -13,6 +13,7 @@
     <string name="menu_slideshow">Servidores</string>
     <string name="menu_tools">Graficas</string>
     <string name="menu_share">Usuario</string>
-    <string name="menu_send">Send</string>
+    <string name="menu_send">Información</string>
+    <string name="salirmenu">Cerrar sesión</string>
     <string name="title_activity_menu_principal">menu_principal</string>
 </resources>

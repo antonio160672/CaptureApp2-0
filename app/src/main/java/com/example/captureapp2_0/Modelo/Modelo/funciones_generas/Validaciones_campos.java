@@ -10,8 +10,8 @@ public class Validaciones_campos {
     public Validaciones_campos() {
 
     }
-    public String Val_Nombres(String s){//funcion que valida que solo existan
-                                        //letras en el campo
+
+    public String Val_Nombres(String s){//función que valida letras
         Pattern pattern = Pattern.compile("^[^ ]+( [^ ]+)*$");//expresión regular para espacios en
         Matcher matcher = pattern.matcher(s);//blanco
         if (matcher.find() == true) {//verifica si existen espacios en blanco al inicio o final

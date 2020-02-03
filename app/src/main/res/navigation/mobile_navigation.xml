@@ -37,7 +37,12 @@
 
     <fragment
         android:id="@+id/nav_send"
-        android:name="com.example.captureapp2_0.Vistas.ui_vistas.send.SendFragment"
+        android:name="com.example.captureapp2_0.Vistas.ui_vistas.informacion.Informacion_app"
         android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
+        tools:layout="@layout/fragment_informacion" />
+    <fragment
+        android:id="@+id/Salir"
+        android:name="com.example.captureapp2_0.Vistas.Salir_aplicacion.Salir_vistas"
+        android:label="@string/salirmenu"
+        tools:layout="@layout/fragment_salir"/>
 </navigation>

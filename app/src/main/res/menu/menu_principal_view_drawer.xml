@@ -28,6 +28,14 @@
                 android:id="@+id/nav_share"
                 android:icon="@drawable/usuario2"
                 android:title="@string/menu_share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/pregunta"
+                android:title="@string/menu_send" />
+            <item
+                android:id="@+id/Salir"
+                android:icon="@drawable/salir_app"
+                android:title="@string/salirmenu" />
 
         </menu>
     </item>

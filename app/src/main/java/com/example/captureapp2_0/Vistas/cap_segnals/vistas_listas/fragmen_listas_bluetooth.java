@@ -71,49 +71,52 @@ public class fragmen_listas_bluetooth extends Fragment implements BeaconConsumer
     }
 
     public void cargarlista(){
-        beaconManager = BeaconManager.getInstanceForApplication(getApplicationContext());//instancia los servicios de beacon
-        //las siguientes dos lineas hacen referencia al modelo de beacon en este caso estimote
+        beaconManager = BeaconManager.
+                getInstanceForApplication(getApplicationContext());//instancia los servicios de beacon
+        //las siguientes dos líneas hacen referencia al modelo de beacon en este caso estimote
         beaconManager.getBeaconParsers().add(new
                 BeaconParser().setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"));
-        //como el anterior instancia el protocolo Eddystine y buscara todos los beacons con este
-        //protocolo
+        //Eddystine y buscara todos los beacons con este protocolo
         beaconManager.getBeaconParsers().add(new BeaconParser().
                 setBeaconLayout(BeaconParser.EDDYSTONE_UID_LAYOUT));
         bluetooth_volley =new Registro_bluetooth_volley();
 
-        beaconManager.bind(this);
-        adaptador=new Adaptador(null,Obj_Context.getContext().getApplicationContext(),  Lista_beacon);
+        beaconManager.bind(this);//se llama al método onBeaconServiceConnect
+        adaptador=new Adaptador(null,
+                Obj_Context.getContext().getApplicationContext(),  Lista_beacon);
+        //se instancia un adaptador para mostrar la información de la lista
     }
 
     @Override
     public void onBeaconServiceConnect() {
         beaconManager.removeAllRangeNotifiers();
-        beaconManager.addRangeNotifier(new RangeNotifier() {
+        beaconManager.addRangeNotifier(new RangeNotifier() {//sobre escribe métodos
             @Override
             public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
-                if (beacons.size() > 0) {
-                    Lista_beacon.clear();
-                    for (Beacon beacon : beacons) {
+                //recolecta colección de beacons
+                if (beacons.size() > 0) {//mientras sea mayor a cero
+                    Lista_beacon.clear();//limpia la lista que almacena datos
+                    for (Beacon beacon : beacons) {//se recorre con forech para cada objeto
                         if (beacons.contains(beacon)){
-                            obj_bluetooth=new Obj_bluetooth();
+                            obj_bluetooth=new Obj_bluetooth();//objeto que almacena datos
                             SimpleDateFormat dateFormat = new //crea la estructura de la fecha
                                     SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                             DateFormat hourFormat = new //crea estrucutra de la hora
                                     SimpleDateFormat("HH:mm:ss", Locale.getDefault());
                             Date date = new Date();//se instancia la hora y fecha
-                            String fecha = dateFormat.format(date);//se les da formato
+                            String fecha = dateFormat.format(date);//se les da formato fecha
                             String hora = hourFormat.format(date);//se les da formato
-                            obj_bluetooth.setUUID(beacon.getId1().toString());
-                            obj_bluetooth.setBluetoothAddress(beacon.getBluetoothAddress());
-                            obj_bluetooth.setId_dip(beacon.getBluetoothAddress()+":"+ID);
+                            obj_bluetooth.setUUID(beacon.getId1().toString());//UUID
+                            obj_bluetooth.setBluetoothAddress(beacon.getBluetoothAddress());//MAC
+                            obj_bluetooth.setId_dip(beacon.getBluetoothAddress()+":"+ID);//ID+MAC
                             obj_bluetooth.setMAJOR(beacon.getId2().toString());
-                            obj_bluetooth.setRSSI(Integer.toString(beacon.getRssi()));
-                            obj_bluetooth.setTX(Integer.toString(beacon.getTxPower()));
+                            obj_bluetooth.setRSSI(Integer.toString(beacon.getRssi()));//señal
+                            obj_bluetooth.setTX(Integer.toString(beacon.getTxPower()));//bateria
                             obj_bluetooth.setId_tip_dispo("2");
                             obj_bluetooth.setId_user(ID);
                             obj_bluetooth.setFecha_cap(fecha);
                             obj_bluetooth.setHora(hora);
-                            bluetooth_volley.setObj_bluetooth(obj_bluetooth);
+                            bluetooth_volley.setObj_bluetooth(obj_bluetooth);//Volley
                             if ((obje_servi!=null)&&(!obje_servi.getDNS_ser().equals("")||!obje_servi.getIp_servidor().equals(""))){
                                 Log.e("Nueva log","valor del servidor"+obje_servi.getDNS_ser());
 

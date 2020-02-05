@@ -2,6 +2,8 @@ package com.example.captureapp2_0.Vistas.Salir_aplicacion;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +16,8 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Context;
 import com.example.captureapp2_0.R;
+import com.example.captureapp2_0.Vistas.Ini_sesion;
+import com.example.captureapp2_0.menu_principal;
 
 public class Salir_vistas extends Fragment {
     View root;
@@ -35,6 +39,14 @@ public class Salir_vistas extends Fragment {
         builder.setPositiveButton(android.R.string.ok, null);
         builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {
+                SharedPreferences preferences=Obj_Context.getContext().getSharedPreferences
+                        ("userid",Obj_Context.getContext().MODE_PRIVATE);
+                SharedPreferences.Editor editor=preferences.edit();
+                editor.clear().apply();
+                Intent r = new Intent(Obj_Context.getContext(), Ini_sesion.class);
+                startActivity(r);
+                getActivity().overridePendingTransition(R.anim.left_in,R.anim.left_out);
+                getActivity().finish();
 
             }
         });

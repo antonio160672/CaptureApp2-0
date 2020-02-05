@@ -77,6 +77,18 @@
                 app:met_textColorHint="#FFFFFF"
                 app:met_underlineColor="#92d0d0"
                 android:layout_gravity="center"/>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:id="@+id/cambiarContra"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:onClick="Preguntas_recu"
+                android:text="Cambiar contraseña"
+                android:layout_margin="1dp"
+                android:gravity="center"
+                android:textSize="16dp"
+                android:textColor="#F7F7F7"/>
 
         </LinearLayout>
 

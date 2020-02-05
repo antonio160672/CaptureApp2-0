@@ -53,7 +53,6 @@
             app:met_underlineColor="#92d0d0" />
 
         <TextView
-
             android:id="@+id/cambiarContra"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

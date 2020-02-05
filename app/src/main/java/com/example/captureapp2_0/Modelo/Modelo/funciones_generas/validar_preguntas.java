@@ -3,6 +3,8 @@ package com.example.captureapp2_0.Modelo.Modelo.funciones_generas;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.util.Log;
+import android.util.Patterns;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -13,9 +15,10 @@ import com.example.captureapp2_0.R;
 public class validar_preguntas {
     private Spinner Pregunta1,Pregunta2;
     private TextView respuesta1,respuesta2;
-    private String Srespuesta1,Srespuesta2,Spregunta1,Spregunta2;
+    private String Srespuesta1,Srespuesta2,Spregunta1,Spregunta2,Scorreo;
     private Dialog dialog;
     private Objeto_preguntas preguntas;
+    private EditText correo;
 
     public validar_preguntas(Dialog dialog) {
         this.dialog = dialog;
@@ -29,6 +32,9 @@ public class validar_preguntas {
             respuesta1=dialog.findViewById(R.id.respu_1);
             respuesta2=dialog.findViewById(R.id.respu_2);
 
+            correo=dialog.findViewById(R.id.Correo_pregunta);
+            Scorreo=correo.getText().toString();
+
             Spregunta1=Pregunta1.getSelectedItem().toString();
             Spregunta2=Pregunta2.getSelectedItem().toString();
             Srespuesta1=respuesta1.getText().toString();
@@ -36,6 +42,19 @@ public class validar_preguntas {
             Srespuesta1=Srespuesta1.trim();
             Srespuesta2=Srespuesta2.trim();
         }
+    }
+    public boolean validar_correo(){
+        boolean bandera=true;
+        if((Spregunta1.isEmpty())){
+            correo.setError("Campo vacío");
+            bandera= false;
+        }else {
+            if (!Patterns.EMAIL_ADDRESS.matcher(Scorreo).matches()){
+                correo.setError("Correo invalido");
+                bandera= false;
+            }
+        }
+        return bandera;
     }
 
     public boolean validarcamposblanco(){
@@ -51,6 +70,7 @@ public class validar_preguntas {
             errorText2.setText("No seleccionado");
             respuesta1.setError("Campo vacío");
             respuesta2.setError("Campo vacío");
+
             return false;
         }else{
             if(Spregunta1.equals("Preguntas de seguridad")){

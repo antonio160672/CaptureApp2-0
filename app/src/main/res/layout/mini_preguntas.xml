@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="330dp"
-    android:layout_height="400dp"
+    android:layout_height="wrap_content"
     android:background="@drawable/dialog_bg"
     android:orientation="vertical"
     android:visibility="visible"
@@ -52,16 +52,36 @@
 
                 <LinearLayout
                     android:layout_marginTop="5dp"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/Correo_pregunta"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/correo1"
+                        android:hint="Correo"
+                        android:inputType="textPersonName"
+                        android:nextFocusDown="@+id/Contraseña"
+                        app:met_baseColor="#FFFFFF"
+                        app:met_errorColor="#F44336"
+                        app:met_floatingLabel="highlight"
+                        app:met_floatingLabelText="Correo"
+                        app:met_primaryColor="#92d0d0"
+                        app:met_textColorHint="#FFFFFF"
+                        app:met_underlineColor="#92d0d0"
+                        android:layout_gravity="center"/>
+
                     <Spinner
+                        android:layout_marginTop="10dp"
                         android:id="@+id/Preguntas_segur1"
-                        android:layout_marginLeft="-2dp"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
+                        android:layout_marginLeft="-2dp"
                         android:background="@drawable/spinner_style"
-                        android:entries="@array/Preguntas" />
+                        android:entries="@array/Preguntas"
+                         />
                 </LinearLayout>
 
                 <com.rengwuxian.materialedittext.MaterialEditText

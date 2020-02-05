@@ -57,8 +57,6 @@ public class Gestion_preguntas_SqliteVolley {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
-
                     }
                 },
                 new Response.ErrorListener() {
@@ -84,6 +82,7 @@ public class Gestion_preguntas_SqliteVolley {
         };
         request.add(getRequest);//agrega a una pila para que sea enviada
     }
+
     private boolean agregar_preguntas(){
         String sql="insert into preguntas_recu values(null,'"+id+"','"+
                 preguntas.getPregunta1()+"','"+preguntas.getSrespuesta1()+"','"+

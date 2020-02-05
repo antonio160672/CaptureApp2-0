@@ -35,8 +35,11 @@ public class Gestion_usuario_sql_volley {
         this.context = Obj_Context.getContext();
         request= Volley.newRequestQueue(context);//se instancia un nuevo reques con el contexto de la aplicación
     }
-    public void consutar_contra_voller(final EditText contra, final String contrase, final String ID){
+
+    public void consutar_contra_voller(final EditText contra, String contrase, final String ID){
         String URL = "http://pruebas-upemor.ddns.net/android/Gestion_datos_usu.php";//se crea una url
+        contrase=contra.getText().toString();
+        final String finalContrase = contrase;
         StringRequest getRequest = new StringRequest(Request.Method.POST, URL,//se indica el metodo
                 //de comunicación tipo post, la url y la información
                 new Response.Listener<String>() {
@@ -50,6 +53,7 @@ public class Gestion_usuario_sql_volley {
                             if (jsonObject.optString("status").equals("true")){
                                 onlistener_usuario.ocurtar_dialog_mostrardatos();
                             }else {
+                                contra.setText("");
                                 contra.setError("Contraseña invalida");
                             }
                         } catch (JSONException e) {
@@ -69,7 +73,7 @@ public class Gestion_usuario_sql_volley {
             protected Map<String, String> getParams() {//metodo para envío de datos
                 //mapea las instrucciones
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("Contra_validar",contrase);
+                params.put("Contra_validar", finalContrase);
                 params.put("Id",ID);
                 params.put("opcion","1");
 

@@ -5,6 +5,7 @@ import android.os.Handler;
 import com.example.captureapp2_0.Interfaces.Registro_par2_interF.interRegistro_par2_Interactor;
 import com.example.captureapp2_0.Interfaces.Registro_par2_interF.oninter_Registro_par2_Finishlicener;
 import com.example.captureapp2_0.Modelo.Modelo.consultas_volley_sqlite.Registro_user;
+import com.example.captureapp2_0.Modelo.Modelo.funciones_generas.Validaciones_campos;
 import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_Estados;
 import com.example.captureapp2_0.Modelo.Modelo.objetos.Obj_usuario;
 
@@ -58,9 +59,8 @@ public class Registro_par2_interac_impL implements interRegistro_par2_Interactor
                         listener.CP_seterror("Campo vacío");
                         bandera=0;
                     }
-                    if (bandera==1){
-                        validar_cadenas(fecha,estado.trim(),municipio.trim(), calle.trim(),colonia.trim(),CP);
-                    }
+                    validar_cadenas(fecha,estado.trim(),municipio.trim(), calle.trim(),colonia.trim(),CP);
+
                 }
                 listener.dismi_progress("");
             }
@@ -69,9 +69,25 @@ public class Registro_par2_interac_impL implements interRegistro_par2_Interactor
 
     //aqui se validan las cadenas para no tener datos no esperados
     private void validar_cadenas(String fecha, String estado, String municipio, String calle, String colonia, String cp) {
-        bandera=1;
+        Validaciones_campos validaciones_campos=new Validaciones_campos();
+        String error;
         if (!(cp.length()>=5&&cp.length()<=8)){
             listener.CP_seterror("El CP no es valido");
+            bandera=0;
+        }
+        error=validaciones_campos.Val_Nombres(municipio);
+        if (error!=null){
+            listener.municipio_seterror(error);
+            bandera=0;
+        }
+        error=validaciones_campos.Direccion(calle);
+        if (error!=null){
+            listener.calle_seterror(error);
+            bandera=0;
+        }
+        error=validaciones_campos.Val_Nombres(colonia);
+        if (error!=null){
+            listener.colonia_setrror(error);
             bandera=0;
         }
         if (bandera==1){

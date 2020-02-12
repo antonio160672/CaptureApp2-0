@@ -64,10 +64,9 @@ public class Registro_par1_interac_impL implements interRegistro_par1_Interactor
                         listener.Correo_seterro("campo vacio");
                         bandera=0;
                     }
-                    if (bandera!=0){
                         validar_cadenas(Nombre.trim(),Apellido_parte.trim()
                                 ,Apellido_mater.trim(),Correo.trim(),Contra.trim(),Conf_contra.trim());
-                    }
+
                 }
                 listener.dismi_progress("");
 
@@ -115,8 +114,6 @@ public class Registro_par1_interac_impL implements interRegistro_par1_Interactor
     //que no haya numeros en campos que solo reciben string
     private void validar_cadenas(final String Nombre, final String Apellido_parte, final String Apellido_mater,
                          final String Correo, final String Contra, final String Conf_contra){
-
-        bandera=1;
         Validaciones_campos validaciones_campos=new Validaciones_campos();
         String error;
         error=validaciones_campos.Val_Nombres(Nombre);

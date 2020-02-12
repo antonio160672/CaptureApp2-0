@@ -12,9 +12,9 @@ public class Validaciones_campos {
     }
 
     public String Val_Nombres(String s){//función que valida letras
-        Pattern pattern = Pattern.compile("^[^ ]+( [^ ]+)*$");//expresión regular para espacios en
+        Pattern pattern = Pattern.compile("\\p{Punct}");//expresión regular para espacios en
         Matcher matcher = pattern.matcher(s);//blanco
-        if (matcher.find() == true) {//verifica si existen espacios en blanco al inicio o final
+        if (matcher.find() == false) {//verifica si existen espacios en blanco al inicio o final
             pattern = Pattern.compile("^[a-zA-ZÀ-ÖØ-öø-ÿ\\u00F1\\u00D1\\s]+$");//solo letras
             matcher = pattern.matcher(s);
             if (matcher.find() == true) {//comprueba si hay algún número o carácter extraño
@@ -23,8 +23,17 @@ public class Validaciones_campos {
                 return "Solo se permiten letras";
             }
         } else {
-            return "No se permiten espacial inicio";
+            return "No se permiten caracteres especiales";
         }
+    }
+    public String Direccion(String s){//función que valida letras
+        Pattern pattern = Pattern.compile("^[\\wÀ-ÖØ-öø-ÿ#\\u00F1\\u00D1\\s]*$");//solo letras
+        Matcher matcher =pattern.matcher(s);
+            if (matcher.find() == true) {//comprueba si hay algún número o carácter extraño
+                return null;
+            } else {
+                return "Solo se permiten letras";
+            }
     }
 
 

@@ -58,11 +58,11 @@ public class Registro_par2_interac_impL implements interRegistro_par2_Interactor
                         listener.CP_seterror("Campo vacío");
                         bandera=0;
                     }
-                    listener.dismi_progress("");
                     if (bandera==1){
                         validar_cadenas(fecha,estado.trim(),municipio.trim(), calle.trim(),colonia.trim(),CP);
                     }
                 }
+                listener.dismi_progress("");
             }
         },1500);
     }

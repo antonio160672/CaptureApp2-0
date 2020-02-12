@@ -38,6 +38,7 @@ public class Registro_par1_interac_impL implements interRegistro_par1_Interactor
                         listener.Apellido_mate_seterro("campo vacio");
                         listener.Correo_seterro("campo vacio");
                         listener.Contra_seterro("campo vacio");
+
                 }else {
                     if (Nombre.equals("")) {
                         listener.Nombr_seterro("campo vacio");
@@ -67,8 +68,8 @@ public class Registro_par1_interac_impL implements interRegistro_par1_Interactor
                         validar_cadenas(Nombre.trim(),Apellido_parte.trim()
                                 ,Apellido_mater.trim(),Correo.trim(),Contra.trim(),Conf_contra.trim());
                     }
-
                 }
+                listener.dismi_progress("");
 
             }
         },1500);

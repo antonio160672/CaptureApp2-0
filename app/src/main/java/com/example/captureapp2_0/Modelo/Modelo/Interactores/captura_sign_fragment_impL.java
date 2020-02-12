@@ -19,6 +19,8 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import org.json.JSONException;
 
+import java.io.IOException;
+import java.net.InetAddress;
 import java.util.ArrayList;
 
 public class captura_sign_fragment_impL implements Interactor_captuSig{
@@ -30,16 +32,24 @@ public class captura_sign_fragment_impL implements Interactor_captuSig{
 
     @Override
     public Boolean Salida_internet(String DNSS,String IP) {
+        Runtime runtime = Runtime.getRuntime();
         try {
-            Log.e("se esta"," dentro de la salida a internet");
-            Process p = java.lang.Runtime.getRuntime().exec("ping -c 1 "+DNSS);
-            int val           = p.waitFor();
-            boolean reachable = (val == 0);
-            return reachable;
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+            Process ipProcess = runtime.exec("/system/bin/ping -c 1 "+IP);
+            int     exitValue = ipProcess.waitFor();
+            if(exitValue == 0){
+                return true;
+            }else{
+                ipProcess = runtime.exec("/system/bin/ping -c 1 "+DNSS);
+                exitValue = ipProcess.waitFor();
+                if(exitValue == 0){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+
+        } catch (IOException e)          { e.printStackTrace(); }
+        catch (InterruptedException e) { e.printStackTrace(); }
         return false;
     }
 

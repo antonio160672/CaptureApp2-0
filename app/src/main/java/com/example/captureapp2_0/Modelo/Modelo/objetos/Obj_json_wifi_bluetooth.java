@@ -23,7 +23,7 @@ public class Obj_json_wifi_bluetooth {
 
     public void primer_registro_json_bluethoo(){
         if (obj_bluetooth!=null){
-            Json_bluetooth="{\"id\":\""+obj_bluetooth.getId_dip()+"\",\"type\":\"historial_bluetooth\",\"fechacaptura\":{\"value\":\""+(obj_bluetooth.getFecha_cap()+"T"+obj_bluetooth.getHora())+"\",\"type\":\"timestamp\"},\"" +
+            Json_bluetooth="{\"id\":\""+obj_bluetooth.getId_dip()+"\",\"type\":\"historial_bluetooth\",\"fechacaptura\":{\"value\":\""+(obj_bluetooth.getFecha_cap()+"T"+obj_bluetooth.getHora())+"\",\"type\":\"DateTime\"},\"" +
                     "macaddres\":{\"value\":\""+obj_bluetooth.getBluetoothAddress()+"\",\"type\":\"Text\"},\"marca\":{\"value\":\"stimote\",\"type\":\"Text\"},\"RSSI\":{\"value\":"+obj_bluetooth.getRSSI()+",\"type\":\"Number\"}," +
                     "\"TX\":{\"value\":"+obj_bluetooth.getTX()+",\"type\":\"Number\"},\"Major\":{\"value\":\""+obj_bluetooth.getMAJOR()+"\",\"type\":\"Text\"},\"UUID\":{\"value\":\""+obj_bluetooth.getUUID()+"\",\"type\":\"Text\"},\"" +
                     "Id_tipoDispositivo\":{\"value\":1,\"type\":\"Number\"},\"Idusuario\":{\"value\":\""+obj_bluetooth.getId_user()+"\",\"type\":\"Text\"}}";
@@ -35,7 +35,7 @@ public class Obj_json_wifi_bluetooth {
         if (obj_bluetooth!=null){
             Json_bluetooth="{\"RSSI\":{\"type\":\"Number\",\"value\":"+obj_bluetooth.getRSSI()+"},\"TX\":{\"type\":\"Number\",\"value\":"+obj_bluetooth.getTX()+"}," +
                             "\"Major\":{\"type\":\"Text\",\"value\":\""+obj_bluetooth.getMAJOR()+"\"}," +
-                            "\"fechacaptura\":{\"type\":\"timestamp\",\"value\":\""+(obj_bluetooth.getFecha_cap()+"T"+obj_bluetooth.getHora())+"\"}}";
+                            "\"fechacaptura\":{\"type\":\"DateTime\",\"value\":\""+(obj_bluetooth.getFecha_cap()+"T"+obj_bluetooth.getHora())+"\"}}";
         }
     }
 

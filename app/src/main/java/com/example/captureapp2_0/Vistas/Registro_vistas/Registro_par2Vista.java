@@ -7,6 +7,7 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +29,7 @@ import java.util.Calendar;
 
 public class Registro_par2Vista extends AppCompatActivity implements Interf_Registro_par2_vista{
     private TextView text_fech;
+    private TextView titulo;
     private Spinner Estado_spi;
     private EditText municipi,calle,colonia,CP;
     private Obj_usuario obj_usuario;
@@ -49,8 +51,20 @@ public class Registro_par2Vista extends AppCompatActivity implements Interf_Regi
         calle=findViewById(R.id.calle);
         colonia=findViewById(R.id.colonia);
         CP=findViewById(R.id.CP);
+        activar_fuente();
         presentador=new Registro_par2_presen_impL(this);
 
+    }
+
+    private void activar_fuente() {
+        titulo = findViewById(R.id.Titulo_part2);   //definimos en ONCREATE donde esta por                                                                                                     //medio de un ID
+        Typeface face=Typeface.createFromAsset(getAssets(),"fonts/Mohave-Bold.otf");
+        titulo.setTypeface(face);
+        text_fech.setTypeface(face);
+        municipi.setTypeface(face);
+        calle.setTypeface(face);
+        colonia.setTypeface(face);
+        CP.setTypeface(face);
     }
 
     public void fecha_nacimiento(View view) {

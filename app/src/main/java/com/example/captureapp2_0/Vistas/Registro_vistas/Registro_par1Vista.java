@@ -50,6 +50,12 @@ public class Registro_par1Vista extends AppCompatActivity implements inter_Regis
         titulo = findViewById(R.id.Titulo);   //definimos en ONCREATE donde esta por                                                                                                     //medio de un ID
         Typeface face=Typeface.createFromAsset(getAssets(),"fonts/Mohave-Bold.otf");
         titulo.setTypeface(face);
+        Nombre.setTypeface(face);
+        Apellido_parte.setTypeface(face);
+        Apellido_mater.setTypeface(face);
+        Correo.setTypeface(face);
+        Contra.setTypeface(face);
+        Conf_contra.setTypeface(face);
     }
 
     public void Validar_Reg(View view) {

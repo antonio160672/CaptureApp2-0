@@ -49,8 +49,8 @@ public class Registro_user {
 
     public void Registro_usuario(){
         request= Volley.newRequestQueue(context);//se instancia un nuevo request
-        //String URL = "http://192.168.1.75/android/insert.php";
-        String URL = "http://pruebas-upemor.ddns.net/android/insert.php";//se crea una url
+        String URL = "http://207.249.127.94/android/insert.php";
+        //String URL = "http://pruebas-upemor.ddns.net/android/insert.php";//se crea una url
         StringRequest getRequest = new StringRequest(Request.Method.POST, URL,//se indica el metodo
                 //de comunicación tipo post, la url y la información
                 new Response.Listener<String>() {
@@ -99,7 +99,8 @@ public class Registro_user {
     public boolean validar_correo(final String correo,Response.Listener<String> onResponse){
         request= Volley.newRequestQueue(context);//se instancia un nuevo reques con el contexto de la aplicación
         final boolean[] bandera = new boolean[2];
-        String URL = "http://pruebas-upemor.ddns.net/android/Consulta_correo.php";//se crea una url
+        String URL = "http://207.249.127.94/android/Consulta_correo.php";
+        //String URL = "http://pruebas-upemor.ddns.net/android/Consulta_correo.php";//se crea una url
         Log.e("valo","formato: "+URL);
         StringRequest getRequest = new StringRequest(Request.Method.POST, URL,//se indica el metodo
                 //de comunicación tipo post, la url y la información
@@ -125,7 +126,6 @@ public class Registro_user {
         request.add(getRequest);//agrega a una pila para que sea enviada
         return bandera[1];
     }
-
 
     private boolean parseData(String response) throws JSONException {
         JSONObject jsonObject = new JSONObject(response); ;

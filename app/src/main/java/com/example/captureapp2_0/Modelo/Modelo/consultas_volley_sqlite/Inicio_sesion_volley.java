@@ -34,8 +34,8 @@ public class Inicio_sesion_volley {
 
     public void validar_pregunta(final Objeto_preguntas preguntas, final String correo){
         request= Volley.newRequestQueue(Obj_Context.getContext());//se instancia un nuevo reques con el contexto de la aplicación
-        //String URL = "http://192.168.1.75/android/insert.php";
-        String URL = "http://pruebas-upemor.ddns.net/android/Gestion_datos_usu.php";//se crea una url
+        String URL = "http://207.249.127.94/android/Gestion_datos_usu.php";
+        //String URL = "http://pruebas-upemor.ddns.net/android/Gestion_datos_usu.php";//se crea una url
         StringRequest getRequest = new StringRequest(Request.Method.POST, URL,//se indica el metodo
                 //de comunicación tipo post, la url y la información
                 new Response.Listener<String>() {
@@ -83,7 +83,8 @@ public class Inicio_sesion_volley {
 
     public void actualizar_contra(final String correo,final String contra){
         request= Volley.newRequestQueue(Obj_Context.getContext());//se instancia un nuevo reques con el contexto de la aplicación
-        String URL = "http://pruebas-upemor.ddns.net/android/Gestion_datos_usu.php";//se crea una url
+        String URL = "http://207.249.127.94/android/Gestion_datos_usu.php";
+        //String URL = "http://pruebas-upemor.ddns.net/android/Gestion_datos_usu.php";//se crea una url
         StringRequest getRequest = new StringRequest(Request.Method.POST, URL,//se indica el metodo
                 //de comunicación tipo post, la url y la información
                 new Response.Listener<String>() {
@@ -128,7 +129,8 @@ public class Inicio_sesion_volley {
 
     public void validar_contra_correo(final String correo,final String contra){
         request= Volley.newRequestQueue(Obj_Context.getContext());//se instancia un nuevo reques con el contexto de la aplicación
-        String URL = "http://pruebas-upemor.ddns.net/android/Gestion_datos_usu.php";//se crea una url
+        String URL = "http://207.249.127.94/android/Gestion_datos_usu.php";
+        //String URL = "http://pruebas-upemor.ddns.net/android/Gestion_datos_usu.php";//se crea una url
         StringRequest getRequest = new StringRequest(Request.Method.POST, URL,//se indica el metodo
                 //de comunicación tipo post, la url y la información
                 new Response.Listener<String>() {
@@ -211,6 +213,7 @@ public class Inicio_sesion_volley {
             e.printStackTrace();
         }
     }
+
     private boolean user_gesti(){
         String fecha="634089600";
         objUsuario.setMunicipio("Cuernavaca");
@@ -239,7 +242,6 @@ public class Inicio_sesion_volley {
             return false;
         }
     }
-
 
     private void salvar_preferencias() {
         SharedPreferences preferences=Obj_Context.getContext().getSharedPreferences

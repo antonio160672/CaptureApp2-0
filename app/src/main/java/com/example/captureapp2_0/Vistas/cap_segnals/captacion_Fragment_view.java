@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -71,10 +72,28 @@ public class captacion_Fragment_view extends Fragment  implements View.OnClickLi
         adaptador_view=new Viewpager_adaptador_view(getFragmentManager());//agrega los fragmentos aun
         //adaptador de vistas es el que permite moverse entre las dos imagenes
 
+        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION},
+                /* Este codigo es para identificar tu request */ 1);
+
         verificar_datos_sin_conex();
         return root;
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1 /* El codigo que puse a mi request */: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // aqui ya tengo permisos
+                } else {
+                    // aqui no tengo permisos
+                }
+                return;
+            }
+        }
+    }
     @SuppressLint("RestrictedApi")
     @Override
     public void onClick(View view) {

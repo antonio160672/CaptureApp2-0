@@ -35,8 +35,8 @@ public class Gestion_preguntas_SqliteVolley {
 
     public void actualizar_preguntas(){
         request= Volley.newRequestQueue(context);//se instancia un nuevo reques con el contexto de la aplicación
-        //String URL = "http://192.168.1.75/android/insert.php";
-        String URL = "http://pruebas-upemor.ddns.net/android/Actualizar_preguntas.php";//se crea una url
+        String URL ="http://207.249.127.94/android/Actualizar_preguntas.php";
+        // String URL = "http://pruebas-upemor.ddns.net/android/Actualizar_preguntas.php";//se crea una url
         StringRequest getRequest = new StringRequest(Request.Method.POST, URL,//se indica el metodo
                 //de comunicación tipo post, la url y la información
                 new Response.Listener<String>() {

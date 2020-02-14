@@ -1,11 +1,13 @@
 package com.example.captureapp2_0.Vistas.cap_segnals.vistas_listas;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -20,6 +22,8 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.captureapp2_0.Modelo.Modelo.objetos.Obje_servi;
@@ -67,6 +71,7 @@ public class fragment_lista_wifi extends Fragment {
         SharedPreferences preferences=Obj_Context.getContext().getSharedPreferences
                 ("userid",Obj_Context.getContext().MODE_PRIVATE);
         ID=preferences.getString("Id_User","nulo");
+        ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION);
         try {
             cargarlista();
         } catch (JSONException e) {
@@ -77,10 +82,9 @@ public class fragment_lista_wifi extends Fragment {
     }
 
 
-
     private void cargarlista() throws JSONException {
         listView= view.findViewById(R.id.Lista_señales_wifi);
-        wifiManager = (WifiManager) Obj_Context.getContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        wifiManager = (WifiManager)(WifiManager)getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         //saca los datos de los servicios del telefono por eso el service y manda el wifi service
         wifiInfo = wifiManager.getConnectionInfo();//este saca la informacion de los servivios y los manda
         //a una variable para informar
@@ -118,6 +122,7 @@ public class fragment_lista_wifi extends Fragment {
             List<ScanResult> wifiScanList = wifiManager.getScanResults();
             //inicia la lista del manger por eso el . get resultados saca los
             //resultados de la busqueda del momento
+            Log.e("entra en wifi","tamañooooooooooo "+wifiScanList.size());
             if (wifiScanList.size()>0){
                 Lista_wifi.clear();
                 //va sacando cada entidad de los datos
@@ -146,11 +151,11 @@ public class fragment_lista_wifi extends Fragment {
                     registro_wifi_volley.setObj_wifi(obj_wifi);
                     if (obje_servi!=null&&(!obje_servi.getDNS_ser().equals("")||!obje_servi.getIp_servidor().equals(""))){
                         try {
-                            if(!(obje_servi.getDNS_ser().equals(""))){
-                                registro_wifi_volley.SQLite_exitencia_registro(obje_servi.getDNS_ser(),obje_servi.getPuerto_crateDB(),
+                            if((obje_servi.getDNS_ser().equals(""))||(obje_servi.getDNS_ser().equals("Sin DNNS"))){
+                                registro_wifi_volley.SQLite_exitencia_registro(obje_servi.getIp_servidor(),obje_servi.getPuerto_crateDB(),
                                         obje_servi.getPuerto_orion());
                             }else{
-                                registro_wifi_volley.SQLite_exitencia_registro(obje_servi.getIp_servidor(),obje_servi.getPuerto_crateDB(),
+                                registro_wifi_volley.SQLite_exitencia_registro(obje_servi.getDNS_ser(),obje_servi.getPuerto_crateDB(),
                                         obje_servi.getPuerto_orion());
                             }
                         } catch (JSONException e) {

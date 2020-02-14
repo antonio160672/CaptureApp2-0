@@ -37,7 +37,8 @@ public class Gestion_usuario_sql_volley {
     }
 
     public void consutar_contra_voller(final EditText contra, String contrase, final String ID){
-        String URL = "http://pruebas-upemor.ddns.net/android/Gestion_datos_usu.php";//se crea una url
+        String URL = "http://207.249.127.94/android/Gestion_datos_usu.php";
+        //String URL = "http://pruebas-upemor.ddns.net/android/Gestion_datos_usu.php";//se crea una url
         contrase=contra.getText().toString();
         final String finalContrase = contrase;
         StringRequest getRequest = new StringRequest(Request.Method.POST, URL,//se indica el metodo
@@ -85,7 +86,8 @@ public class Gestion_usuario_sql_volley {
     }
 
     public void actualizar_contra(final String contra, final String ID){
-        String URL = "http://pruebas-upemor.ddns.net/android/Gestion_datos_usu.php";//se crea una url
+        String URL = "http://207.249.127.94/android/Gestion_datos_usu.php";
+        //String URL = "http://pruebas-upemor.ddns.net/android/Gestion_datos_usu.php";//se crea una url
         StringRequest getRequest = new StringRequest(Request.Method.POST, URL,//se indica el metodo
                 //de comunicación tipo post, la url y la información
                 new Response.Listener<String>() {
@@ -129,7 +131,8 @@ public class Gestion_usuario_sql_volley {
     }
 
     public void actualizar_datos_usuario(final Obj_usuario usuario_obj,final String ID){
-        String URL = "http://pruebas-upemor.ddns.net/android/Gestion_datos_usu.php";//se crea una url
+        String URL = "http://207.249.127.94/android/Gestion_datos_usu.php";
+        //String URL = "http://pruebas-upemor.ddns.net/android/Gestion_datos_usu.php";//se crea una url
         StringRequest getRequest = new StringRequest(Request.Method.POST, URL,//se indica el metodo
                 //de comunicación tipo post, la url y la información
                 new Response.Listener<String>() {
@@ -195,7 +198,8 @@ public class Gestion_usuario_sql_volley {
     }
 
     public void verificar_preguntas(final Objeto_preguntas objetoPreguntas, final String id) {
-        String URL = "http://pruebas-upemor.ddns.net/android/Gestion_datos_usu.php";//se crea una url
+        String URL = "http://207.249.127.94/android/Gestion_datos_usu.php";
+        //String URL = "http://pruebas-upemor.ddns.net/android/Gestion_datos_usu.php";//se crea una url
         StringRequest getRequest = new StringRequest(Request.Method.POST, URL,//se indica el metodo
                 //de comunicación tipo post, la url y la información
                 new Response.Listener<String>() {

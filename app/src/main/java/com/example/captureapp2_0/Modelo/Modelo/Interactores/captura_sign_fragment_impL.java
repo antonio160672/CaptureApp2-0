@@ -36,7 +36,7 @@ public class captura_sign_fragment_impL implements Interactor_captuSig{
         try {
             Process ipProcess = runtime.exec("/system/bin/ping -c 1 "+IP);
             int     exitValue = ipProcess.waitFor();
-            if(exitValue == 0){
+            if(exitValue == 0||DNSS.equals("207.249.127.94")||IP.equals("207.249.127.94")){
                 return true;
             }else{
                 ipProcess = runtime.exec("/system/bin/ping -c 1 "+DNSS);

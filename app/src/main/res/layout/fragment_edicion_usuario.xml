@@ -37,7 +37,8 @@
                     app:met_floatingLabelText="Contraseña"
                     app:met_primaryColor="#000000"
                     app:met_textColorHint="#000000"
-                    app:met_underlineColor="#000000" />
+                    app:met_underlineColor="#000000"
+                    android:fontFamily="@font/mohavebold" />
 
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/Contra_conf_Nuev"
@@ -52,7 +53,8 @@
                     app:met_floatingLabelText="Contraseña"
                     app:met_primaryColor="#000000"
                     app:met_textColorHint="#000000"
-                    app:met_underlineColor="#000000" />
+                    app:met_underlineColor="#000000"
+                    android:fontFamily="@font/mohavebold"/>
 
                 <Button
                     android:id="@+id/btneditar"
@@ -61,7 +63,8 @@
                     android:layout_marginTop="15dp"
                     android:background="@drawable/botones"
                     android:text="Editar contraseña"
-                    android:textColor="#ffffff" />
+                    android:textColor="#ffffff"
+                    android:fontFamily="@font/mohavebold" />
 
                 <Button
                     android:id="@+id/Cambiar_usuario"
@@ -70,7 +73,8 @@
                     android:layout_marginTop="15dp"
                     android:background="@drawable/botones"
                     android:text="Editar datos del usuario"
-                    android:textColor="#ffffff" />
+                    android:textColor="#ffffff"
+                    android:fontFamily="@font/mohavebold"/>
 
                 <Button
                     android:id="@+id/Cambiar_direccion"
@@ -79,7 +83,8 @@
                     android:layout_marginTop="15dp"
                     android:background="@drawable/botones"
                     android:text="Editar datos de la dirección"
-                    android:textColor="#ffffff" />
+                    android:textColor="#ffffff"
+                    android:fontFamily="@font/mohavebold"/>
             </LinearLayout>
 
         </LinearLayout>

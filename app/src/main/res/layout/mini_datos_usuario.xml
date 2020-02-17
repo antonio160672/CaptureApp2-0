@@ -33,7 +33,8 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         android:src="@drawable/img_radi"
-                        android:radius="30px"/>
+                        android:radius="30px"
+                        android:fontFamily="@font/mohavebold"/>
                     <TextView
                         android:id="@+id/Usuario"
                         android:layout_width="wrap_content"
@@ -69,7 +70,8 @@
                         app:met_floatingLabelText="Nombre"
                         app:met_primaryColor="#92d0d0"
                         app:met_textColorHint="#FFFFFF"
-                        app:met_underlineColor="#92d0d0" />
+                        app:met_underlineColor="#92d0d0"
+                        android:fontFamily="@font/mohavebold"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -91,7 +93,8 @@
                             app:met_floatingLabelText="Apellido pater"
                             app:met_primaryColor="#92d0d0"
                             app:met_textColorHint="#FFFFFF"
-                            app:met_underlineColor="#92d0d0" />
+                            app:met_underlineColor="#92d0d0"
+                            android:fontFamily="@font/mohavebold"/>
 
                         <com.rengwuxian.materialedittext.MaterialEditText
                             android:id="@+id/Apellido_ma"
@@ -107,8 +110,8 @@
                             app:met_floatingLabelText="Apellido mater"
                             app:met_primaryColor="#92d0d0"
                             app:met_textColorHint="#FFFFFF"
-                            app:met_underlineColor="#92d0d0" />
-
+                            app:met_underlineColor="#92d0d0"
+                            android:fontFamily="@font/mohavebold"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_marginTop="10dp"
@@ -125,8 +128,10 @@
                             android:onClick="fecha_nacimiento"
                             android:text="Fecha de nacimiento"
                             android:textColor="#ffffff"
-                            android:textSize="14dp"
-                            tools:ignore="RtlCompat" />
+                            android:textSize="13dp"
+                            tools:ignore="RtlCompat"
+                            android:fontFamily="@font/mohavebold"
+                            />
 
                         <TextView
                             android:id="@+id/text_fech_usuari"
@@ -137,6 +142,7 @@
                             android:textColor="#E7EDF8"
                             android:textColorHint="#FFFFFF"
                             android:textSize="20dp"
+                            android:fontFamily="@font/mohavebold"
                             />
                     </LinearLayout>
 
@@ -149,7 +155,8 @@
                         android:onClick="Validar_Reg"
                         android:text="Editar"
                         android:textColor="#ffffff"
-                        tools:ignore="RtlCompat" />
+                        tools:ignore="RtlCompat"
+                        android:fontFamily="@font/mohavebold" />
 
                 </LinearLayout>
 

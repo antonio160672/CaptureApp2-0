@@ -35,7 +35,8 @@
             android:textColor="#E7EDF8"
             android:textColorHint="#FFFFFF"
             android:textSize="30dp"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/mohavebold"/>
 
         <LinearLayout
             android:orientation="vertical"
@@ -58,7 +59,8 @@
                 app:met_primaryColor="#92d0d0"
                 app:met_textColorHint="#FFFFFF"
                 app:met_underlineColor="#92d0d0"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:fontFamily="@font/mohavebold"/>
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/Contraseña"
@@ -76,7 +78,8 @@
                 app:met_primaryColor="#92d0d0"
                 app:met_textColorHint="#FFFFFF"
                 app:met_underlineColor="#92d0d0"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:fontFamily="@font/mohavebold"/>
             <TextView
                 android:layout_marginTop="10dp"
                 android:id="@+id/cambiarContra"
@@ -88,7 +91,8 @@
                 android:layout_margin="1dp"
                 android:gravity="center"
                 android:textSize="16dp"
-                android:textColor="#F7F7F7"/>
+                android:textColor="#F7F7F7"
+                android:fontFamily="@font/mohavebold"/>
 
         </LinearLayout>
 
@@ -101,7 +105,8 @@
             android:background="@drawable/botones"
             android:text="Iniciar sesión"
             android:textColor="#ffffff"
-            tools:ignore="RtlCompat" />
+            tools:ignore="RtlCompat"
+            android:fontFamily="@font/mohavebold"/>
 
         <Button
             android:id="@+id/button3"
@@ -111,7 +116,8 @@
             android:layout_height="50dp"
             android:background="@drawable/botones"
             android:text="Registro"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            android:fontFamily="@font/mohavebold"/>
 
     </LinearLayout>
 

@@ -46,7 +46,8 @@
                         app:layout_constraintBottom_toBottomOf="@+id/imageView12"
                         app:layout_constraintEnd_toEndOf="@+id/imageView12"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/imageView12" />
+                        app:layout_constraintTop_toTopOf="@+id/imageView12"
+                        android:fontFamily="@font/mohavebold"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -81,6 +82,7 @@
                         android:layout_marginLeft="-2dp"
                         android:background="@drawable/spinner_style"
                         android:entries="@array/Preguntas"
+                        android:fontFamily="@font/mohavebold"
                          />
                 </LinearLayout>
 
@@ -96,7 +98,8 @@
                     app:met_floatingLabelText="Pregunta 1"
                     app:met_primaryColor="#92d0d0"
                     app:met_textColorHint="#FFFFFF"
-                    app:met_underlineColor="#92d0d0" />
+                    app:met_underlineColor="#92d0d0"
+                    android:fontFamily="@font/mohavebold" />
 
                 <LinearLayout
                     android:layout_marginTop="5dp"
@@ -109,7 +112,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/spinner_style"
-                        android:entries="@array/Preguntas" />
+                        android:entries="@array/Preguntas"
+                        android:fontFamily="@font/mohavebold" />
                 </LinearLayout>
 
                 <com.rengwuxian.materialedittext.MaterialEditText
@@ -124,7 +128,8 @@
                     app:met_floatingLabelText="Pregunta 2"
                     app:met_primaryColor="#92d0d0"
                     app:met_textColorHint="#FFFFFF"
-                    app:met_underlineColor="#92d0d0" />
+                    app:met_underlineColor="#92d0d0"
+                    android:fontFamily="@font/mohavebold"/>
 
                 <Button
                     android:id="@+id/dialog_but_pregun"
@@ -134,7 +139,8 @@
                     android:background="@drawable/botones"
                     android:text="Registrar preguntas"
                     android:textColor="#ffffff"
-                    tools:ignore="RtlCompat" />
+                    tools:ignore="RtlCompat"
+                    android:fontFamily="@font/mohavebold"/>
 
             </LinearLayout>
         </ScrollView>

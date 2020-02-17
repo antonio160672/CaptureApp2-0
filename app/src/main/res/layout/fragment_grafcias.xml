@@ -27,7 +27,8 @@
                 android:background="@drawable/botones"
                 android:text="Fecha inicio"
                 android:textColor="#ffffff"
-                android:textSize="14dp" />
+                android:textSize="14dp"
+                android:fontFamily="@font/mohavebold"/>
 
             <Button
                 android:id="@+id/FEcha_fin"
@@ -38,7 +39,8 @@
                 android:background="@drawable/botones"
                 android:text="Fecha fin"
                 android:textColor="#ffffff"
-                android:textSize="14dp" />
+                android:textSize="14dp"
+                android:fontFamily="@font/mohavebold"/>
 
 
         </LinearLayout>
@@ -54,7 +56,8 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/spinner_style"
-                android:entries="@array/Dispositivo" />
+                android:entries="@array/Dispositivo"
+                android:fontFamily="@font/mohavebold" />
 
             <Spinner
                 android:id="@+id/tipo_grafica"
@@ -62,7 +65,8 @@
                 android:layout_width="150dp"
                 android:layout_height="40dp"
                 android:background="@drawable/spinner_style"
-                android:entries="@array/Grafica" />
+                android:entries="@array/Grafica"
+                android:fontFamily="@font/mohavebold"/>
 
         </LinearLayout>
         <LinearLayout
@@ -78,7 +82,8 @@
             android:layout_height="match_parent"
             android:background="@drawable/botones"
             android:text="Generar"
-            android:textColor="#ffffff"  />
+            android:textColor="#ffffff"
+            android:fontFamily="@font/mohavebold"/>
     </LinearLayout>
         <com.github.mikephil.charting.charts.BarChart
             android:layout_margin="4dp"

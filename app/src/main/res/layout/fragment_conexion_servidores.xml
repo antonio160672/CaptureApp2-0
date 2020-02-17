@@ -22,7 +22,8 @@
             android:textSize="20sp"
             android:background="#86080F5C"
             android:textColor="@color/blanco"
-            android:text="Servidores registrados"/>
+            android:text="Servidores registrados"
+            android:fontFamily="@font/mohavebold"/>
 
         <LinearLayout
             android:gravity="center"
@@ -46,7 +47,8 @@
             android:onClick="Agregar_servi"
             android:text="Agregar servidor"
             android:textSize="16dp"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            android:fontFamily="@font/mohavebold"/>
     </LinearLayout>
 
 </LinearLayout>

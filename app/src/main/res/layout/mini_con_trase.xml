@@ -28,7 +28,8 @@
             android:gravity="center"
             android:textSize="22dp"
             android:text="Ingrese su contraseña"
-            android:textColor="@color/blanco"/>
+            android:textColor="@color/blanco"
+            android:fontFamily="@font/mohavebold"/>
 
     </RelativeLayout >
 
@@ -50,7 +51,9 @@
             app:met_floatingLabelText="Contraseña"
             app:met_primaryColor="#4CAAAA"
             app:met_textColorHint="#070707"
-            app:met_underlineColor="#92d0d0" />
+            app:met_underlineColor="#92d0d0"
+            android:fontFamily="@font/mohavebold"
+            />
 
         <TextView
             android:id="@+id/cambiarContra"
@@ -61,7 +64,8 @@
             android:layout_margin="1dp"
             android:gravity="center"
             android:textSize="16dp"
-            android:textColor="#2334B3"/>
+            android:textColor="#2334B3"
+            android:fontFamily="@font/mohavebold" />
     </LinearLayout>
 
     <LinearLayout
@@ -74,13 +78,15 @@
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Cancelar" />
+            android:text="Cancelar"
+            android:fontFamily="@font/mohavebold"/>
 
         <Button
             android:id="@+id/ingresar_dialog"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Ingresar" />
+            android:text="Ingresar"
+            android:fontFamily="@font/mohavebold"/>
     </LinearLayout>
 </LinearLayout>

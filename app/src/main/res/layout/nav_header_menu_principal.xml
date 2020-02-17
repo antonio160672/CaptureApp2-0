@@ -22,6 +22,7 @@
         android:src="@drawable/logo_gif2" />
 
     <TextView
+        android:id="@+id/nombre_app"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
@@ -29,9 +30,9 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/correo_nav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="prueba_registro1@cenidet.edu.mx" />
+        android:text="Aplicación libre por CENIDET" />
 
 </LinearLayout>

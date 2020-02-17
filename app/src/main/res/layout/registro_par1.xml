@@ -156,7 +156,8 @@
                     android:onClick="Validar_Reg"
                     android:text="Siguiente"
                     android:textColor="#ffffff"
-                    tools:ignore="RtlCompat" />
+                    tools:ignore="RtlCompat"
+                    android:fontFamily="@font/mohavebold"/>
 
             </LinearLayout>
         </ScrollView>

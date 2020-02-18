@@ -8,6 +8,8 @@ public interface Ini_sesion_vista {
     void generar_dialog_preguntas();
     void error_preguntas_contr(String mensaje);
     void preguntas_validas(String correo);
+    void progressbar_show();
+    void progressbar_hiden();
 }
 
 

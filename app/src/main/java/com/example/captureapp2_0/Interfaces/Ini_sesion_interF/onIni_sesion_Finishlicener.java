@@ -10,6 +10,8 @@ public interface onIni_sesion_Finishlicener {
     void exito_consul();
     void preguntas_correctas(String correo);
     void preguntas_invali(String mensaje);
+    void progressbar_activar();
+    void progressbar_desactiva();
     //esto permite al interactor indicar que hacer
 }
 

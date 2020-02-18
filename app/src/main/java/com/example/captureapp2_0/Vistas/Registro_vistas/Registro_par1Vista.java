@@ -70,7 +70,6 @@ public class Registro_par1Vista extends AppCompatActivity implements inter_Regis
         progressDialog.setMessage("Validando datos");
         //muestras el ProgressDialog
         progressDialog.show();
-        Log.e("entroo","mensajeee");
     }
 
     @Override

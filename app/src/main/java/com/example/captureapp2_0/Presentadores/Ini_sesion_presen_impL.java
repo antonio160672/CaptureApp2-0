@@ -38,6 +38,7 @@ public class Ini_sesion_presen_impL implements Ini_sesion_presentador, onIni_ses
     @Override
     public void valida_usuario(String correo, String contra) {
         if (intera_ini_Sesion != null) {//se verifica la existencia de una vista
+            progressbar_activar();
             intera_ini_Sesion.validarUser(correo,contra,this);
         }
     }
@@ -83,6 +84,20 @@ public class Ini_sesion_presen_impL implements Ini_sesion_presentador, onIni_ses
     public void enviar_contra(String correo, String contra) {
         if (intera_ini_Sesion != null) {
             intera_ini_Sesion.actualizar_contra(this,correo,contra);
+        }
+    }
+
+    @Override
+    public void progressbar_activar() {
+        if (intera_ini_Sesion != null) {
+            vista_iniSesi.progressbar_show();
+        }
+    }
+
+    @Override
+    public void progressbar_desactiva() {
+        if (intera_ini_Sesion != null) {
+            vista_iniSesi.progressbar_hiden();
         }
     }
 }

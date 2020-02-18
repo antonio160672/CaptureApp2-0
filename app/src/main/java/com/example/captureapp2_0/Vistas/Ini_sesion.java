@@ -3,11 +3,13 @@ package com.example.captureapp2_0.Vistas;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +34,7 @@ public class Ini_sesion extends AppCompatActivity implements Ini_sesion_vista {
     private Ini_sesion_presentador presentador;//interfaz del presentador para comunicación
     private Dialog dialog;
     private Objeto_preguntas preguntas;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,5 +177,21 @@ public class Ini_sesion extends AppCompatActivity implements Ini_sesion_vista {
 
     public void Preguntas_recu(View view) {
         generar_dialog_preguntas();
+    }
+
+    @Override
+    public void progressbar_show() {
+        progressDialog= new ProgressDialog(this);
+        progressDialog.setMessage("Validando datos");
+        //muestras el ProgressDialog
+        progressDialog.show();
+    }
+
+    @Override
+    public void progressbar_hiden() //en caso de existir error lo mostrara
+    {
+        Log.e("esconder","mensajeee");
+        progressDialog.dismiss();
+
     }
 }

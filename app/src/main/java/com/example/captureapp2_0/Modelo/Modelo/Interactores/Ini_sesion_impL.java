@@ -47,9 +47,10 @@ public class Ini_sesion_impL implements Ini_sesion_Interactor {
                     Inicio_sesion_volley volley=new Inicio_sesion_volley(listener);
                     volley.validar_contra_correo(correo,contra);
                 }
+                listener.progressbar_desactiva();
 
             }
-        },100);
+        },1000);
 
     }
 
